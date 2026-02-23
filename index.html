@@ -420,6 +420,58 @@
             margin: 0;
             background: transparent;
         }
+
+        /* User message markdown-like styling */
+        .user-message .user-markdown {
+            font-size: 13px;
+            line-height: 1.65;
+            color: #1f2a37;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .user-message .user-markdown .md-line,
+        .user-message .user-markdown .md-h1,
+        .user-message .user-markdown .md-h2,
+        .user-message .user-markdown .md-h3 {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .user-message .user-markdown .md-h1 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0d47a1;
+            margin: 6px 0 8px;
+        }
+
+        .user-message .user-markdown .md-h2 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 10px 0 6px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #dbe7f3;
+        }
+
+        .user-message .user-markdown .md-h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e88e5;
+            margin: 8px 0 4px;
+        }
+
+        .user-message .user-markdown .md-bold {
+            font-weight: 600;
+            color: #0d47a1;
+            background: #e3f2fd;
+            padding: 0 3px;
+            border-radius: 3px;
+        }
+
+        .user-message .user-markdown .md-spacer {
+            height: 8px;
+        }
         
         .user-message .message-header {
             background: #e3f2fd;
@@ -1301,6 +1353,7 @@
                 }
 
                 out.push({
+                    kind: entry.kind,
                     cssClass,
                     header,
                     content: toPrettyText(content),
@@ -1309,6 +1362,123 @@
             }
 
             return out;
+        }
+
+        function renderUserMarkdown(text) {
+            if (text === null || text === undefined) return '';
+            const lines = String(text).replace(/\r\n/g, '\n').split('\n');
+            let html = '';
+            let inCode = false;
+            let inTips = false;
+            let codeBuffer = [];
+            let tipsBuffer = [];
+            let tableBuffer = [];
+
+            const flushCode = () => {
+                if (codeBuffer.length) {
+                    html += `<pre class="md-code">${escapeHtml(codeBuffer.join('\n'))}</pre>`;
+                    codeBuffer = [];
+                }
+            };
+
+            const flushTips = () => {
+                if (tipsBuffer.length) {
+                    html += `<pre class="md-tips">${escapeHtml(tipsBuffer.join('\n'))}</pre>`;
+                    tipsBuffer = [];
+                }
+            };
+
+            const flushTable = () => {
+                if (tableBuffer.length) {
+                    html += `<pre class="md-table">${escapeHtml(tableBuffer.join('\n'))}</pre>`;
+                    tableBuffer = [];
+                }
+            };
+
+            const isHeading = line => /^#{1,3}\s+/.test(line.trim());
+            const isTipsHeading = title => /^tips\b/i.test(title.trim());
+            const isTableLine = line => /^\s*\|/.test(line) && line.includes('|');
+
+            for (const line of lines) {
+                const trimmed = line.trim();
+                const isFence = trimmed.startsWith('```');
+
+                if (inCode) {
+                    if (isFence) {
+                        flushCode();
+                        inCode = false;
+                    } else {
+                        codeBuffer.push(line);
+                    }
+                    continue;
+                }
+
+                if (inTips) {
+                    if (isHeading(trimmed)) {
+                        flushTips();
+                        inTips = false;
+                        // fall through to process heading line
+                    } else {
+                        tipsBuffer.push(line);
+                        continue;
+                    }
+                }
+
+                if (isFence) {
+                    flushTable();
+                    inCode = true;
+                    codeBuffer = [];
+                    continue;
+                }
+
+                if (isTableLine(line)) {
+                    tableBuffer.push(line);
+                    continue;
+                }
+                flushTable();
+
+                const headingMatch = line.match(/^(#{1,3})\s+(.*)$/);
+                if (headingMatch) {
+                    const level = headingMatch[1].length;
+                    const title = headingMatch[2] || '';
+                    const cls = level === 1 ? 'md-h1' : level === 2 ? 'md-h2' : 'md-h3';
+                    html += `<div class="${cls}">${escapeHtml(title)}</div>`;
+                    if (isTipsHeading(title)) {
+                        inTips = true;
+                        tipsBuffer = [];
+                    }
+                    continue;
+                }
+
+                if (/^tips\s*:/i.test(line)) {
+                    const label = line.replace(/^tips\s*:/i, 'Tips');
+                    html += `<div class="md-h3">${escapeHtml(label)}</div>`;
+                    inTips = true;
+                    tipsBuffer = [];
+                    continue;
+                }
+
+                if (trimmed === '') {
+                    html += '<div class="md-spacer"></div>';
+                    continue;
+                }
+
+                const escaped = escapeHtml(line);
+                const formatted = escaped.replace(/\*\*([^*]+)\*\*/g, '<span class="md-bold">$1</span>');
+                html += `<div class="md-line">${formatted}</div>`;
+            }
+
+            if (inCode) flushCode();
+            if (inTips) flushTips();
+            flushTable();
+            return html;
+        }
+
+        function renderMessageBody(entry) {
+            if (entry.kind === 'user') {
+                return `<div class="user-markdown">${renderUserMarkdown(entry.content)}</div>`;
+            }
+            return `<pre>${escapeHtml(entry.content)}</pre>`;
         }
 
         function renderMessageEntries(containerId, entries, stream) {
@@ -1321,7 +1491,7 @@
             container.innerHTML = entries.map((entry, idx) => `
                 <div class="message ${entry.cssClass} has-raw-tooltip" data-stream="${stream}" data-entry-index="${idx}">
                     <div class="message-header">${escapeHtml(entry.header)}</div>
-                    <div class="message-content"><pre>${escapeHtml(entry.content)}</pre></div>
+                    <div class="message-content">${renderMessageBody(entry)}</div>
                 </div>
             `).join('');
         }
