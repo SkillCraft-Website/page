@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-02-23T15:27:02Z",
+  "task_group": "scaled_tasks",
+  "task_count": 126,
+  "model_count": 7,
+  "models": [
+    "Kimi-K2-Thinking",
+    "DeepSeek-V3.2-EXP",
+    "DeepSeek-R1",
+    "Gemini 3 Pro",
+    "Minimax-M2.1",
+    "Claude 4.5 Sonnet",
+    "GPT-5.2"
+  ],
+  "traj_detail_file_count": 882
+}

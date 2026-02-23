@@ -1,0 +1,1266 @@
+{
+  "task_group": "scaled_tasks",
+  "count": 126,
+  "tasks": [
+    {
+      "key": "cat-facts-collector-e1",
+      "display_name": "Cat Breed Encyclopedia (3 Breeds × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Cat facts encyclopedia with 3 breeds × 3 APIs (easy)",
+      "detail_path": "./data/tasks/cat-facts-collector-e1.json"
+    },
+    {
+      "key": "cat-facts-collector-e2",
+      "display_name": "Cat Breed Encyclopedia (3 Breeds × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Cat facts encyclopedia with 3 breeds × 3 APIs (easy)",
+      "detail_path": "./data/tasks/cat-facts-collector-e2.json"
+    },
+    {
+      "key": "cat-facts-collector-e3",
+      "display_name": "Cat Breed Encyclopedia (3 Breeds × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Cat facts encyclopedia with 3 breeds × 3 APIs (easy)",
+      "detail_path": "./data/tasks/cat-facts-collector-e3.json"
+    },
+    {
+      "key": "cat-facts-collector-m1",
+      "display_name": "Cat Breed Encyclopedia (4 Breeds × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Cat facts encyclopedia with 4 breeds × 4 APIs (medium)",
+      "detail_path": "./data/tasks/cat-facts-collector-m1.json"
+    },
+    {
+      "key": "cat-facts-collector-m2",
+      "display_name": "Cat Breed Encyclopedia (4 Breeds × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Cat facts encyclopedia with 4 breeds × 4 APIs (medium)",
+      "detail_path": "./data/tasks/cat-facts-collector-m2.json"
+    },
+    {
+      "key": "cat-facts-collector-h1",
+      "display_name": "Cat Breed Encyclopedia (5 Breeds × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Cat facts encyclopedia with 5 breeds × 5 APIs (hard)",
+      "detail_path": "./data/tasks/cat-facts-collector-h1.json"
+    },
+    {
+      "key": "cocktail-menu-generator-e1",
+      "display_name": "Cocktail Menu (3 Cocktails × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Cocktail menu with 3 cocktails × 3 APIs (easy)",
+      "detail_path": "./data/tasks/cocktail-menu-generator-e1.json"
+    },
+    {
+      "key": "cocktail-menu-generator-e2",
+      "display_name": "Cocktail Menu (3 Cocktails × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Cocktail menu with 3 cocktails × 3 APIs (easy)",
+      "detail_path": "./data/tasks/cocktail-menu-generator-e2.json"
+    },
+    {
+      "key": "cocktail-menu-generator-e3",
+      "display_name": "Cocktail Menu (3 Cocktails × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Cocktail menu with 3 cocktails × 3 APIs (easy)",
+      "detail_path": "./data/tasks/cocktail-menu-generator-e3.json"
+    },
+    {
+      "key": "cocktail-menu-generator-m1",
+      "display_name": "Cocktail Menu (4 Cocktails × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Cocktail menu with 4 cocktails × 4 APIs (medium)",
+      "detail_path": "./data/tasks/cocktail-menu-generator-m1.json"
+    },
+    {
+      "key": "cocktail-menu-generator-m2",
+      "display_name": "Cocktail Menu (4 Cocktails × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Cocktail menu with 4 cocktails × 4 APIs (medium)",
+      "detail_path": "./data/tasks/cocktail-menu-generator-m2.json"
+    },
+    {
+      "key": "cocktail-menu-generator-h1",
+      "display_name": "Cocktail Menu (5 Cocktails × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Cocktail menu with 5 cocktails × 5 APIs (hard)",
+      "detail_path": "./data/tasks/cocktail-menu-generator-h1.json"
+    },
+    {
+      "key": "countries-encyclopedia-e1",
+      "display_name": "World Countries Encyclopedia (Easy - 3 Regions × 3 APIs)",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Generate encyclopedia entries for 3 world regions with region, details, and borders (easy difficulty)",
+      "detail_path": "./data/tasks/countries-encyclopedia-e1.json"
+    },
+    {
+      "key": "countries-encyclopedia-e2",
+      "display_name": "World Countries Encyclopedia - Economic & Linguistic (Easy - 3 Regions × 3 APIs)",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Generate encyclopedia entries for 3 world regions with region, currency, and language analysis (easy difficulty)",
+      "detail_path": "./data/tasks/countries-encyclopedia-e2.json"
+    },
+    {
+      "key": "countries-encyclopedia-e3",
+      "display_name": "Country Profiles - Details & Economics (Easy - 3 Countries × 3 APIs)",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Generate encyclopedia entries for 3 countries with details, borders, and currency (easy difficulty)",
+      "detail_path": "./data/tasks/countries-encyclopedia-e3.json"
+    },
+    {
+      "key": "countries-encyclopedia-m1",
+      "display_name": "World Countries Encyclopedia (Medium - 4 Regions × 4 APIs)",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Generate encyclopedia entries for 4 world regions with region, details, borders, and currency (medium difficulty)",
+      "detail_path": "./data/tasks/countries-encyclopedia-m1.json"
+    },
+    {
+      "key": "countries-encyclopedia-m2",
+      "display_name": "World Countries Encyclopedia - Linguistic Focus (Medium - 4 Regions × 4 APIs)",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Generate encyclopedia entries for 4 world regions with region, details, borders, and language (medium difficulty)",
+      "detail_path": "./data/tasks/countries-encyclopedia-m2.json"
+    },
+    {
+      "key": "countries-encyclopedia-h1",
+      "display_name": "World Countries Encyclopedia (Hard - 5 Regions × 5 APIs)",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Generate encyclopedia entries for 5 world regions with 5 API calls each (hard difficulty)",
+      "detail_path": "./data/tasks/countries-encyclopedia-h1.json"
+    },
+    {
+      "key": "dnd-campaign-builder-e1",
+      "display_name": "D&D Character Builder (3 Characters × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "D&D character builder with 3 characters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dnd-campaign-builder-e1.json"
+    },
+    {
+      "key": "dnd-campaign-builder-e2",
+      "display_name": "D&D Character Builder (3 Characters × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "D&D character builder with 3 characters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dnd-campaign-builder-e2.json"
+    },
+    {
+      "key": "dnd-campaign-builder-e3",
+      "display_name": "D&D Character Builder (3 Characters × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "D&D character builder with 3 characters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dnd-campaign-builder-e3.json"
+    },
+    {
+      "key": "dnd-campaign-builder-m1",
+      "display_name": "D&D Character Builder (4 Characters × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "D&D character builder with 4 characters × 4 APIs (medium)",
+      "detail_path": "./data/tasks/dnd-campaign-builder-m1.json"
+    },
+    {
+      "key": "dnd-campaign-builder-m2",
+      "display_name": "D&D Character Builder (4 Characters × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "D&D character builder with 4 characters × 4 APIs (medium)",
+      "detail_path": "./data/tasks/dnd-campaign-builder-m2.json"
+    },
+    {
+      "key": "dnd-campaign-builder-h1",
+      "display_name": "D&D Character Builder (5 Characters × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "D&D character builder with 5 characters × 5 APIs (hard)",
+      "detail_path": "./data/tasks/dnd-campaign-builder-h1.json"
+    },
+    {
+      "key": "dnd-monster-compendium-e1",
+      "display_name": "D&D Monster Compendium (3 Monsters × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "D&D monster compendium with 3 monsters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dnd-monster-compendium-e1.json"
+    },
+    {
+      "key": "dnd-monster-compendium-e2",
+      "display_name": "D&D Monster Compendium (3 Monsters × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "D&D monster compendium with 3 monsters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dnd-monster-compendium-e2.json"
+    },
+    {
+      "key": "dnd-monster-compendium-e3",
+      "display_name": "D&D Monster Compendium (3 Monsters × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "D&D monster compendium with 3 monsters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dnd-monster-compendium-e3.json"
+    },
+    {
+      "key": "dnd-monster-compendium-m1",
+      "display_name": "D&D Monster Compendium (4 Monsters × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "D&D monster compendium with 4 monsters × 4 APIs (medium)",
+      "detail_path": "./data/tasks/dnd-monster-compendium-m1.json"
+    },
+    {
+      "key": "dnd-monster-compendium-m2",
+      "display_name": "D&D Monster Compendium (4 Monsters × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "D&D monster compendium with 4 monsters × 4 APIs (medium)",
+      "detail_path": "./data/tasks/dnd-monster-compendium-m2.json"
+    },
+    {
+      "key": "dnd-monster-compendium-h1",
+      "display_name": "D&D Monster Compendium (5 Monsters × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "D&D monster compendium with 5 monsters × 5 APIs (hard)",
+      "detail_path": "./data/tasks/dnd-monster-compendium-h1.json"
+    },
+    {
+      "key": "dog-breeds-encyclopedia-e1",
+      "display_name": "Dog Breeds Encyclopedia (3 Breeds × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Dog breeds encyclopedia with 3 breeds × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dog-breeds-encyclopedia-e1.json"
+    },
+    {
+      "key": "dog-breeds-encyclopedia-e2",
+      "display_name": "Dog Breeds Encyclopedia (3 Breeds × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Dog breeds encyclopedia with 3 breeds × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dog-breeds-encyclopedia-e2.json"
+    },
+    {
+      "key": "dog-breeds-encyclopedia-e3",
+      "display_name": "Dog Breeds Encyclopedia (3 Breeds × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Dog breeds encyclopedia with 3 breeds × 3 APIs (easy)",
+      "detail_path": "./data/tasks/dog-breeds-encyclopedia-e3.json"
+    },
+    {
+      "key": "dog-breeds-encyclopedia-m1",
+      "display_name": "Dog Breeds Encyclopedia (4 Breeds × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Dog breeds encyclopedia with 4 breeds × 4 APIs (medium)",
+      "detail_path": "./data/tasks/dog-breeds-encyclopedia-m1.json"
+    },
+    {
+      "key": "dog-breeds-encyclopedia-m2",
+      "display_name": "Dog Breeds Encyclopedia (4 Breeds × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Dog breeds encyclopedia with 4 breeds × 4 APIs (medium)",
+      "detail_path": "./data/tasks/dog-breeds-encyclopedia-m2.json"
+    },
+    {
+      "key": "dog-breeds-encyclopedia-h1",
+      "display_name": "Dog Breeds Encyclopedia (5 Breeds × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Dog breeds encyclopedia with 5 breeds × 5 APIs (hard)",
+      "detail_path": "./data/tasks/dog-breeds-encyclopedia-h1.json"
+    },
+    {
+      "key": "gitlab-deep-analysis-e1",
+      "display_name": "GitLab Basic Project Analysis (Easy - 3 Projects × 3 APIs)",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Analysis of 3 GitLab repositories with project info, contributors, and issues (easy difficulty)",
+      "detail_path": "./data/tasks/gitlab-deep-analysis-e1.json"
+    },
+    {
+      "key": "gitlab-deep-analysis-e2",
+      "display_name": "GitLab Repository Analysis - Branches & Issues (Easy - 3 Projects × 3 APIs)",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Analysis of 3 GitLab repositories focusing on branches and issues (easy difficulty)",
+      "detail_path": "./data/tasks/gitlab-deep-analysis-e2.json"
+    },
+    {
+      "key": "gitlab-deep-analysis-e3",
+      "display_name": "GitLab Repository Analysis - Development Activity (Easy - 3 Projects × 3 APIs)",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Analysis of 3 GitLab repositories focusing on development activity (easy difficulty)",
+      "detail_path": "./data/tasks/gitlab-deep-analysis-e3.json"
+    },
+    {
+      "key": "gitlab-deep-analysis-m1",
+      "display_name": "GitLab Project Analysis (Medium - 4 Projects × 4 APIs)",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Analysis of 4 GitLab repositories with branch info (medium difficulty)",
+      "detail_path": "./data/tasks/gitlab-deep-analysis-m1.json"
+    },
+    {
+      "key": "gitlab-deep-analysis-m2",
+      "display_name": "GitLab Repository Analysis - Comprehensive (Medium - 4 Projects × 4 APIs)",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Analysis of 4 GitLab repositories with project info, contributors, branches, and issues (medium difficulty)",
+      "detail_path": "./data/tasks/gitlab-deep-analysis-m2.json"
+    },
+    {
+      "key": "gitlab-deep-analysis-h1",
+      "display_name": "GitLab Deep Project Analysis (Hard - 5 Projects)",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Comprehensive analysis of 5 GitLab repositories (hard difficulty)",
+      "detail_path": "./data/tasks/gitlab-deep-analysis-h1.json"
+    },
+    {
+      "key": "jikan-anime-analysis-e1",
+      "display_name": "Anime Analysis (3 Anime × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Anime analysis with 3 anime × 3 APIs (easy)",
+      "detail_path": "./data/tasks/jikan-anime-analysis-e1.json"
+    },
+    {
+      "key": "jikan-anime-analysis-e2",
+      "display_name": "Anime Analysis (3 Anime × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Anime analysis with 3 anime × 3 APIs (easy)",
+      "detail_path": "./data/tasks/jikan-anime-analysis-e2.json"
+    },
+    {
+      "key": "jikan-anime-analysis-e3",
+      "display_name": "Anime Analysis (3 Anime × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Anime analysis with 3 anime × 3 APIs (easy)",
+      "detail_path": "./data/tasks/jikan-anime-analysis-e3.json"
+    },
+    {
+      "key": "jikan-anime-analysis-m1",
+      "display_name": "Anime Analysis (4 Anime × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Anime analysis with 4 anime × 4 APIs (medium)",
+      "detail_path": "./data/tasks/jikan-anime-analysis-m1.json"
+    },
+    {
+      "key": "jikan-anime-analysis-m2",
+      "display_name": "Anime Analysis (4 Anime × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Anime analysis with 4 anime × 4 APIs (medium)",
+      "detail_path": "./data/tasks/jikan-anime-analysis-m2.json"
+    },
+    {
+      "key": "jikan-anime-analysis-h1",
+      "display_name": "Anime Analysis (5 Anime × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Anime analysis with 5 anime × 5 APIs (hard)",
+      "detail_path": "./data/tasks/jikan-anime-analysis-h1.json"
+    },
+    {
+      "key": "jsonplaceholder-blog-analyzer-e1",
+      "display_name": "Blog User Analysis (3 Users × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Blog user analysis with 3 users × 3 APIs (easy)",
+      "detail_path": "./data/tasks/jsonplaceholder-blog-analyzer-e1.json"
+    },
+    {
+      "key": "jsonplaceholder-blog-analyzer-e2",
+      "display_name": "Blog User Analysis (3 Users × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Blog user analysis with 3 users × 3 APIs (easy)",
+      "detail_path": "./data/tasks/jsonplaceholder-blog-analyzer-e2.json"
+    },
+    {
+      "key": "jsonplaceholder-blog-analyzer-e3",
+      "display_name": "Blog User Analysis (3 Users × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Blog user analysis with 3 users × 3 APIs (easy)",
+      "detail_path": "./data/tasks/jsonplaceholder-blog-analyzer-e3.json"
+    },
+    {
+      "key": "jsonplaceholder-blog-analyzer-m1",
+      "display_name": "Blog User Analysis (4 Users × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Blog user analysis with 4 users × 4 APIs (medium)",
+      "detail_path": "./data/tasks/jsonplaceholder-blog-analyzer-m1.json"
+    },
+    {
+      "key": "jsonplaceholder-blog-analyzer-m2",
+      "display_name": "Blog User Analysis (4 Users × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Blog user analysis with 4 users × 4 APIs (medium)",
+      "detail_path": "./data/tasks/jsonplaceholder-blog-analyzer-m2.json"
+    },
+    {
+      "key": "jsonplaceholder-blog-analyzer-h1",
+      "display_name": "Blog User Analysis (5 Users × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Blog user analysis with 5 users × 5 APIs (hard)",
+      "detail_path": "./data/tasks/jsonplaceholder-blog-analyzer-h1.json"
+    },
+    {
+      "key": "local-dna-analysis-e1",
+      "display_name": "DNA Analysis (3 Sequences × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "DNA analysis with 3 sequences × 3 APIs (easy)",
+      "detail_path": "./data/tasks/local-dna-analysis-e1.json"
+    },
+    {
+      "key": "local-dna-analysis-e2",
+      "display_name": "DNA Analysis (3 Sequences × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "DNA analysis with 3 sequences × 3 APIs (easy)",
+      "detail_path": "./data/tasks/local-dna-analysis-e2.json"
+    },
+    {
+      "key": "local-dna-analysis-e3",
+      "display_name": "DNA Analysis (3 Sequences × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "DNA analysis with 3 sequences × 3 APIs (easy)",
+      "detail_path": "./data/tasks/local-dna-analysis-e3.json"
+    },
+    {
+      "key": "local-dna-analysis-m1",
+      "display_name": "DNA Analysis (4 Sequences × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "DNA analysis with 4 sequences × 4 APIs (medium)",
+      "detail_path": "./data/tasks/local-dna-analysis-m1.json"
+    },
+    {
+      "key": "local-dna-analysis-m2",
+      "display_name": "DNA Analysis (4 Sequences × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "DNA analysis with 4 sequences × 4 APIs (medium)",
+      "detail_path": "./data/tasks/local-dna-analysis-m2.json"
+    },
+    {
+      "key": "local-dna-analysis-h1",
+      "display_name": "DNA Analysis (5 Sequences × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "DNA analysis with 5 sequences × 5 APIs (hard)",
+      "detail_path": "./data/tasks/local-dna-analysis-h1.json"
+    },
+    {
+      "key": "name-demographics-analyzer-e1",
+      "display_name": "Name Demographics (3 Names × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Name demographics with 3 names × 3 APIs (easy)",
+      "detail_path": "./data/tasks/name-demographics-analyzer-e1.json"
+    },
+    {
+      "key": "name-demographics-analyzer-e2",
+      "display_name": "Name Demographics (3 Names × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Name demographics with 3 names × 3 APIs (easy)",
+      "detail_path": "./data/tasks/name-demographics-analyzer-e2.json"
+    },
+    {
+      "key": "name-demographics-analyzer-e3",
+      "display_name": "Name Demographics (3 Names × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Name demographics with 3 names × 3 APIs (easy)",
+      "detail_path": "./data/tasks/name-demographics-analyzer-e3.json"
+    },
+    {
+      "key": "name-demographics-analyzer-m1",
+      "display_name": "Name Demographics (4 Names × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Name demographics with 4 names × 4 APIs (medium)",
+      "detail_path": "./data/tasks/name-demographics-analyzer-m1.json"
+    },
+    {
+      "key": "name-demographics-analyzer-m2",
+      "display_name": "Name Demographics (4 Names × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Name demographics with 4 names × 4 APIs (medium)",
+      "detail_path": "./data/tasks/name-demographics-analyzer-m2.json"
+    },
+    {
+      "key": "name-demographics-analyzer-h1",
+      "display_name": "Name Demographics (5 Names × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Name demographics with 5 names × 5 APIs (hard)",
+      "detail_path": "./data/tasks/name-demographics-analyzer-h1.json"
+    },
+    {
+      "key": "openmeteo-weather-e1",
+      "display_name": "Weather Monitor (3 Cities × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Weather monitoring with 3 cities × 3 APIs (easy)",
+      "detail_path": "./data/tasks/openmeteo-weather-e1.json"
+    },
+    {
+      "key": "openmeteo-weather-e2",
+      "display_name": "Weather Monitor (3 Cities × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Weather monitoring with 3 cities × 3 APIs (easy)",
+      "detail_path": "./data/tasks/openmeteo-weather-e2.json"
+    },
+    {
+      "key": "openmeteo-weather-e3",
+      "display_name": "Weather Monitor (3 Cities × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Weather monitoring with 3 cities × 3 APIs (easy)",
+      "detail_path": "./data/tasks/openmeteo-weather-e3.json"
+    },
+    {
+      "key": "openmeteo-weather-m1",
+      "display_name": "Weather Monitor (4 Cities × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Weather monitoring with 4 cities × 4 APIs (medium)",
+      "detail_path": "./data/tasks/openmeteo-weather-m1.json"
+    },
+    {
+      "key": "openmeteo-weather-m2",
+      "display_name": "Weather Monitor (4 Cities × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Weather monitoring with 4 cities × 4 APIs (medium)",
+      "detail_path": "./data/tasks/openmeteo-weather-m2.json"
+    },
+    {
+      "key": "openmeteo-weather-h1",
+      "display_name": "Weather Monitor (5 Cities × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Weather monitoring with 5 cities × 5 APIs (hard)",
+      "detail_path": "./data/tasks/openmeteo-weather-h1.json"
+    },
+    {
+      "key": "pokeapi-pokedex-e1",
+      "display_name": "Pokemon Pokedex (3 Pokemon × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Pokemon Pokedex with 3 Pokemon × 3 APIs (easy)",
+      "detail_path": "./data/tasks/pokeapi-pokedex-e1.json"
+    },
+    {
+      "key": "pokeapi-pokedex-e2",
+      "display_name": "Pokemon Pokedex (3 Pokemon × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Pokemon Pokedex with 3 Pokemon × 3 APIs (easy)",
+      "detail_path": "./data/tasks/pokeapi-pokedex-e2.json"
+    },
+    {
+      "key": "pokeapi-pokedex-e3",
+      "display_name": "Pokemon Pokedex (3 Pokemon × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Pokemon Pokedex with 3 Pokemon × 3 APIs (easy)",
+      "detail_path": "./data/tasks/pokeapi-pokedex-e3.json"
+    },
+    {
+      "key": "pokeapi-pokedex-m1",
+      "display_name": "Pokemon Pokedex (4 Pokemon × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Pokemon Pokedex with 4 Pokemon × 4 APIs (medium)",
+      "detail_path": "./data/tasks/pokeapi-pokedex-m1.json"
+    },
+    {
+      "key": "pokeapi-pokedex-m2",
+      "display_name": "Pokemon Pokedex (4 Pokemon × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Pokemon Pokedex with 4 Pokemon × 4 APIs (medium)",
+      "detail_path": "./data/tasks/pokeapi-pokedex-m2.json"
+    },
+    {
+      "key": "pokeapi-pokedex-h1",
+      "display_name": "Pokemon Pokedex (5 Pokemon × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Pokemon Pokedex with 5 Pokemon × 5 APIs (hard)",
+      "detail_path": "./data/tasks/pokeapi-pokedex-h1.json"
+    },
+    {
+      "key": "random-user-database-e1",
+      "display_name": "User Database Builder (3 Nationalities × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "User database builder with 3 nationalities × 3 APIs (easy)",
+      "detail_path": "./data/tasks/random-user-database-e1.json"
+    },
+    {
+      "key": "random-user-database-e2",
+      "display_name": "User Database Builder (3 Nationalities × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "User database builder with 3 nationalities × 3 APIs (easy)",
+      "detail_path": "./data/tasks/random-user-database-e2.json"
+    },
+    {
+      "key": "random-user-database-e3",
+      "display_name": "User Database Builder (3 Nationalities × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "User database builder with 3 nationalities × 3 APIs (easy)",
+      "detail_path": "./data/tasks/random-user-database-e3.json"
+    },
+    {
+      "key": "random-user-database-m1",
+      "display_name": "User Database Builder (4 Nationalities × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "User database builder with 4 nationalities × 4 APIs (medium)",
+      "detail_path": "./data/tasks/random-user-database-m1.json"
+    },
+    {
+      "key": "random-user-database-m2",
+      "display_name": "User Database Builder (4 Nationalities × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "User database builder with 4 nationalities × 4 APIs (medium)",
+      "detail_path": "./data/tasks/random-user-database-m2.json"
+    },
+    {
+      "key": "random-user-database-h1",
+      "display_name": "User Database Builder (5 Nationalities × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "User database builder with 5 nationalities × 5 APIs (hard)",
+      "detail_path": "./data/tasks/random-user-database-h1.json"
+    },
+    {
+      "key": "recipe-cookbook-builder-e1",
+      "display_name": "Recipe Cookbook (3 Dishes × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Recipe cookbook with 3 dishes × 3 APIs (easy)",
+      "detail_path": "./data/tasks/recipe-cookbook-builder-e1.json"
+    },
+    {
+      "key": "recipe-cookbook-builder-e2",
+      "display_name": "Recipe Cookbook (3 Dishes × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Recipe cookbook with 3 dishes × 3 APIs (easy)",
+      "detail_path": "./data/tasks/recipe-cookbook-builder-e2.json"
+    },
+    {
+      "key": "recipe-cookbook-builder-e3",
+      "display_name": "Recipe Cookbook (3 Dishes × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Recipe cookbook with 3 dishes × 3 APIs (easy)",
+      "detail_path": "./data/tasks/recipe-cookbook-builder-e3.json"
+    },
+    {
+      "key": "recipe-cookbook-builder-m1",
+      "display_name": "Recipe Cookbook (4 Dishes × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Recipe cookbook with 4 dishes × 4 APIs (medium)",
+      "detail_path": "./data/tasks/recipe-cookbook-builder-m1.json"
+    },
+    {
+      "key": "recipe-cookbook-builder-m2",
+      "display_name": "Recipe Cookbook (4 Dishes × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Recipe cookbook with 4 dishes × 4 APIs (medium)",
+      "detail_path": "./data/tasks/recipe-cookbook-builder-m2.json"
+    },
+    {
+      "key": "recipe-cookbook-builder-h1",
+      "display_name": "Recipe Cookbook (5 Dishes × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Recipe cookbook with 5 dishes × 5 APIs (hard)",
+      "detail_path": "./data/tasks/recipe-cookbook-builder-h1.json"
+    },
+    {
+      "key": "rickmorty-multiverse-explorer-e1",
+      "display_name": "Rick and Morty Character Analysis (3 Characters × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Rick and Morty character analysis with 3 characters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/rickmorty-multiverse-explorer-e1.json"
+    },
+    {
+      "key": "rickmorty-multiverse-explorer-e2",
+      "display_name": "Rick and Morty Character Analysis (3 Characters × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Rick and Morty character analysis with 3 characters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/rickmorty-multiverse-explorer-e2.json"
+    },
+    {
+      "key": "rickmorty-multiverse-explorer-e3",
+      "display_name": "Rick and Morty Character Analysis (3 Characters × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Rick and Morty character analysis with 3 characters × 3 APIs (easy)",
+      "detail_path": "./data/tasks/rickmorty-multiverse-explorer-e3.json"
+    },
+    {
+      "key": "rickmorty-multiverse-explorer-m1",
+      "display_name": "Rick and Morty Character Analysis (4 Characters × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Rick and Morty character analysis with 4 characters × 4 APIs (medium)",
+      "detail_path": "./data/tasks/rickmorty-multiverse-explorer-m1.json"
+    },
+    {
+      "key": "rickmorty-multiverse-explorer-m2",
+      "display_name": "Rick and Morty Character Analysis (4 Characters × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Rick and Morty character analysis with 4 characters × 4 APIs (medium)",
+      "detail_path": "./data/tasks/rickmorty-multiverse-explorer-m2.json"
+    },
+    {
+      "key": "rickmorty-multiverse-explorer-h1",
+      "display_name": "Rick and Morty Character Analysis (5 Characters × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Rick and Morty character analysis with 5 characters × 5 APIs (hard)",
+      "detail_path": "./data/tasks/rickmorty-multiverse-explorer-h1.json"
+    },
+    {
+      "key": "tvmaze-series-analyzer-e1",
+      "display_name": "TV Series Analysis (3 Shows × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "TV series analysis with 3 shows × 3 API calls (easy difficulty)",
+      "detail_path": "./data/tasks/tvmaze-series-analyzer-e1.json"
+    },
+    {
+      "key": "tvmaze-series-analyzer-e2",
+      "display_name": "TV Series Analysis (3 Shows × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "TV series analysis with 3 shows × 3 API calls (easy difficulty)",
+      "detail_path": "./data/tasks/tvmaze-series-analyzer-e2.json"
+    },
+    {
+      "key": "tvmaze-series-analyzer-e3",
+      "display_name": "TV Series Analysis (3 Shows × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "TV series analysis with 3 shows × 3 API calls (easy difficulty)",
+      "detail_path": "./data/tasks/tvmaze-series-analyzer-e3.json"
+    },
+    {
+      "key": "tvmaze-series-analyzer-m1",
+      "display_name": "TV Series Analysis (4 Shows × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "TV series analysis with 4 shows × 4 API calls (medium difficulty)",
+      "detail_path": "./data/tasks/tvmaze-series-analyzer-m1.json"
+    },
+    {
+      "key": "tvmaze-series-analyzer-m2",
+      "display_name": "TV Series Analysis (4 Shows × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "TV series analysis with 4 shows × 4 API calls (medium difficulty)",
+      "detail_path": "./data/tasks/tvmaze-series-analyzer-m2.json"
+    },
+    {
+      "key": "tvmaze-series-analyzer-h1",
+      "display_name": "TV Series Analysis (5 Shows × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "TV series analysis with 5 shows × 5 API calls (hard difficulty)",
+      "detail_path": "./data/tasks/tvmaze-series-analyzer-h1.json"
+    },
+    {
+      "key": "university-directory-builder-e1",
+      "display_name": "University Directory (3 Countries × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "University directory with 3 countries × 3 APIs (easy)",
+      "detail_path": "./data/tasks/university-directory-builder-e1.json"
+    },
+    {
+      "key": "university-directory-builder-e2",
+      "display_name": "University Directory (3 Countries × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "University directory with 3 countries × 3 APIs (easy)",
+      "detail_path": "./data/tasks/university-directory-builder-e2.json"
+    },
+    {
+      "key": "university-directory-builder-e3",
+      "display_name": "University Directory (3 Countries × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "University directory with 3 countries × 3 APIs (easy)",
+      "detail_path": "./data/tasks/university-directory-builder-e3.json"
+    },
+    {
+      "key": "university-directory-builder-m1",
+      "display_name": "University Directory (4 Countries × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "University directory with 4 countries × 4 APIs (medium)",
+      "detail_path": "./data/tasks/university-directory-builder-m1.json"
+    },
+    {
+      "key": "university-directory-builder-m2",
+      "display_name": "University Directory (4 Countries × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "University directory with 4 countries × 4 APIs (medium)",
+      "detail_path": "./data/tasks/university-directory-builder-m2.json"
+    },
+    {
+      "key": "university-directory-builder-h1",
+      "display_name": "University Directory (5 Countries × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "University directory with 5 countries × 5 APIs (hard)",
+      "detail_path": "./data/tasks/university-directory-builder-h1.json"
+    },
+    {
+      "key": "usgs-earthquake-monitor-e1",
+      "display_name": "Earthquake Analysis (3 Regions × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Earthquake analysis with 3 regions × 3 APIs (easy)",
+      "detail_path": "./data/tasks/usgs-earthquake-monitor-e1.json"
+    },
+    {
+      "key": "usgs-earthquake-monitor-e2",
+      "display_name": "Earthquake Analysis (3 Regions × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Earthquake analysis with 3 regions × 3 APIs (easy)",
+      "detail_path": "./data/tasks/usgs-earthquake-monitor-e2.json"
+    },
+    {
+      "key": "usgs-earthquake-monitor-e3",
+      "display_name": "Earthquake Analysis (3 Regions × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Earthquake analysis with 3 regions × 3 APIs (easy)",
+      "detail_path": "./data/tasks/usgs-earthquake-monitor-e3.json"
+    },
+    {
+      "key": "usgs-earthquake-monitor-m1",
+      "display_name": "Earthquake Analysis (4 Regions × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Earthquake analysis with 4 regions × 4 APIs (medium)",
+      "detail_path": "./data/tasks/usgs-earthquake-monitor-m1.json"
+    },
+    {
+      "key": "usgs-earthquake-monitor-m2",
+      "display_name": "Earthquake Analysis (4 Regions × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Earthquake analysis with 4 regions × 4 APIs (medium)",
+      "detail_path": "./data/tasks/usgs-earthquake-monitor-m2.json"
+    },
+    {
+      "key": "usgs-earthquake-monitor-h1",
+      "display_name": "Earthquake Analysis (5 Regions × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Earthquake analysis with 5 regions × 5 APIs (hard)",
+      "detail_path": "./data/tasks/usgs-earthquake-monitor-h1.json"
+    },
+    {
+      "key": "vocabulary-builder-e1",
+      "display_name": "Vocabulary Builder (3 Words × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Vocabulary builder with 3 words × 3 APIs (easy)",
+      "detail_path": "./data/tasks/vocabulary-builder-e1.json"
+    },
+    {
+      "key": "vocabulary-builder-e2",
+      "display_name": "Vocabulary Builder (3 Words × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Vocabulary builder with 3 words × 3 APIs (easy)",
+      "detail_path": "./data/tasks/vocabulary-builder-e2.json"
+    },
+    {
+      "key": "vocabulary-builder-e3",
+      "display_name": "Vocabulary Builder (3 Words × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Vocabulary builder with 3 words × 3 APIs (easy)",
+      "detail_path": "./data/tasks/vocabulary-builder-e3.json"
+    },
+    {
+      "key": "vocabulary-builder-m1",
+      "display_name": "Vocabulary Builder (4 Words × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Vocabulary builder with 4 words × 4 APIs (medium)",
+      "detail_path": "./data/tasks/vocabulary-builder-m1.json"
+    },
+    {
+      "key": "vocabulary-builder-m2",
+      "display_name": "Vocabulary Builder (4 Words × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Vocabulary builder with 4 words × 4 APIs (medium)",
+      "detail_path": "./data/tasks/vocabulary-builder-m2.json"
+    },
+    {
+      "key": "vocabulary-builder-h1",
+      "display_name": "Vocabulary Builder (5 Words × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Vocabulary builder with 5 words × 5 APIs (hard)",
+      "detail_path": "./data/tasks/vocabulary-builder-h1.json"
+    },
+    {
+      "key": "world-bank-economic-snapshot-e1",
+      "display_name": "Economic Snapshot (3 Countries × 3 APIs) - E1",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Economic snapshot with 3 countries × 3 APIs (easy)",
+      "detail_path": "./data/tasks/world-bank-economic-snapshot-e1.json"
+    },
+    {
+      "key": "world-bank-economic-snapshot-e2",
+      "display_name": "Economic Snapshot (3 Countries × 3 APIs) - E2",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Economic snapshot with 3 countries × 3 APIs (easy)",
+      "detail_path": "./data/tasks/world-bank-economic-snapshot-e2.json"
+    },
+    {
+      "key": "world-bank-economic-snapshot-e3",
+      "display_name": "Economic Snapshot (3 Countries × 3 APIs) - E3",
+      "difficulty": "easy",
+      "category": "scaled_tasks",
+      "subtask_count": 3,
+      "calls_per_subtask": 3,
+      "description": "Economic snapshot with 3 countries × 3 APIs (easy)",
+      "detail_path": "./data/tasks/world-bank-economic-snapshot-e3.json"
+    },
+    {
+      "key": "world-bank-economic-snapshot-m1",
+      "display_name": "Economic Snapshot (4 Countries × 4 APIs) - M1",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Economic snapshot with 4 countries × 4 APIs (medium)",
+      "detail_path": "./data/tasks/world-bank-economic-snapshot-m1.json"
+    },
+    {
+      "key": "world-bank-economic-snapshot-m2",
+      "display_name": "Economic Snapshot (4 Countries × 4 APIs) - M2",
+      "difficulty": "medium",
+      "category": "scaled_tasks",
+      "subtask_count": 4,
+      "calls_per_subtask": 4,
+      "description": "Economic snapshot with 4 countries × 4 APIs (medium)",
+      "detail_path": "./data/tasks/world-bank-economic-snapshot-m2.json"
+    },
+    {
+      "key": "world-bank-economic-snapshot-h1",
+      "display_name": "Economic Snapshot (5 Countries × 5 APIs) - H1",
+      "difficulty": "hard",
+      "category": "scaled_tasks",
+      "subtask_count": 5,
+      "calls_per_subtask": 5,
+      "description": "Economic snapshot with 5 countries × 5 APIs (hard)",
+      "detail_path": "./data/tasks/world-bank-economic-snapshot-h1.json"
+    }
+  ]
+}

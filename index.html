@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillCraft - Tasks & Trajectories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* ===== Navigation Bar ===== */
+        .nav-bar {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            height: 52px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        
+        .nav-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .nav-tab {
+            padding: 14px 24px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-tab:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-tab.active {
+            color: #fff;
+            border-bottom-color: #667eea;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* ===== Page Containers ===== */
+        .page-container {
+            flex: 1;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .page-container.active {
+            display: flex;
+        }
+        
+        /* ===== Shared Styles ===== */
+        .top-bar {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .brand {
+            font-size: 18px;
+            font-weight: 600;
+            color: #007AFF;
+            margin-right: 16px;
+        }
+        
+        select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            font-size: 14px;
+            min-width: 180px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        select:focus {
+            border-color: #007AFF;
+        }
+        
+        .model-select, .task-select {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 500;
+            min-width: 200px;
+        }
+        
+        .model-select option, .model-select optgroup,
+        .task-select option, .task-select optgroup {
+            background: white;
+            color: #333;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            padding: 14px 16px;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+        }
+        
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        
+        /* ===== Trajectory Page Styles ===== */
+        .stats-panel {
+            width: 320px;
+            min-width: 280px;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .stats-container {
+            font-size: 13px;
+        }
+        
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        
+        .stats-table th, .stats-table td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stats-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        
+        .stats-table tr.result-row td {
+            padding-top: 12px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .pass-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .fail-badge {
+            background: #ffebee;
+            color: #c62828;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .pattern-summary {
+            background: #f0f7ff;
+            border: 1px solid #b3d4fc;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        
+        .pattern-summary h4 {
+            font-size: 13px;
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+        
+        .pattern-stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .pattern-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .pattern-stat .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+        
+        .pattern-stat .stat-label {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .pattern-list {
+            border-top: 1px solid #b3d4fc;
+            padding-top: 10px;
+        }
+        
+        .pattern-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .pattern-item:hover {
+            background: #e3f2fd;
+            border-color: #90caf9;
+        }
+        
+        .pattern-name {
+            font-weight: 600;
+            font-size: 12px;
+            color: #1565c0;
+            display: block;
+        }
+        
+        .pattern-desc {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .pattern-more {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+            margin-top: 4px;
+        }
+        
+        /* Global Tooltip */
+        #globalTooltip {
+            position: fixed;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre-wrap;
+            max-width: 500px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 999999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: none;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        #globalTooltip .tooltip-title {
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 8px;
+            font-size: 13px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 6px;
+        }
+        
+        #globalTooltip .tooltip-code {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 11px;
+            color: #444;
+        }
+        
+        /* Trajectory Panels */
+        .traj-panels {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .traj-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+        
+        .traj-panel:last-child {
+            border-right: none;
+        }
+        
+        .traj-panel .panel-header.normal {
+            background: linear-gradient(135deg, #e3f2fd, #f5f5f5);
+            color: #1565c0;
+        }
+        
+        .traj-panel .panel-header.reuse {
+            background: linear-gradient(135deg, #e8f5e9, #f5f5f5);
+            color: #2e7d32;
+        }
+        
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            background: #f8f9fa;
+        }
+        
+        /* Messages */
+        .message {
+            margin-bottom: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            cursor: default;
+        }
+        
+        .message.has-raw-tooltip:hover {
+            border-color: #90caf9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-header {
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .message-content {
+            padding: 10px 12px;
+        }
+        
+        .message-content pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 0;
+            background: transparent;
+        }
+        
+        .user-message .message-header {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .assistant-message .message-header {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .tool-call .message-header {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .tool-output .message-header {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .tool-output .message-content {
+            background: #fafafa;
+        }
+        
+        /* Task Info Section */
+        .task-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .task-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .task-info .task-desc {
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .task-info .view-details-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-top: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+        
+        .task-info .view-details-btn:hover {
+            background: rgba(255,255,255,0.35);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-1px);
+        }
+        
+        .progress-text {
+            font-size: 12px;
+            color: #666;
+            min-width: 60px;
+            font-family: monospace;
+        }
+        
+        /* ===== Task Showcase Page Styles ===== */
+        .sidebar {
+            width: 320px;
+            min-width: 280px;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-item {
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #eee;
+        }
+        
+        .task-item:hover {
+            background: #f0f7ff;
+            border-color: #007AFF;
+        }
+        
+        .task-item.active {
+            background: #e8f4ff;
+            border-color: #007AFF;
+        }
+        
+        .task-item-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .task-item-meta {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .badge-easy { background: #d4edda; color: #155724; }
+        .badge-medium { background: #fff3cd; color: #856404; }
+        .badge-hard { background: #f8d7da; color: #721c24; }
+        .badge-api { background: #e7f3ff; color: #004085; }
+        .badge-local { background: #f0e6ff; color: #5a2d82; }
+        
+        .content-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .content-header {
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .content-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .content-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .meta-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 20px;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: #666;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            color: #007AFF;
+        }
+        
+        .tab.active {
+            color: #007AFF;
+            border-bottom-color: #007AFF;
+        }
+        
+        .tab-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #fafafa;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .markdown-content {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            max-width: none;
+            width: 100%;
+        }
+        
+        .markdown-content h1 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .markdown-content h2 {
+            font-size: 20px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .markdown-content h3 {
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        
+        .markdown-content h4 {
+            font-size: 14px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin-bottom: 12px;
+            padding-left: 24px;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        
+        .markdown-content .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .markdown-content .inline-code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+        }
+        
+        .config-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .config-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .config-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+        
+        .config-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .config-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .tool-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .tool-tag {
+            background: #e7f3ff;
+            color: #004085;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .tool-tag.mcp {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .showcase-pattern-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .showcase-pattern-info h3 {
+            color: white;
+            margin-bottom: 12px;
+        }
+        
+        .showcase-pattern-stats {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .showcase-pattern-stat {
+            text-align: center;
+        }
+        
+        .showcase-pattern-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .showcase-pattern-stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .raw-json {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        .search-box {
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+        
+        .stats-summary {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-panel, .sidebar {
+                width: 260px;
+                min-width: 240px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .stats-panel, .sidebar {
+                width: 100%;
+                max-height: 200px;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            
+            .traj-panels {
+                flex-direction: column;
+            }
+            
+            .traj-panel {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-brand">
+            <span style="font-size: 24px;">🔬</span>
+            <span>SkillCraft</span>
+        </div>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab" data-page="tasks" onclick="switchPage('tasks')">
+                <span>📋</span>
+                <span>Task Definitions</span>
+            </div>
+            <div class="nav-tab active" data-page="traj" onclick="switchPage('traj')">
+                <span>📊</span>
+                <span>Trajectory Comparison</span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Global Tooltip Container -->
+    <div id="globalTooltip"></div>
+    
+    <!-- ===== TRAJECTORY PAGE ===== -->
+    <div id="trajPage" class="page-container active">
+        <div class="top-bar">
+            <div class="controls">
+                <span class="brand">🔬 Multi-Model Comparison</span>
+                <select id="modelSelect" class="model-select" onchange="trajUpdateGroupSelect()">
+                    <option value="">-- Select Model --</option>
+                </select>
+                <select id="trajTaskSelect" onchange="trajLoadTask()">
+                    <option value="">-- Select Task --</option>
+                </select>
+            </div>
+            <div class="progress-container">
+                <span class="progress-text" id="progressText">Base: 0 steps | Skill: 0 steps</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="stats-panel">
+                <div class="panel-content" id="statsContent">
+                    <div id="taskInfoSection"></div>
+                    <div class="panel-header" style="margin: 0 -16px; padding: 10px 16px;">📊 Statistics Comparison</div>
+                    <div id="statsSection">
+                        <div class="empty-state">
+                            <h3>Select a Task</h3>
+                            <p>Choose model, task group, and task</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="traj-panels">
+                <div class="traj-panel">
+                    <div class="panel-header normal">🔵 Base Mode</div>
+                    <div class="messages-container" id="normalMessages">
+                        <div class="empty-state">
+                            <h3>No Trajectory</h3>
+                            <p>Select a task to view trajectory</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="traj-panel">
+                    <div class="panel-header reuse">🟢 Skill Mode</div>
+                    <div class="messages-container" id="reuseMessages">
+                        <div class="empty-state">
+                            <h3>No Trajectory</h3>
+                            <p>Select a task to view trajectory</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ===== TASK SHOWCASE PAGE ===== -->
+    <div id="tasksPage" class="page-container">
+        <div class="top-bar">
+            <div class="controls">
+                <span class="brand">📋 Task Showcase</span>
+                <select class="task-select" id="showcaseTaskBaseSelect" onchange="showcaseSelectTaskFromDropdowns()">
+                    <option value="">Select task base...</option>
+                </select>
+                <select class="task-select" id="showcaseTaskLevelSelect" onchange="showcaseSelectTaskFromDropdowns()">
+                    <option value="">Select difficulty...</option>
+                </select>
+            </div>
+            <div class="stats-summary">
+                <div class="stat-item">
+                    <span>Total Tasks:</span>
+                    <span class="stat-value" id="totalTasksStat">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>API Tasks:</span>
+                    <span class="stat-value" id="apiTasksStat">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Local Tasks:</span>
+                    <span class="stat-value" id="localTasksStat">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="panel-header">📁 All Tasks</div>
+                <div class="panel-content">
+                    <input type="text" class="search-box" id="searchBox" placeholder="Search tasks..." oninput="showcaseFilterTasks()">
+                    <ul class="task-list" id="taskList"></ul>
+                </div>
+            </div>
+            
+            <div class="content-panel">
+                <div class="content-header" id="showcaseContentHeader">
+                    <div class="content-title" id="showcaseContentTitle">Select a task to view details</div>
+                    <div class="content-meta" id="showcaseContentMeta"></div>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="prompt" onclick="showcaseSwitchTab('prompt')">Agent Prompt</div>
+                    <div class="tab" data-tab="config" onclick="showcaseSwitchTab('config')">Configuration</div>
+                    <div class="tab" data-tab="raw" onclick="showcaseSwitchTab('raw')">Raw Config</div>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="promptPane">
+                        <div class="markdown-content" id="promptContent">
+                            <p style="color: #666; text-align: center; padding: 40px;">
+                                👈 Select a task from the sidebar or dropdown to view its prompt
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="configPane">
+                        <div id="configContent"></div>
+                    </div>
+                    
+                    <div class="tab-pane" id="rawPane">
+                        <pre class="raw-json" id="rawContent">Select a task to view its configuration</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ===== DATA LOADER =====
+        const DATA_ROOT = './data';
+
+        let appManifest = null;
+        let taskCatalog = {};
+        let trajModelCatalog = {};
+
+        const taskDetailCache = new Map();
+        const modelIndexCache = new Map();
+        const trajDetailCache = new Map();
+
+        // ===== PAGE SWITCHING =====
+        function switchPage(page) {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.page === page);
+            });
+            document.getElementById('trajPage').classList.toggle('active', page === 'traj');
+            document.getElementById('tasksPage').classList.toggle('active', page === 'tasks');
+        }
+
+        function navigateToTaskDetails(taskKey) {
+            switchPage('tasks');
+            setTimeout(() => {
+                showcaseSelectTask(taskKey);
+            }, 100);
+        }
+
+        async function fetchJson(path) {
+            const res = await fetch(path, { cache: 'no-cache' });
+            if (!res.ok) {
+                throw new Error(`Failed to load ${path} (${res.status})`);
+            }
+            return await res.json();
+        }
+
+        function toPrettyText(value) {
+            if (value === null || value === undefined) return '';
+            if (typeof value === 'string') {
+                const trimmed = value.trim();
+                if ((trimmed.startsWith('{') && trimmed.endsWith('}')) ||
+                    (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
+                    try {
+                        return JSON.stringify(JSON.parse(trimmed), null, 2);
+                    } catch (_) {}
+                }
+                return value;
+            }
+            if (typeof value === 'object') {
+                try {
+                    return JSON.stringify(value, null, 2);
+                } catch (_) {
+                    return String(value);
+                }
+            }
+            return String(value);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function setEmpty(containerId, title, desc) {
+            document.getElementById(containerId).innerHTML = `
+                <div class="empty-state">
+                    <h3>${escapeHtml(title)}</h3>
+                    <p>${escapeHtml(desc)}</p>
+                </div>
+            `;
+        }
+
+        function showStatsError(message) {
+            document.getElementById('statsSection').innerHTML = `
+                <div class="empty-state">
+                    <h3>Load Failed</h3>
+                    <p>${escapeHtml(message)}</p>
+                </div>
+            `;
+        }
+
+        // ===== TOOLTIP =====
+        const tooltip = document.getElementById('globalTooltip');
+        let tooltipTimeout;
+
+        function showTooltip(element, content, title) {
+            clearTimeout(tooltipTimeout);
+            const rect = element.getBoundingClientRect();
+
+            let tooltipHtml = '';
+            if (title) {
+                tooltipHtml += `<div class="tooltip-title">📄 ${escapeHtml(title)}</div>`;
+            }
+            tooltipHtml += `<div class="tooltip-code">${escapeHtml(content)}</div>`;
+            tooltip.innerHTML = tooltipHtml;
+            tooltip.style.display = 'block';
+
+            let left = rect.right + 10;
+            let top = rect.top;
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            if (left + tooltipRect.width > window.innerWidth - 20) {
+                left = rect.left - tooltipRect.width - 10;
+            }
+            if (top + tooltipRect.height > window.innerHeight - 20) {
+                top = window.innerHeight - tooltipRect.height - 20;
+            }
+            if (top < 10) top = 10;
+            if (left < 10) left = 10;
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        function hideTooltip() {
+            tooltipTimeout = setTimeout(() => {
+                tooltip.style.display = 'none';
+            }, 100);
+        }
+
+        tooltip.addEventListener('mouseenter', () => clearTimeout(tooltipTimeout));
+        tooltip.addEventListener('mouseleave', hideTooltip);
+
+        // ===== TRAJECTORY PAGE =====
+        let currentBaseRenderEntries = [];
+        let currentSkillRenderEntries = [];
+
+        async function loadModelIndex(modelDisplay) {
+            const meta = trajModelCatalog[modelDisplay];
+            if (!meta) throw new Error(`Unknown model: ${modelDisplay}`);
+
+            if (modelIndexCache.has(modelDisplay)) return modelIndexCache.get(modelDisplay);
+
+            const modelIndex = await fetchJson(meta.index_path);
+            modelIndexCache.set(modelDisplay, modelIndex);
+            return modelIndex;
+        }
+
+        async function loadTrajDetail(detailPath) {
+            if (trajDetailCache.has(detailPath)) return trajDetailCache.get(detailPath);
+            const detail = await fetchJson(detailPath);
+            trajDetailCache.set(detailPath, detail);
+            return detail;
+        }
+
+        function getRawForEntry(trajPayload, entry) {
+            const rawMessages = Array.isArray(trajPayload?.raw_messages) ? trajPayload.raw_messages : [];
+            const msg = rawMessages[entry.msg_idx] || {};
+            if (entry.kind === 'tool-call') {
+                const calls = Array.isArray(msg.tool_calls) ? msg.tool_calls : [];
+                return calls[entry.tool_call_idx] || {};
+            }
+            return msg;
+        }
+
+        function buildRenderEntries(trajPayload) {
+            const entries = Array.isArray(trajPayload?.entries) ? trajPayload.entries : [];
+            const out = [];
+
+            for (const entry of entries) {
+                const raw = getRawForEntry(trajPayload, entry);
+                let cssClass = 'assistant-message';
+                let header = '🤖 Assistant';
+                let content = '';
+
+                if (entry.kind === 'user') {
+                    cssClass = 'user-message';
+                    header = '👤 User';
+                    content = raw?.content;
+                } else if (entry.kind === 'assistant') {
+                    cssClass = 'assistant-message';
+                    header = '🤖 Assistant';
+                    content = raw?.content;
+                } else if (entry.kind === 'tool-call') {
+                    cssClass = 'tool-call';
+                    const fn = raw?.function || {};
+                    const name = fn?.name || raw?.name || 'unknown_tool';
+                    header = `🔧 Tool: ${name}`;
+                    content = fn?.arguments ?? raw?.arguments ?? '';
+                } else if (entry.kind === 'tool-output') {
+                    cssClass = 'tool-output';
+                    header = '📤 Output';
+                    content = raw?.content;
+                }
+
+                out.push({
+                    cssClass,
+                    header,
+                    content: toPrettyText(content),
+                    raw,
+                });
+            }
+
+            return out;
+        }
+
+        function renderMessageEntries(containerId, entries, stream) {
+            const container = document.getElementById(containerId);
+            if (!entries || entries.length === 0) {
+                setEmpty(containerId, 'No Trajectory', 'No trajectory data available');
+                return;
+            }
+
+            container.innerHTML = entries.map((entry, idx) => `
+                <div class="message ${entry.cssClass} has-raw-tooltip" data-stream="${stream}" data-entry-index="${idx}">
+                    <div class="message-header">${escapeHtml(entry.header)}</div>
+                    <div class="message-content"><pre>${escapeHtml(entry.content)}</pre></div>
+                </div>
+            `).join('');
+        }
+
+        function trajBindPatternTooltips() {
+            document.querySelectorAll('.pattern-item[data-tooltip]').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const content = this.getAttribute('data-tooltip');
+                    const name = this.querySelector('.pattern-name')?.textContent || 'Skill';
+                    showTooltip(this, content, name);
+                });
+                item.addEventListener('mouseleave', hideTooltip);
+            });
+        }
+
+        function trajBindMessageTooltips() {
+            document.querySelectorAll('.has-raw-tooltip').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const stream = this.getAttribute('data-stream');
+                    const idx = Number(this.getAttribute('data-entry-index'));
+                    const entries = stream === 'base' ? currentBaseRenderEntries : currentSkillRenderEntries;
+                    const raw = entries[idx]?.raw;
+                    if (raw !== undefined) {
+                        showTooltip(this, toPrettyText(raw), 'Raw JSON');
+                    }
+                });
+                item.addEventListener('mouseleave', hideTooltip);
+            });
+        }
+
+        function trajBindAllTooltips() {
+            trajBindPatternTooltips();
+            trajBindMessageTooltips();
+        }
+
+        async function trajInit() {
+            const modelSelect = document.getElementById('modelSelect');
+            modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
+
+            const modelNames = appManifest?.models || Object.keys(trajModelCatalog);
+            modelNames.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                modelSelect.appendChild(option);
+            });
+
+            if (modelNames.length > 0) {
+                modelSelect.value = modelNames[0];
+                await trajUpdateGroupSelect();
+            }
+        }
+
+        async function trajUpdateGroupSelect() {
+            const model = document.getElementById('modelSelect').value;
+            const taskSelect = document.getElementById('trajTaskSelect');
+
+            taskSelect.innerHTML = '<option value="">-- Select Task --</option>';
+
+            if (!model) return;
+
+            try {
+                await trajUpdateTaskSelect();
+            } catch (err) {
+                showStatsError(err.message || String(err));
+            }
+        }
+
+        async function trajUpdateTaskSelect() {
+            const model = document.getElementById('modelSelect').value;
+            const taskSelect = document.getElementById('trajTaskSelect');
+
+            taskSelect.innerHTML = '<option value="">-- Select Task --</option>';
+            if (!model) return;
+
+            try {
+                const modelIndex = await loadModelIndex(model);
+                const tasks = modelIndex.tasks || [];
+
+                tasks.sort((a, b) => a.task_key.localeCompare(b.task_key));
+
+                tasks.forEach(t => {
+                    const option = document.createElement('option');
+                    option.value = t.task_key;
+                    option.textContent = t.task_key;
+                    taskSelect.appendChild(option);
+                });
+
+                if (tasks.length > 0) {
+                    taskSelect.value = tasks[0].task_key;
+                    await trajLoadTask();
+                }
+            } catch (err) {
+                showStatsError(err.message || String(err));
+            }
+        }
+
+        async function trajLoadTask() {
+            const model = document.getElementById('modelSelect').value;
+            const task = document.getElementById('trajTaskSelect').value;
+            if (!model || !task) return;
+
+            setEmpty('normalMessages', 'Loading...', 'Loading base trajectory');
+            setEmpty('reuseMessages', 'Loading...', 'Loading skill trajectory');
+
+            try {
+                const modelIndex = await loadModelIndex(model);
+                const taskMeta = (modelIndex.tasks || []).find(t => t.task_key === task);
+                if (!taskMeta) throw new Error(`Task not found in model index: ${task}`);
+
+                const data = await loadTrajDetail(taskMeta.detail_path);
+
+                const taskInfo = data.task_info || {};
+                const cleanTaskName = task.replace(/^SingleUserTurn-/, '');
+                let taskInfoHtml = '';
+                if (taskInfo.task_name) {
+                    taskInfoHtml = `
+                        <div class="task-info">
+                            <h3>📋 ${escapeHtml(taskInfo.task_name)}</h3>
+                            ${taskInfo.description ? `<div class="task-desc">${escapeHtml(taskInfo.description)}</div>` : ''}
+                            <div class="view-details-btn" onclick="navigateToTaskDetails('${cleanTaskName}')">
+                                📄 View Full Task Details
+                            </div>
+                        </div>
+                    `;
+                }
+                document.getElementById('taskInfoSection').innerHTML = taskInfoHtml;
+                document.getElementById('statsSection').innerHTML = data.stats_html || '<div class="empty-state">No stats available</div>';
+
+                currentBaseRenderEntries = buildRenderEntries(data.base || {});
+                currentSkillRenderEntries = buildRenderEntries(data.skill || {});
+
+                renderMessageEntries('normalMessages', currentBaseRenderEntries, 'base');
+                renderMessageEntries('reuseMessages', currentSkillRenderEntries, 'skill');
+
+                document.getElementById('progressText').textContent =
+                    `Base: ${currentBaseRenderEntries.length} steps | Skill: ${currentSkillRenderEntries.length} steps`;
+
+                setTimeout(trajBindAllTooltips, 30);
+            } catch (err) {
+                showStatsError(err.message || String(err));
+                setEmpty('normalMessages', 'Load Failed', err.message || String(err));
+                setEmpty('reuseMessages', 'Load Failed', err.message || String(err));
+            }
+        }
+
+        // ===== TASK SHOWCASE PAGE =====
+        let showcaseCurrentTask = null;
+        const TASK_LEVEL_ORDER = ['e1', 'e2', 'e3', 'm1', 'm2', 'h1'];
+        let taskBaseIndex = {};
+
+        function parseTaskKey(taskKey) {
+            const m = String(taskKey || '').match(/^(.*)-(e1|e2|e3|m1|m2|h1)$/i);
+            if (!m) return null;
+            return { base: m[1], level: m[2].toLowerCase() };
+        }
+
+        function baseLabelFromKey(baseKey) {
+            return baseKey
+                .split('-')
+                .map(x => x ? x[0].toUpperCase() + x.slice(1) : x)
+                .join(' ');
+        }
+
+        function sortedTasksEntries() {
+            return Object.entries(taskCatalog).sort((a, b) => {
+                return a[1].display_name.localeCompare(b[1].display_name);
+            });
+        }
+
+        async function loadTaskDetail(taskKey) {
+            if (taskDetailCache.has(taskKey)) return taskDetailCache.get(taskKey);
+            const meta = taskCatalog[taskKey];
+            if (!meta) throw new Error(`Unknown task key: ${taskKey}`);
+            const detail = await fetchJson(meta.detail_path);
+            const merged = { ...meta, ...detail };
+            taskDetailCache.set(taskKey, merged);
+            return merged;
+        }
+
+        function buildTaskBaseIndex() {
+            taskBaseIndex = {};
+            sortedTasksEntries().forEach(([taskKey, task]) => {
+                const parsed = parseTaskKey(taskKey);
+                if (!parsed) return;
+                if (!taskBaseIndex[parsed.base]) taskBaseIndex[parsed.base] = {};
+                taskBaseIndex[parsed.base][parsed.level] = taskKey;
+            });
+        }
+
+        function showcasePopulateTaskBaseSelect() {
+            const baseSelect = document.getElementById('showcaseTaskBaseSelect');
+            baseSelect.innerHTML = '<option value="">Select task base...</option>';
+
+            Object.keys(taskBaseIndex).sort().forEach(baseKey => {
+                const option = document.createElement('option');
+                option.value = baseKey;
+                option.textContent = baseLabelFromKey(baseKey);
+                baseSelect.appendChild(option);
+            });
+        }
+
+        function showcasePopulateTaskLevelSelect(baseKey, preferredLevel = '') {
+            const levelSelect = document.getElementById('showcaseTaskLevelSelect');
+            levelSelect.innerHTML = '<option value="">Select difficulty...</option>';
+            if (!baseKey || !taskBaseIndex[baseKey]) return;
+
+            TASK_LEVEL_ORDER.forEach(level => {
+                if (!taskBaseIndex[baseKey][level]) return;
+                const option = document.createElement('option');
+                option.value = level;
+                option.textContent = level.toUpperCase();
+                levelSelect.appendChild(option);
+            });
+
+            if (preferredLevel && taskBaseIndex[baseKey][preferredLevel]) {
+                levelSelect.value = preferredLevel;
+            }
+        }
+
+        function showcaseUpdateStatsSummary() {
+            const entries = Object.entries(taskCatalog);
+            const total = entries.length;
+            const local = entries.filter(([k]) => k.includes('local-')).length;
+            const api = total - local;
+            document.getElementById('totalTasksStat').textContent = String(total);
+            document.getElementById('apiTasksStat').textContent = String(api);
+            document.getElementById('localTasksStat').textContent = String(local);
+        }
+
+        function showcasePopulateTaskList() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+
+            sortedTasksEntries().forEach(([key, task]) => {
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                li.dataset.task = key;
+
+                const isLocal = key.includes('local-');
+                const difficultyClass = task.difficulty === 'easy' ? 'badge-easy' :
+                                        task.difficulty === 'medium' ? 'badge-medium' : 'badge-hard';
+
+                li.innerHTML = `
+                    <div class="task-item-name">${escapeHtml(task.display_name)}</div>
+                    <div class="task-item-meta">
+                        <span class="badge ${difficultyClass}">${escapeHtml(task.difficulty)}</span>
+                        <span class="badge ${isLocal ? 'badge-local' : 'badge-api'}">${isLocal ? 'Local' : 'API'}</span>
+                        <span>${task.subtask_count}×${task.calls_per_subtask}</span>
+                    </div>
+                `;
+
+                li.addEventListener('click', () => showcaseSelectTask(key));
+                taskList.appendChild(li);
+            });
+        }
+
+        function showcaseFilterTasks() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            document.querySelectorAll('.task-item').forEach(item => {
+                const taskKey = item.dataset.task;
+                const task = taskCatalog[taskKey];
+                const matches = taskKey.toLowerCase().includes(query) ||
+                               task.display_name.toLowerCase().includes(query) ||
+                               task.description.toLowerCase().includes(query);
+                item.style.display = matches ? '' : 'none';
+            });
+        }
+
+        function showcaseSwitchTab(tabName) {
+            document.querySelectorAll('#tasksPage .tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#tasksPage .tab-pane').forEach(p => p.classList.remove('active'));
+
+            document.querySelector(`#tasksPage .tab[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName + 'Pane').classList.add('active');
+        }
+
+        function showcaseSelectTaskFromDropdowns() {
+            const base = document.getElementById('showcaseTaskBaseSelect').value;
+            const level = document.getElementById('showcaseTaskLevelSelect').value;
+
+            if (!base) {
+                showcasePopulateTaskLevelSelect('', '');
+                return;
+            }
+
+            showcasePopulateTaskLevelSelect(base, level);
+            if (!level) return;
+
+            const taskKey = taskBaseIndex[base]?.[level];
+            if (taskKey) showcaseSelectTask(taskKey);
+        }
+
+        async function showcaseSelectTask(taskKey) {
+            try {
+                const task = await loadTaskDetail(taskKey);
+                showcaseCurrentTask = task;
+
+                const parsed = parseTaskKey(taskKey);
+                if (parsed && taskBaseIndex[parsed.base]) {
+                    const baseSelect = document.getElementById('showcaseTaskBaseSelect');
+                    if (baseSelect.value !== parsed.base) {
+                        baseSelect.value = parsed.base;
+                    }
+                    showcasePopulateTaskLevelSelect(parsed.base, parsed.level);
+                    document.getElementById('showcaseTaskLevelSelect').value = parsed.level;
+                }
+
+                let activeItem = null;
+                document.querySelectorAll('.task-item').forEach(item => {
+                    const isActive = item.dataset.task === taskKey;
+                    item.classList.toggle('active', isActive);
+                    if (isActive) activeItem = item;
+                });
+                if (activeItem) {
+                    activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                }
+
+                document.getElementById('showcaseContentTitle').textContent = task.display_name;
+
+                const difficultyClass = task.difficulty === 'easy' ? 'badge-easy' :
+                                        task.difficulty === 'medium' ? 'badge-medium' : 'badge-hard';
+                const isLocal = taskKey.includes('local-');
+
+                document.getElementById('showcaseContentMeta').innerHTML = `
+                    <div class="meta-item">
+                        <span class="badge ${difficultyClass}">${escapeHtml(task.difficulty)}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="badge ${isLocal ? 'badge-local' : 'badge-api'}">${isLocal ? 'Local Files' : 'API Based'}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Subtasks:</span>
+                        <span class="meta-value">${task.subtask_count}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Calls/Subtask:</span>
+                        <span class="meta-value">${task.calls_per_subtask}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>Total Calls:</span>
+                        <span class="meta-value">${task.subtask_count * task.calls_per_subtask}</span>
+                    </div>
+                `;
+
+                document.getElementById('promptContent').innerHTML = task.task_md_html || '';
+                showcaseUpdateConfigContent(task);
+
+                document.getElementById('rawContent').textContent = JSON.stringify({
+                    task_name: task.name,
+                    task_type: task.task_type,
+                    meta: {
+                        difficulty: task.difficulty,
+                        category: task.category,
+                        subtask_count: task.subtask_count,
+                        calls_per_subtask: task.calls_per_subtask,
+                        description: task.description
+                    },
+                    mcp_servers: task.mcp_servers,
+                    local_tools: task.local_tools,
+                    tools_used: task.tools_used
+                }, null, 2);
+            } catch (err) {
+                document.getElementById('promptContent').innerHTML = `
+                    <p style="color:#c62828; text-align:center; padding:40px;">
+                        Failed to load task: ${escapeHtml(err.message || String(err))}
+                    </p>
+                `;
+            }
+        }
+
+        function showcaseUpdateConfigContent(task) {
+            const container = document.getElementById('configContent');
+            const toolsUsed = task.tools_used || [];
+            const mcpServers = task.mcp_servers || [];
+            const localTools = task.local_tools || [];
+
+            container.innerHTML = `
+                <div class="showcase-pattern-info">
+                    <h3>🔄 Skill Reuse Target</h3>
+                    <div class="showcase-pattern-stats">
+                        <div class="showcase-pattern-stat">
+                            <div class="showcase-pattern-stat-value">${task.subtask_count}</div>
+                            <div class="showcase-pattern-stat-label">Subtasks</div>
+                        </div>
+                        <div class="showcase-pattern-stat">
+                            <div class="showcase-pattern-stat-value">${task.calls_per_subtask}</div>
+                            <div class="showcase-pattern-stat-label">Calls per Subtask</div>
+                        </div>
+                        <div class="showcase-pattern-stat">
+                            <div class="showcase-pattern-stat-value">${task.subtask_count * task.calls_per_subtask}</div>
+                            <div class="showcase-pattern-stat-label">Total Tool Calls</div>
+                        </div>
+                        <div class="showcase-pattern-stat">
+                            <div class="showcase-pattern-stat-value">${toolsUsed.length}</div>
+                            <div class="showcase-pattern-stat-label">Unique Tools</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>📝 Task Information</h3>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <div class="config-label">Task Name</div>
+                            <div class="config-value">${escapeHtml(task.name)}</div>
+                        </div>
+                        <div class="config-item">
+                            <div class="config-label">Task Type</div>
+                            <div class="config-value">${escapeHtml(task.task_type)}</div>
+                        </div>
+                        <div class="config-item">
+                            <div class="config-label">Difficulty</div>
+                            <div class="config-value">${escapeHtml(task.difficulty)}</div>
+                        </div>
+                        <div class="config-item">
+                            <div class="config-label">Category</div>
+                            <div class="config-value">${escapeHtml(task.category)}</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 12px; color: #666; font-size: 14px;">${escapeHtml(task.description || '')}</p>
+                </div>
+
+                <div class="config-section">
+                    <h3>🔧 Tools Used</h3>
+                    <div class="tool-list">
+                        ${toolsUsed.map(t => `<span class="tool-tag">${escapeHtml(t)}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>🔌 Dependencies</h3>
+                    <div style="margin-bottom: 12px;">
+                        <div class="config-label" style="margin-bottom: 6px;">MCP Servers</div>
+                        <div class="tool-list">
+                            ${mcpServers.map(s => `<span class="tool-tag mcp">${escapeHtml(s)}</span>`).join('') || '<span style="color: #666;">None</span>'}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="config-label" style="margin-bottom: 6px;">Local Tools</div>
+                        <div class="tool-list">
+                            ${localTools.map(t => `<span class="tool-tag">${escapeHtml(t)}</span>`).join('') || '<span style="color: #666;">None</span>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function showcaseInit() {
+            buildTaskBaseIndex();
+            showcasePopulateTaskBaseSelect();
+            showcasePopulateTaskLevelSelect('', '');
+            showcasePopulateTaskList();
+            showcaseUpdateStatsSummary();
+
+            const first = sortedTasksEntries()[0];
+            if (first) {
+                await showcaseSelectTask(first[0]);
+            }
+        }
+
+        async function initializeApp() {
+            try {
+                const [manifest, taskIndex, trajIndex] = await Promise.all([
+                    fetchJson('./data/manifest.json'),
+                    fetchJson('./data/tasks/index.json'),
+                    fetchJson('./data/traj/index.json'),
+                ]);
+
+                appManifest = manifest;
+
+                taskCatalog = {};
+                (taskIndex.tasks || []).forEach(t => {
+                    taskCatalog[t.key] = t;
+                });
+
+                trajModelCatalog = {};
+                (trajIndex.models || []).forEach(m => {
+                    trajModelCatalog[m.display_name] = m;
+                });
+
+                await trajInit();
+                await showcaseInit();
+                trajBindAllTooltips();
+            } catch (err) {
+                const message = err && err.message ? err.message : String(err);
+                showStatsError(message);
+                document.getElementById('promptContent').innerHTML = `
+                    <p style="color:#c62828; text-align:center; padding:40px;">Failed to initialize page: ${escapeHtml(message)}</p>
+                `;
+            }
+        }
+
+        initializeApp();
+
+</script>
+</body>
+</html>

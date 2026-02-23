@@ -1,0 +1,1145 @@
+{
+  "model_display": "Claude 4.5 Sonnet",
+  "model_key": "claude-4.5-sonnet-0929",
+  "task_groups": [
+    "scaled_tasks"
+  ],
+  "base_run": "claude-4.5-sonnet-normal-reuse-iterate",
+  "skill_run": "claude-4.5-sonnet-normal-reuse-iterate",
+  "tasks": [
+    {
+      "task_key": "SingleUserTurn-cat-facts-collector-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Cat facts encyclopedia with 3 breeds × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cat-facts-collector-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cat-facts-collector-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Cat facts encyclopedia with 3 breeds × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cat-facts-collector-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cat-facts-collector-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Cat facts encyclopedia with 3 breeds × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cat-facts-collector-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cat-facts-collector-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Cat facts encyclopedia with 4 breeds × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cat-facts-collector-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cat-facts-collector-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Cat facts encyclopedia with 4 breeds × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cat-facts-collector-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cat-facts-collector-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Cat facts encyclopedia with 5 breeds × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cat-facts-collector-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cocktail-menu-generator-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Cocktail menu with 3 cocktails × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cocktail-menu-generator-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cocktail-menu-generator-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Cocktail menu with 3 cocktails × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cocktail-menu-generator-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cocktail-menu-generator-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Cocktail menu with 3 cocktails × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cocktail-menu-generator-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cocktail-menu-generator-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Cocktail menu with 4 cocktails × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cocktail-menu-generator-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cocktail-menu-generator-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Cocktail menu with 4 cocktails × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cocktail-menu-generator-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-cocktail-menu-generator-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Cocktail menu with 5 cocktails × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-cocktail-menu-generator-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-countries-encyclopedia-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Generate encyclopedia entries for 3 world regions with region, details, and borders (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-countries-encyclopedia-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-countries-encyclopedia-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Generate encyclopedia entries for 3 world regions with region, currency, and language analysis (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-countries-encyclopedia-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-countries-encyclopedia-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Generate encyclopedia entries for 3 countries with details, borders, and currency (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-countries-encyclopedia-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-countries-encyclopedia-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Generate encyclopedia entries for 4 world regions with region, details, borders, and currency (medium difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-countries-encyclopedia-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-countries-encyclopedia-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Generate encyclopedia entries for 4 world regions with region, details, borders, and language (medium difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-countries-encyclopedia-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-countries-encyclopedia-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Generate encyclopedia entries for 5 world regions with 5 API calls each (hard difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-countries-encyclopedia-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-campaign-builder-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "D&D character builder with 3 characters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-campaign-builder-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-campaign-builder-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "D&D character builder with 3 characters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-campaign-builder-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-campaign-builder-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "D&D character builder with 3 characters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-campaign-builder-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-campaign-builder-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "D&D character builder with 4 characters × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-campaign-builder-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-campaign-builder-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "D&D character builder with 4 characters × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-campaign-builder-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-campaign-builder-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "D&D character builder with 5 characters × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-campaign-builder-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-monster-compendium-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "D&D monster compendium with 3 monsters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-monster-compendium-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-monster-compendium-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "D&D monster compendium with 3 monsters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-monster-compendium-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-monster-compendium-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "D&D monster compendium with 3 monsters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-monster-compendium-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-monster-compendium-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "D&D monster compendium with 4 monsters × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-monster-compendium-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-monster-compendium-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "D&D monster compendium with 4 monsters × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-monster-compendium-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dnd-monster-compendium-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "D&D monster compendium with 5 monsters × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dnd-monster-compendium-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dog-breeds-encyclopedia-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Dog breeds encyclopedia with 3 breeds × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dog-breeds-encyclopedia-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dog-breeds-encyclopedia-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Dog breeds encyclopedia with 3 breeds × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dog-breeds-encyclopedia-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dog-breeds-encyclopedia-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Dog breeds encyclopedia with 3 breeds × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dog-breeds-encyclopedia-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dog-breeds-encyclopedia-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Dog breeds encyclopedia with 4 breeds × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dog-breeds-encyclopedia-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dog-breeds-encyclopedia-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Dog breeds encyclopedia with 4 breeds × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dog-breeds-encyclopedia-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-dog-breeds-encyclopedia-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Dog breeds encyclopedia with 5 breeds × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-dog-breeds-encyclopedia-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-gitlab-deep-analysis-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Analysis of 3 GitLab repositories with project info, contributors, and issues (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-gitlab-deep-analysis-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-gitlab-deep-analysis-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Analysis of 3 GitLab repositories focusing on branches and issues (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-gitlab-deep-analysis-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-gitlab-deep-analysis-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Analysis of 3 GitLab repositories focusing on development activity (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-gitlab-deep-analysis-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-gitlab-deep-analysis-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Analysis of 4 GitLab repositories with branch info (medium difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-gitlab-deep-analysis-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-gitlab-deep-analysis-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Analysis of 4 GitLab repositories with project info, contributors, branches, and issues (medium difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-gitlab-deep-analysis-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-gitlab-deep-analysis-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Comprehensive analysis of 5 GitLab repositories (hard difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-gitlab-deep-analysis-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jikan-anime-analysis-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Anime analysis with 3 anime × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jikan-anime-analysis-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jikan-anime-analysis-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Anime analysis with 3 anime × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jikan-anime-analysis-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jikan-anime-analysis-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Anime analysis with 3 anime × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jikan-anime-analysis-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jikan-anime-analysis-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Anime analysis with 4 anime × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jikan-anime-analysis-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jikan-anime-analysis-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Anime analysis with 4 anime × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jikan-anime-analysis-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jikan-anime-analysis-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Anime analysis with 5 anime × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jikan-anime-analysis-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jsonplaceholder-blog-analyzer-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Blog user analysis with 3 users × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jsonplaceholder-blog-analyzer-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jsonplaceholder-blog-analyzer-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Blog user analysis with 3 users × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jsonplaceholder-blog-analyzer-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jsonplaceholder-blog-analyzer-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Blog user analysis with 3 users × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jsonplaceholder-blog-analyzer-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jsonplaceholder-blog-analyzer-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Blog user analysis with 4 users × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jsonplaceholder-blog-analyzer-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jsonplaceholder-blog-analyzer-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Blog user analysis with 4 users × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jsonplaceholder-blog-analyzer-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-jsonplaceholder-blog-analyzer-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Blog user analysis with 5 users × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-jsonplaceholder-blog-analyzer-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-local-dna-analysis-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "DNA analysis with 3 sequences × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-local-dna-analysis-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-local-dna-analysis-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "DNA analysis with 3 sequences × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-local-dna-analysis-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-local-dna-analysis-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "DNA analysis with 3 sequences × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-local-dna-analysis-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-local-dna-analysis-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "DNA analysis with 4 sequences × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-local-dna-analysis-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-local-dna-analysis-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "DNA analysis with 4 sequences × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-local-dna-analysis-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-local-dna-analysis-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "DNA analysis with 5 sequences × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-local-dna-analysis-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-name-demographics-analyzer-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Name demographics with 3 names × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-name-demographics-analyzer-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-name-demographics-analyzer-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Name demographics with 3 names × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-name-demographics-analyzer-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-name-demographics-analyzer-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Name demographics with 3 names × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-name-demographics-analyzer-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-name-demographics-analyzer-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Name demographics with 4 names × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-name-demographics-analyzer-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-name-demographics-analyzer-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Name demographics with 4 names × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-name-demographics-analyzer-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-name-demographics-analyzer-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Name demographics with 5 names × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-name-demographics-analyzer-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-openmeteo-weather-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Weather monitoring with 3 cities × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-openmeteo-weather-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-openmeteo-weather-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Weather monitoring with 3 cities × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-openmeteo-weather-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-openmeteo-weather-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Weather monitoring with 3 cities × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-openmeteo-weather-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-openmeteo-weather-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Weather monitoring with 4 cities × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-openmeteo-weather-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-openmeteo-weather-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Weather monitoring with 4 cities × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-openmeteo-weather-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-openmeteo-weather-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Weather monitoring with 5 cities × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-openmeteo-weather-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-pokeapi-pokedex-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Pokemon Pokedex with 3 Pokemon × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-pokeapi-pokedex-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-pokeapi-pokedex-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Pokemon Pokedex with 3 Pokemon × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-pokeapi-pokedex-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-pokeapi-pokedex-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Pokemon Pokedex with 3 Pokemon × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-pokeapi-pokedex-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-pokeapi-pokedex-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Pokemon Pokedex with 4 Pokemon × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-pokeapi-pokedex-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-pokeapi-pokedex-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Pokemon Pokedex with 4 Pokemon × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-pokeapi-pokedex-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-pokeapi-pokedex-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Pokemon Pokedex with 5 Pokemon × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-pokeapi-pokedex-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-random-user-database-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "User database builder with 3 nationalities × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-random-user-database-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-random-user-database-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "User database builder with 3 nationalities × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-random-user-database-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-random-user-database-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "User database builder with 3 nationalities × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-random-user-database-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-random-user-database-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "User database builder with 4 nationalities × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-random-user-database-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-random-user-database-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "User database builder with 4 nationalities × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-random-user-database-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-random-user-database-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "User database builder with 5 nationalities × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-random-user-database-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-recipe-cookbook-builder-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Recipe cookbook with 3 dishes × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-recipe-cookbook-builder-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-recipe-cookbook-builder-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Recipe cookbook with 3 dishes × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-recipe-cookbook-builder-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-recipe-cookbook-builder-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Recipe cookbook with 3 dishes × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-recipe-cookbook-builder-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-recipe-cookbook-builder-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Recipe cookbook with 4 dishes × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-recipe-cookbook-builder-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-recipe-cookbook-builder-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Recipe cookbook with 4 dishes × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-recipe-cookbook-builder-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-recipe-cookbook-builder-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Recipe cookbook with 5 dishes × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-recipe-cookbook-builder-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-rickmorty-multiverse-explorer-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Rick and Morty character analysis with 3 characters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-rickmorty-multiverse-explorer-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-rickmorty-multiverse-explorer-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Rick and Morty character analysis with 3 characters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-rickmorty-multiverse-explorer-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-rickmorty-multiverse-explorer-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Rick and Morty character analysis with 3 characters × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-rickmorty-multiverse-explorer-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-rickmorty-multiverse-explorer-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Rick and Morty character analysis with 4 characters × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-rickmorty-multiverse-explorer-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-rickmorty-multiverse-explorer-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Rick and Morty character analysis with 4 characters × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-rickmorty-multiverse-explorer-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-rickmorty-multiverse-explorer-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Rick and Morty character analysis with 5 characters × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-rickmorty-multiverse-explorer-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-tvmaze-series-analyzer-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "TV series analysis with 3 shows × 3 API calls (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-tvmaze-series-analyzer-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-tvmaze-series-analyzer-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "TV series analysis with 3 shows × 3 API calls (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-tvmaze-series-analyzer-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-tvmaze-series-analyzer-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "TV series analysis with 3 shows × 3 API calls (easy difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-tvmaze-series-analyzer-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-tvmaze-series-analyzer-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "TV series analysis with 4 shows × 4 API calls (medium difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-tvmaze-series-analyzer-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-tvmaze-series-analyzer-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "TV series analysis with 4 shows × 4 API calls (medium difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-tvmaze-series-analyzer-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-tvmaze-series-analyzer-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "TV series analysis with 5 shows × 5 API calls (hard difficulty)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-tvmaze-series-analyzer-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-university-directory-builder-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "University directory with 3 countries × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-university-directory-builder-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-university-directory-builder-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "University directory with 3 countries × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-university-directory-builder-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-university-directory-builder-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "University directory with 3 countries × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-university-directory-builder-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-university-directory-builder-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "University directory with 4 countries × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-university-directory-builder-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-university-directory-builder-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "University directory with 4 countries × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-university-directory-builder-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-university-directory-builder-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "University directory with 5 countries × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-university-directory-builder-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-usgs-earthquake-monitor-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Earthquake analysis with 3 regions × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-usgs-earthquake-monitor-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-usgs-earthquake-monitor-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Earthquake analysis with 3 regions × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-usgs-earthquake-monitor-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-usgs-earthquake-monitor-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Earthquake analysis with 3 regions × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-usgs-earthquake-monitor-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-usgs-earthquake-monitor-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Earthquake analysis with 4 regions × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-usgs-earthquake-monitor-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-usgs-earthquake-monitor-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Earthquake analysis with 4 regions × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-usgs-earthquake-monitor-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-usgs-earthquake-monitor-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Earthquake analysis with 5 regions × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-usgs-earthquake-monitor-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-vocabulary-builder-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Vocabulary builder with 3 words × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-vocabulary-builder-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-vocabulary-builder-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Vocabulary builder with 3 words × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-vocabulary-builder-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-vocabulary-builder-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Vocabulary builder with 3 words × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-vocabulary-builder-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-vocabulary-builder-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Vocabulary builder with 4 words × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-vocabulary-builder-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-vocabulary-builder-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Vocabulary builder with 4 words × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-vocabulary-builder-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-vocabulary-builder-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Vocabulary builder with 5 words × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-vocabulary-builder-h1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-world-bank-economic-snapshot-e1",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Economic snapshot with 3 countries × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-world-bank-economic-snapshot-e1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-world-bank-economic-snapshot-e2",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Economic snapshot with 3 countries × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-world-bank-economic-snapshot-e2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-world-bank-economic-snapshot-e3",
+      "group": "scaled_tasks",
+      "difficulty": "easy",
+      "description": "Economic snapshot with 3 countries × 3 APIs (easy)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-world-bank-economic-snapshot-e3.json"
+    },
+    {
+      "task_key": "SingleUserTurn-world-bank-economic-snapshot-m1",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Economic snapshot with 4 countries × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-world-bank-economic-snapshot-m1.json"
+    },
+    {
+      "task_key": "SingleUserTurn-world-bank-economic-snapshot-m2",
+      "group": "scaled_tasks",
+      "difficulty": "medium",
+      "description": "Economic snapshot with 4 countries × 4 APIs (medium)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-world-bank-economic-snapshot-m2.json"
+    },
+    {
+      "task_key": "SingleUserTurn-world-bank-economic-snapshot-h1",
+      "group": "scaled_tasks",
+      "difficulty": "hard",
+      "description": "Economic snapshot with 5 countries × 5 APIs (hard)",
+      "has_base": true,
+      "has_skill": true,
+      "detail_path": "./data/traj/claude-4.5-sonnet-0929/SingleUserTurn-world-bank-economic-snapshot-h1.json"
+    }
+  ]
+}

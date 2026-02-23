@@ -1,0 +1,39 @@
+{
+  "models": [
+    {
+      "display_name": "Kimi-K2-Thinking",
+      "model_key": "kimi-k2-thinking",
+      "index_path": "./data/traj/kimi-k2-thinking/index.json"
+    },
+    {
+      "display_name": "DeepSeek-V3.2-EXP",
+      "model_key": "deepseek-v3.2-exp",
+      "index_path": "./data/traj/deepseek-v3.2-exp/index.json"
+    },
+    {
+      "display_name": "DeepSeek-R1",
+      "model_key": "deepseek-r1",
+      "index_path": "./data/traj/deepseek-r1/index.json"
+    },
+    {
+      "display_name": "Gemini 3 Pro",
+      "model_key": "gemini-3-pro",
+      "index_path": "./data/traj/gemini-3-pro/index.json"
+    },
+    {
+      "display_name": "Minimax-M2.1",
+      "model_key": "minimax-m2.1",
+      "index_path": "./data/traj/minimax-m2.1/index.json"
+    },
+    {
+      "display_name": "Claude 4.5 Sonnet",
+      "model_key": "claude-4.5-sonnet-0929",
+      "index_path": "./data/traj/claude-4.5-sonnet-0929/index.json"
+    },
+    {
+      "display_name": "GPT-5.2",
+      "model_key": "gpt-5.2-2025-12-11",
+      "index_path": "./data/traj/gpt-5.2-2025-12-11/index.json"
+    }
+  ]
+}
