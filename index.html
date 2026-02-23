@@ -1223,6 +1223,8 @@
             const taskSelect = document.getElementById('trajTaskSelect');
             const concurrency = 4;
             let index = 0;
+            const getFirstRealOption = () =>
+                taskSelect.querySelector('option[value]:not([value=""])');
 
             async function worker() {
                 while (index < tasks.length) {
@@ -1244,7 +1246,7 @@
             const selected = taskSelect.value;
             const stillExists = selected && taskSelect.querySelector(`option[value="${selected}"]`);
             if (!stillExists) {
-                const first = taskSelect.querySelector('option[value]');
+                const first = getFirstRealOption();
                 if (first) {
                     taskSelect.value = first.value;
                     await trajLoadTask();
@@ -1408,8 +1410,9 @@
                     taskSelect.appendChild(option);
                 });
 
-                if (tasks.length > 0) {
-                    taskSelect.value = tasks[0].task_key;
+                const first = taskSelect.querySelector('option[value]:not([value=""])');
+                if (first) {
+                    taskSelect.value = first.value;
                     await trajLoadTask();
                 }
 
@@ -1440,7 +1443,7 @@
                     const taskSelect = document.getElementById('trajTaskSelect');
                     const opt = taskSelect.querySelector(`option[value="${taskMeta.task_key}"]`);
                     if (opt) opt.remove();
-                    const next = taskSelect.querySelector('option[value]');
+                    const next = taskSelect.querySelector('option[value]:not([value=""])');
                     if (next) {
                         taskSelect.value = next.value;
                         await trajLoadTask();
