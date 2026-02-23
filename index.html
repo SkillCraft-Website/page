@@ -1061,6 +1061,8 @@
         const taskDetailCache = new Map();
         const modelIndexCache = new Map();
         const trajDetailCache = new Map();
+        const trajEmptyCache = new Map();
+        let trajFilterToken = 0;
 
         // ===== PAGE SWITCHING =====
         function switchPage(page) {
@@ -1194,6 +1196,66 @@
             const detail = await fetchJson(detailPath);
             trajDetailCache.set(detailPath, detail);
             return detail;
+        }
+
+        function getTrajEntryCounts(payload) {
+            const baseEntries = Array.isArray(payload?.base?.entries) ? payload.base.entries.length : 0;
+            const skillEntries = Array.isArray(payload?.skill?.entries) ? payload.skill.entries.length : 0;
+            return { baseEntries, skillEntries };
+        }
+
+        async function isTrajectoryEmpty(taskMeta) {
+            if (!taskMeta?.detail_path) return true;
+            if (trajEmptyCache.has(taskMeta.detail_path)) return trajEmptyCache.get(taskMeta.detail_path);
+            try {
+                const detail = await loadTrajDetail(taskMeta.detail_path);
+                const counts = getTrajEntryCounts(detail);
+                const empty = counts.baseEntries === 0 && counts.skillEntries === 0;
+                trajEmptyCache.set(taskMeta.detail_path, empty);
+                return empty;
+            } catch (_) {
+                trajEmptyCache.set(taskMeta.detail_path, true);
+                return true;
+            }
+        }
+
+        async function filterEmptyTrajOptions(tasks, token) {
+            const taskSelect = document.getElementById('trajTaskSelect');
+            const concurrency = 4;
+            let index = 0;
+
+            async function worker() {
+                while (index < tasks.length) {
+                    const current = tasks[index++];
+                    if (token !== trajFilterToken) return;
+                    const empty = await isTrajectoryEmpty(current);
+                    if (token !== trajFilterToken) return;
+                    if (empty) {
+                        const opt = taskSelect.querySelector(`option[value="${current.task_key}"]`);
+                        if (opt) opt.remove();
+                    }
+                }
+            }
+
+            const workers = Array.from({ length: concurrency }, () => worker());
+            await Promise.all(workers);
+
+            if (token !== trajFilterToken) return;
+            const selected = taskSelect.value;
+            const stillExists = selected && taskSelect.querySelector(`option[value="${selected}"]`);
+            if (!stillExists) {
+                const first = taskSelect.querySelector('option[value]');
+                if (first) {
+                    taskSelect.value = first.value;
+                    await trajLoadTask();
+                } else {
+                    document.getElementById('taskInfoSection').innerHTML = '';
+                    document.getElementById('statsSection').innerHTML = '<div class="empty-state">No stats available</div>';
+                    setEmpty('normalMessages', 'No Data', 'No trajectories available for this model');
+                    setEmpty('reuseMessages', 'No Data', 'No trajectories available for this model');
+                    document.getElementById('progressText').textContent = 'Base: 0 steps | Skill: 0 steps';
+                }
+            }
         }
 
         function getRawForEntry(trajPayload, entry) {
@@ -1350,6 +1412,9 @@
                     taskSelect.value = tasks[0].task_key;
                     await trajLoadTask();
                 }
+
+                const token = ++trajFilterToken;
+                filterEmptyTrajOptions(tasks, token);
             } catch (err) {
                 showStatsError(err.message || String(err));
             }
@@ -1369,6 +1434,25 @@
                 if (!taskMeta) throw new Error(`Task not found in model index: ${task}`);
 
                 const data = await loadTrajDetail(taskMeta.detail_path);
+                const counts = getTrajEntryCounts(data);
+                if (counts.baseEntries === 0 && counts.skillEntries === 0) {
+                    trajEmptyCache.set(taskMeta.detail_path, true);
+                    const taskSelect = document.getElementById('trajTaskSelect');
+                    const opt = taskSelect.querySelector(`option[value="${taskMeta.task_key}"]`);
+                    if (opt) opt.remove();
+                    const next = taskSelect.querySelector('option[value]');
+                    if (next) {
+                        taskSelect.value = next.value;
+                        await trajLoadTask();
+                        return;
+                    }
+                    document.getElementById('taskInfoSection').innerHTML = '';
+                    document.getElementById('statsSection').innerHTML = '<div class="empty-state">No stats available</div>';
+                    setEmpty('normalMessages', 'No Data', 'No trajectories available for this model');
+                    setEmpty('reuseMessages', 'No Data', 'No trajectories available for this model');
+                    document.getElementById('progressText').textContent = 'Base: 0 steps | Skill: 0 steps';
+                    return;
+                }
 
                 const taskInfo = data.task_info || {};
                 const cleanTaskName = task.replace(/^SingleUserTurn-/, '');
