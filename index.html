@@ -930,27 +930,661 @@
                 min-width: 240px;
             }
         }
-        
+
         @media (max-width: 900px) {
             .main-content {
                 flex-direction: column;
             }
-            
+
             .stats-panel, .sidebar {
                 width: 100%;
                 max-height: 200px;
                 border-right: none;
                 border-bottom: 1px solid #e0e0e0;
             }
-            
+
             .traj-panels {
                 flex-direction: column;
             }
-            
+
             .traj-panel {
                 border-right: none;
                 border-bottom: 1px solid #e0e0e0;
             }
+        }
+
+        /* ===== Homepage Styles ===== */
+        #homePage {
+            overflow-y: auto;
+            background: #fff;
+        }
+
+        .home-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+            width: 100%;
+        }
+
+        /* Hero */
+        .home-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 64px 32px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(102,126,234,0.15) 0%, transparent 70%),
+                        radial-gradient(ellipse at 70% 50%, rgba(118,75,162,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .home-hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .home-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #c8d6f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .home-hero .subtitle {
+            font-size: 22px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .home-hero .tagline {
+            font-size: 15px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .home-hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .home-hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            color: #fff;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .home-hero-btn:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .home-hero-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+        }
+
+        .home-hero-btn.primary:hover {
+            box-shadow: 0 4px 20px rgba(102,126,234,0.4);
+        }
+
+        /* Authors */
+        .home-authors {
+            text-align: center;
+            padding: 36px 32px 20px;
+            background: #fafbfe;
+            border-bottom: 1px solid #eef0f5;
+        }
+
+        .home-authors-list {
+            max-width: 860px;
+            margin: 0 auto 12px;
+            font-size: 15px;
+            line-height: 2;
+            color: #444;
+        }
+
+        .home-authors-list a {
+            color: #4a6fa5;
+            text-decoration: none;
+        }
+
+        .home-authors-list a:hover {
+            text-decoration: underline;
+        }
+
+        .home-authors-list sup {
+            font-size: 10px;
+            color: #888;
+            margin-left: 1px;
+        }
+
+        .home-affiliations {
+            max-width: 860px;
+            margin: 0 auto;
+            font-size: 12.5px;
+            color: #888;
+            line-height: 1.8;
+        }
+
+        .home-affiliations sup {
+            font-size: 9px;
+            margin-right: 2px;
+        }
+
+        .home-equal {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        /* Explore Cards */
+        .home-explore {
+            padding: 40px 32px;
+            background: #f8f9fb;
+        }
+
+        .home-explore-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .home-explore-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 28px 24px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-explore-card::after {
+            content: '\2192';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+
+        .home-explore-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(102,126,234,0.4);
+        }
+
+        .home-explore-card:hover::after {
+            opacity: 1;
+            right: 16px;
+        }
+
+        .home-explore-card:nth-child(2) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            box-shadow: 0 4px 15px rgba(67,233,123,0.25);
+        }
+
+        .home-explore-card:nth-child(2):hover {
+            box-shadow: 0 8px 30px rgba(67,233,123,0.4);
+        }
+
+        .home-explore-card .card-icon {
+            font-size: 32px;
+        }
+
+        .home-explore-card .card-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .home-explore-card .card-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+            padding-right: 32px;
+        }
+
+        /* Section Headings */
+        .home-section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .home-section-sub {
+            font-size: 15px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* Abstract */
+        .home-abstract-section {
+            padding: 48px 32px 40px;
+        }
+
+        .home-abstract {
+            max-width: 860px;
+            margin: 0 auto;
+            font-size: 15.5px;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+
+        .home-abstract p {
+            margin-bottom: 14px;
+        }
+
+        .home-abstract strong {
+            color: #1a1a2e;
+        }
+
+        /* Figures */
+        .home-figure-section {
+            padding: 0 32px 48px;
+        }
+
+        .home-figure {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .home-figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+
+        .home-figure-caption {
+            margin-top: 14px;
+            font-size: 13.5px;
+            color: #777;
+            line-height: 1.6;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home-figure-caption strong {
+            color: #444;
+        }
+
+        /* Stats Strip */
+        .home-stats-section {
+            padding: 0 32px 48px;
+        }
+
+        .home-stats-strip {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .home-stat-card {
+            background: #f8f9fb;
+            border: 1px solid #eef0f5;
+            border-radius: 12px;
+            padding: 20px 12px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .home-stat-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.1);
+        }
+
+        .home-stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .home-stat-label {
+            font-size: 12.5px;
+            color: #888;
+            margin-top: 6px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Results Table */
+        .home-results-section {
+            padding: 48px 32px;
+            background: #f8f9fb;
+        }
+
+        .home-results-table-wrap {
+            max-width: 1060px;
+            margin: 0 auto;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+
+        .home-results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 14px;
+        }
+
+        .home-results-table thead th {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 12px 14px;
+            font-weight: 600;
+            font-size: 12.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .home-results-table thead th:first-child {
+            text-align: left;
+            border-radius: 12px 0 0 0;
+        }
+
+        .home-results-table thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .home-results-table tbody td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .home-results-table tbody td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .home-results-table tbody tr:hover {
+            background: #f5f8ff;
+        }
+
+        .home-results-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .home-results-table tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 12px;
+        }
+
+        .home-results-table tbody tr:last-child td:last-child {
+            border-radius: 0 0 12px 0;
+        }
+
+        .home-results-table .model-type-row td {
+            background: #f0f2f8;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #667eea;
+            padding: 8px 14px;
+            text-align: left;
+        }
+
+        .delta-positive {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .delta-negative {
+            color: #c62828;
+            font-weight: 600;
+        }
+
+        .delta-neutral {
+            color: #888;
+            font-weight: 500;
+        }
+
+        .home-results-table .success-base {
+            color: #666;
+        }
+
+        .home-results-table .success-skill {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .token-reduction {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .token-reduction.high {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .token-reduction.medium {
+            background: #f1f8e9;
+            color: #33691e;
+        }
+
+        .token-reduction.low {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .home-table-note {
+            max-width: 1060px;
+            margin: 12px auto 0;
+            font-size: 12.5px;
+            color: #999;
+            text-align: center;
+        }
+
+        /* Key Findings */
+        .home-findings-section {
+            padding: 48px 32px;
+        }
+
+        .home-findings-grid {
+            max-width: 1060px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .home-finding-card {
+            background: #fff;
+            border: 1px solid #eef0f5;
+            border-radius: 14px;
+            padding: 28px 24px;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .home-finding-card:hover {
+            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+
+        .home-finding-card .finding-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        .home-finding-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .home-finding-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.65;
+        }
+
+        .home-finding-card .finding-metric {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: #f0f4ff;
+            color: #4a5db5;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Citation */
+        .home-citation-section {
+            padding: 48px 32px;
+            background: #f8f9fb;
+        }
+
+        .home-citation-block {
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .home-citation-block pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 10px;
+            padding: 24px;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        }
+
+        .home-citation-copy {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .home-citation-copy:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        /* Footer */
+        .home-footer {
+            text-align: center;
+            padding: 28px 32px;
+            font-size: 13px;
+            color: #999;
+            border-top: 1px solid #eef0f5;
+        }
+
+        .home-footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .home-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Homepage responsive */
+        @media (max-width: 900px) {
+            .home-hero h1 { font-size: 32px; }
+            .home-hero .subtitle { font-size: 18px; }
+            .home-explore-inner { grid-template-columns: 1fr; }
+            .home-stats-strip { grid-template-columns: repeat(3, 1fr); }
+            .home-findings-grid { grid-template-columns: 1fr; }
+            .home-hero-btns { flex-direction: column; align-items: center; }
+        }
+
+        @media (max-width: 600px) {
+            .home-hero { padding: 40px 20px 36px; }
+            .home-hero h1 { font-size: 28px; }
+            .home-stats-strip { grid-template-columns: repeat(2, 1fr); }
+            .home-section { padding: 0 16px; }
+            .home-abstract-section, .home-figure-section,
+            .home-stats-section, .home-results-section,
+            .home-findings-section, .home-citation-section { padding-left: 16px; padding-right: 16px; }
         }
     </style>
 </head>
@@ -961,13 +1595,17 @@
             <span style="font-size: 24px;">🔬</span>
             <span>SkillCraft</span>
         </div>
-        
+
         <div class="nav-tabs">
+            <div class="nav-tab active" data-page="home" onclick="switchPage('home')">
+                <span>🏠</span>
+                <span>Home</span>
+            </div>
             <div class="nav-tab" data-page="tasks" onclick="switchPage('tasks')">
                 <span>📋</span>
                 <span>Task Definitions</span>
             </div>
-            <div class="nav-tab active" data-page="traj" onclick="switchPage('traj')">
+            <div class="nav-tab" data-page="traj" onclick="switchPage('traj')">
                 <span>📊</span>
                 <span>Trajectory Comparison</span>
             </div>
@@ -976,9 +1614,330 @@
     
     <!-- Global Tooltip Container -->
     <div id="globalTooltip"></div>
-    
+
+    <!-- ===== HOME PAGE ===== -->
+    <div id="homePage" class="page-container active">
+
+        <!-- Hero -->
+        <div class="home-hero">
+            <div class="home-hero-inner">
+                <h1>SkillCraft</h1>
+                <div class="subtitle">Can LLM Agents Learn to Use Tools Skillfully?</div>
+                <div class="tagline">
+                    A benchmark with 126 realistic tasks to evaluate whether LLM agents can identify, compose, cache, and reuse multi-step tool sequences — achieving higher success with dramatically fewer tokens.
+                </div>
+                <div class="home-hero-btns">
+                    <a href="#" class="home-hero-btn primary" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 4.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v3a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 11V5a1.5 1.5 0 0 1 1.5-1.5h3a.5.5 0 0 1 0 1h-3zM9 3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V4.707l-4.146 4.147a.5.5 0 0 1-.708-.708L11.293 4H9.5a.5.5 0 0 1-.5-.5z"/></svg>
+                        Paper (arXiv)
+                    </a>
+                    <a href="https://github.com/shiqichen17/SkillCraft" class="home-hero-btn" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="./SkillCraft.pdf" class="home-hero-btn" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0H4zm5 0v3.5A1.5 1.5 0 0 0 10.5 5H14v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5z"/></svg>
+                        PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authors -->
+        <div class="home-authors">
+            <div class="home-authors-list">
+                Shiqi Chen<sup>1,*</sup>,
+                Jingze Gai<sup>2,*</sup>,
+                Ruochen Zhou<sup>3,*</sup>,
+                Jinghan Zhang<sup>1,*</sup>,
+                Tongyao Zhu<sup>4,*</sup>,
+                Junlong Li<sup>1</sup>,
+                Kangrui Wang<sup>1</sup>,
+                Zihan Wang<sup>5</sup>,
+                Zhengyu Chen<sup>2</sup>,
+                Klara Kaleb<sup>1</sup>,
+                Ning Miao<sup>1</sup>,
+                Siyang Gao<sup>2</sup>,
+                Cong Lu<sup>6</sup>,
+                Manling Li<sup>3</sup>,
+                Junxian He<sup>4</sup>,
+                Yee Whye Teh<sup>1</sup>
+            </div>
+            <div class="home-affiliations">
+                <sup>1</sup>University of Oxford &nbsp;&nbsp;
+                <sup>2</sup>City University of Hong Kong &nbsp;&nbsp;
+                <sup>3</sup>Northwestern University &nbsp;&nbsp;
+                <sup>4</sup>Hong Kong University of Science and Technology &nbsp;&nbsp;
+                <sup>5</sup>National University of Singapore &nbsp;&nbsp;
+                <sup>6</sup>Google DeepMind &nbsp;&nbsp;
+                <sup>7</sup>Zhejiang University
+            </div>
+            <div class="home-equal">* Equal contribution</div>
+        </div>
+
+        <!-- Explore Cards -->
+        <div class="home-explore">
+            <div class="home-explore-inner">
+                <div class="home-explore-card" onclick="switchPage('tasks')">
+                    <span class="card-icon">📋</span>
+                    <span class="card-title">Browse Task Definitions</span>
+                    <span class="card-desc">126 tasks across 21 families and 6 application domains, with full prompts and configurations.</span>
+                </div>
+                <div class="home-explore-card" onclick="switchPage('traj')">
+                    <span class="card-icon">📊</span>
+                    <span class="card-title">Compare Model Trajectories</span>
+                    <span class="card-desc">Side-by-side base vs. skill mode execution traces for 7 frontier models.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abstract -->
+        <div class="home-abstract-section">
+            <div class="home-section">
+                <div class="home-section-title">Overview</div>
+                <div class="home-section-sub">What is SkillCraft and why does it matter?</div>
+            </div>
+            <div class="home-abstract">
+                <p>
+                    Real-world tool-using agents operate over long-horizon workflows with recurring structure and diverse demands, where effective behavior requires not only invoking atomic tools but also <strong>abstracting and reusing higher-level tool compositions</strong>. However, existing benchmarks mainly measure instance-level success under static tool sets, offering limited insight into agents' ability to acquire such reusable skills.
+                </p>
+                <p>
+                    We address this gap by introducing <strong>SkillCraft</strong>, a benchmark explicitly designed to stress-test agent ability to form and reuse higher-level tool compositions, which we call <strong>Skills</strong>. SkillCraft features realistic, highly compositional tool-use scenarios with difficulty scaled along both quantitative and structural dimensions, designed to elicit skill abstraction and cross-task reuse.
+                </p>
+                <p>
+                    We further propose a lightweight <strong>Skill Mode</strong> evaluation protocol that enables agents to autonomously discover, compose, cache, and execute reusable Skills — accumulating a persistent library of verified skills over time. This plug-and-play mechanism dramatically improves efficiency and success, reducing token usage by up to 80%.
+                </p>
+            </div>
+        </div>
+
+        <!-- Figure: Skill Demo -->
+        <div class="home-figure-section">
+            <div class="home-figure">
+                <img src="./assets/figure-pipeline.png" alt="SkillCraft Protocol Pipeline Overview">
+                <div class="home-figure-caption">
+                    <strong>Figure: SkillCraft Protocol Pipeline Overview.</strong>
+                    (1) <em>Test-Time Tool Chain Evolution:</em> The agent explores and chains atomic tools, forming executable tool sequences.
+                    (2) <em>Iterative Skill Composition:</em> Successful sequences are abstracted into candidate skills, executed and verified in a coding environment; failed executions trigger re-exploration.
+                    (3) <em>Skill Library:</em> A growing repository of verified, reusable skills that can be retrieved in later tasks to reduce low-level tool exploration.
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Stats Strip -->
+        <div class="home-stats-section">
+            <div class="home-stats-strip">
+                <div class="home-stat-card">
+                    <div class="home-stat-number">126</div>
+                    <div class="home-stat-label">Tasks</div>
+                </div>
+                <div class="home-stat-card">
+                    <div class="home-stat-number">21</div>
+                    <div class="home-stat-label">Task Families</div>
+                </div>
+                <div class="home-stat-card">
+                    <div class="home-stat-number">7</div>
+                    <div class="home-stat-label">Models Evaluated</div>
+                </div>
+                <div class="home-stat-card">
+                    <div class="home-stat-number">6</div>
+                    <div class="home-stat-label">Domains</div>
+                </div>
+                <div class="home-stat-card">
+                    <div class="home-stat-number">79%</div>
+                    <div class="home-stat-label">Max Token Savings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Results Table -->
+        <div class="home-results-section">
+            <div class="home-section">
+                <div class="home-section-title">Main Results</div>
+                <div class="home-section-sub">Base mode vs. Skill mode comparison across 7 frontier models on 126 tasks</div>
+            </div>
+            <div class="home-results-table-wrap">
+                <table class="home-results-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Skill Exec</th>
+                            <th>Reuse Factor</th>
+                            <th>Success (Base)</th>
+                            <th>Success (Skill)</th>
+                            <th>&#916; Success</th>
+                            <th>Token &#916;</th>
+                            <th>Cost &#916;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="model-type-row"><td colspan="8">Open-Source Models</td></tr>
+                        <tr>
+                            <td>Kimi-K2-Thinking</td>
+                            <td>70%</td>
+                            <td>3.4&times;</td>
+                            <td class="success-base">55/126 (44%)</td>
+                            <td class="success-skill">56/126 (44%)</td>
+                            <td class="delta-neutral">+0.8%</td>
+                            <td><span class="token-reduction medium">-42%</span></td>
+                            <td><span class="token-reduction medium">-39%</span></td>
+                        </tr>
+                        <tr>
+                            <td>DeepSeek-V3.2-EXP</td>
+                            <td>71%</td>
+                            <td>4.8&times;</td>
+                            <td class="success-base">76/126 (60%)</td>
+                            <td class="success-skill">87/126 (69%)</td>
+                            <td class="delta-positive">+8.7%</td>
+                            <td><span class="token-reduction medium">-49%</span></td>
+                            <td><span class="token-reduction high">-51%</span></td>
+                        </tr>
+                        <tr>
+                            <td>DeepSeek-R1</td>
+                            <td>62%</td>
+                            <td>3.4&times;</td>
+                            <td class="success-base">89/126 (71%)</td>
+                            <td class="success-skill">101/126 (80%)</td>
+                            <td class="delta-positive">+9.5%</td>
+                            <td><span class="token-reduction low">-30%</span></td>
+                            <td><span class="token-reduction low">-24%</span></td>
+                        </tr>
+                        <tr>
+                            <td>GLM-4.7</td>
+                            <td>91%</td>
+                            <td>3.7&times;</td>
+                            <td class="success-base">91/126 (72%)</td>
+                            <td class="success-skill">108/126 (86%)</td>
+                            <td class="delta-positive">+13.5%</td>
+                            <td><span class="token-reduction medium">-39%</span></td>
+                            <td><span class="token-reduction medium">-41%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Minimax-M2.1</td>
+                            <td>100%</td>
+                            <td>3.2&times;</td>
+                            <td class="success-base">117/126 (93%)</td>
+                            <td class="success-skill">119/126 (94%)</td>
+                            <td class="delta-positive">+1.6%</td>
+                            <td><span class="token-reduction low">-11%</span></td>
+                            <td><span class="token-reduction low">-8%</span></td>
+                        </tr>
+                        <tr class="model-type-row"><td colspan="8">Closed-Source Models</td></tr>
+                        <tr>
+                            <td>GPT-5.2</td>
+                            <td>84%</td>
+                            <td>3.8&times;</td>
+                            <td class="success-base">109/126 (87%)</td>
+                            <td class="success-skill">114/126 (90%)</td>
+                            <td class="delta-positive">+4.0%</td>
+                            <td><span class="token-reduction high">-79%</span></td>
+                            <td><span class="token-reduction high">-75%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Gemini 3 Pro</td>
+                            <td>93%</td>
+                            <td>3.9&times;</td>
+                            <td class="success-base">108/126 (86%)</td>
+                            <td class="success-skill">116/126 (92%)</td>
+                            <td class="delta-positive">+6.3%</td>
+                            <td><span class="token-reduction high">-54%</span></td>
+                            <td><span class="token-reduction medium">-49%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Claude 4.5 Sonnet</td>
+                            <td>81%</td>
+                            <td>3.4&times;</td>
+                            <td class="success-base">119/126 (94%)</td>
+                            <td class="success-skill">121/126 (96%)</td>
+                            <td class="delta-positive">+1.6%</td>
+                            <td><span class="token-reduction high">-71%</span></td>
+                            <td><span class="token-reduction high">-74%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="home-table-note">
+                Data from Table 2 of the paper. Token &#916; and Cost &#916; represent percentage change from base to skill mode (negative = reduction).
+            </div>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="home-findings-section">
+            <div class="home-section">
+                <div class="home-section-title">Key Findings</div>
+                <div class="home-section-sub">Insights from evaluating 7 frontier models on the SkillCraft benchmark</div>
+            </div>
+            <div class="home-findings-grid">
+                <div class="home-finding-card">
+                    <div class="finding-number">1</div>
+                    <h3>Skill Reuse Boosts Success</h3>
+                    <p>
+                        Skill Mode improves task success rate across all models. Mid-tier models show the largest gains — GLM-4.7 jumps from 72% to 86%, and DeepSeek-R1 from 71% to 80% — demonstrating that skill composition can bridge capability gaps.
+                    </p>
+                    <span class="finding-metric">Up to +13.5% success gain</span>
+                </div>
+                <div class="home-finding-card">
+                    <div class="finding-number">2</div>
+                    <h3>Dramatic Efficiency Gains</h3>
+                    <p>
+                        Agents accomplish the same tasks with far fewer tokens by reusing cached skill compositions instead of re-exploring from scratch. GPT-5.2 achieves 79% token reduction and 75% cost reduction while improving accuracy.
+                    </p>
+                    <span class="finding-metric">Up to 79% fewer tokens</span>
+                </div>
+                <div class="home-finding-card">
+                    <div class="finding-number">3</div>
+                    <h3>Skill Ability Scales with Strength</h3>
+                    <p>
+                        Stronger models achieve higher skill execution rates (81–100%) and reuse factors (3.2–4.8&times;). Success rate correlates strongly with tool composition ability, underscoring skill acquisition as a core LLM capability.
+                    </p>
+                    <span class="finding-metric">3.2–4.8&times; reuse factor</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Distribution Figure -->
+        <div class="home-figure-section" style="padding-top: 0;">
+            <div class="home-figure">
+                <img src="./assets/figure-task-distribution.png" alt="Task Distribution in SkillCraft" style="max-width: 440px;">
+                <div class="home-figure-caption">
+                    <strong>Task distribution in SkillCraft.</strong>
+                    21 task families across 6 application domains (Food & Lifestyle, Science & Environment, Developer & Web, Education & Society, Reference, Entertainment & Gaming).
+                    Tasks span 3 difficulty levels: Easy (63), Medium (42), and Hard (21), with systematic complexity scaling through entity count and subtask multiplicity.
+                </div>
+            </div>
+        </div>
+
+        <!-- Citation -->
+        <div class="home-citation-section">
+            <div class="home-section">
+                <div class="home-section-title">Citation</div>
+                <div class="home-section-sub">If you find SkillCraft useful in your research, please cite our paper</div>
+            </div>
+            <div class="home-citation-block">
+                <button class="home-citation-copy" onclick="copyBibtex()">Copy BibTeX</button>
+                <pre id="bibtexContent">@article{chen2026skillcraft,
+  title   = {SkillCraft: Can LLM Agents Learn to Use Tools Skillfully?},
+  author  = {Shiqi Chen and Jingze Gai and Ruochen Zhou and Jinghan Zhang and
+             Tongyao Zhu and Junlong Li and Kangrui Wang and Zihan Wang and
+             Zhengyu Chen and Klara Kaleb and Ning Miao and Siyang Gao and
+             Cong Lu and Manling Li and Junxian He and Yee Whye Teh},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="home-footer">
+            SkillCraft &copy; 2026 &nbsp;|&nbsp;
+            <a href="https://github.com/shiqichen17/SkillCraft" target="_blank">GitHub</a> &nbsp;|&nbsp;
+            <a href="#" target="_blank">arXiv</a> &nbsp;|&nbsp;
+            <a href="./SkillCraft.pdf" target="_blank">PDF</a>
+        </div>
+
+    </div>
+
     <!-- ===== TRAJECTORY PAGE ===== -->
-    <div id="trajPage" class="page-container active">
+    <div id="trajPage" class="page-container">
         <div class="top-bar">
             <div class="controls">
                 <span class="brand">🔬 Multi-Model Comparison</span>
@@ -1121,8 +2080,18 @@
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.page === page);
             });
+            document.getElementById('homePage').classList.toggle('active', page === 'home');
             document.getElementById('trajPage').classList.toggle('active', page === 'traj');
             document.getElementById('tasksPage').classList.toggle('active', page === 'tasks');
+        }
+
+        function copyBibtex() {
+            const text = document.getElementById('bibtexContent').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.home-citation-copy');
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = 'Copy BibTeX'; }, 2000);
+            });
         }
 
         function navigateToTaskDetails(taskKey) {
