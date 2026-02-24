@@ -1,0 +1,110 @@
+\newcommand{\better}[1]{\textcolor{green!60!black}{#1}}
+\newcommand{\worse}[1]{\textcolor{red!70!black}{#1}}
+\definecolor{baseblue}{RGB}{230, 240, 250}
+\definecolor{skillgreen}{RGB}{230, 245, 235}
+\begin{table*}[!h]\scriptsize
+\centering
+\Large
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{3.5pt}
+\caption{
+Results (base vs skill mode) across models on 126 tasks.
+\textbf{Success Rate (Overall)}: task completion rate (score $\geq$ 90) for \colorbox{baseblue}{Baseline} (no skills) and \colorbox{skillgreen}{Skill} (with skills) modes, plus \textbf{Success Rate (Hard)} for the hard subset only.
+\textbf{Skill Stats}: Exec = skill execution success rate; Reuse = average times each skill is invoked.
+\textbf{Efficiency metrics} (Tokens, Cost, Turns, Tools): per-task averages computed over tasks where \emph{both} modes succeeded; each shows \colorbox{baseblue}{Base}, \colorbox{skillgreen}{Skill}, and Diff values.
+\textbf{Diff}: percentage change (Skill $-$ Baseline) / Baseline; \better{negative} values indicate improvement, \worse{positive} values indicate degradation.
+}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|cc|ccc|ccc|ccc|ccc|cc|cc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} &
+\multicolumn{2}{c|}{\textbf{Skill Stats}} &
+\multicolumn{3}{c|}{\textbf{Avg Tokens}} &
+\multicolumn{3}{c|}{\textbf{Avg Cost (\$)}} &
+\multicolumn{3}{c|}{\textbf{Avg Turns}} &
+\multicolumn{3}{c|}{\textbf{Avg Tool Calls}} &
+\multicolumn{2}{c|}{\textbf{Success Rate (Overall)}} &
+\multicolumn{2}{c}{\textbf{Success Rate (Hard)}} \\
+\cmidrule{2-3}\cmidrule{4-6}\cmidrule{7-9}\cmidrule{10-12}\cmidrule{13-15}\cmidrule{16-17}\cmidrule{18-19}
+& \textbf{Exec} & \textbf{Reuse} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} \\
+\midrule
+\multicolumn{19}{l}{\textit{\textbf{Open-Source Models}}} \\
+\midrule
+\textbf{Kimi-K2-Thinking} 
+& 70\% & 3.4$\times$
+& 0.51M & 0.30M & \better{-42\%}
+& 0.21 & 0.13 & \better{-39\%}
+& 6.7 & 8.3 & \worse{+24\%}
+& 16.8 & 11.9 & \better{-29\%}
+& 55/126 (44\%) & 56/126 (44\%)
+& 8/21 (38\%) & 7/21 (33\%) \\
+\textbf{DeepSeek-V3.2-EXP} 
+& 71\% & 4.8$\times$ 
+& 1.04M & 0.53M & \better{-49\%}
+& 0.21 & 0.10 & \better{-51\%}
+& 18.8 & 15.4 & \better{-18\%}
+& 19.2 & 14.9 & \better{-23\%}
+& 76/126 (60\%) & 87/126 (69\%) 
+& 9/21 (42\%) & 15/21 (71\%) \\
+\textbf{DeepSeek-R1} 
+& 62\% & 3.4$\times$ 
+& 0.58M & 0.41M & \better{-30\%}
+& 0.24 & 0.18 & \better{-24\%}
+& 9.0 & 9.9 & \worse{+10\%}
+& 13.4 & 11.7 & \better{-12\%}
+& 89/126 (71\%) & 101/126 (80\%) 
+& 11/21 (52\%) & 15/21 (71\%) \\
+\textbf{GLM-4.7} 
+& 91\% & 3.7$\times$ 
+& 0.78M & 0.48M & \better{-39\%}
+& 0.20 & 0.12 & \better{-41\%}
+& 13.5 & 13.0 & \better{-4\%}
+& 16.9 & 13.3 & \better{-21\%}
+& 91/126 (72\%) & 108/126 (86\%) 
+& 12/21 (57\%) & 15/21 (71\%) \\
+\textbf{Minimax-M2.1} 
+& 100\% & 3.2$\times$ 
+& 0.42M & 0.38M & \better{-11\%}
+& 0.04 & 0.04 & \better{-8\%}
+& 5.5 & 5.2 & \better{-6\%}
+& 16.6 & 15.4 & \better{-7\%}
+& 117/126 (93\%)  & 119/126 (94\%)
+& 18/21 (86\%) & 20/21 (95\%) \\
+\midrule
+\multicolumn{19}{l}{\textit{\textbf{Closed-Source Models}}} \\
+\midrule
+\textbf{GPT-5.2} 
+& 84\% & 3.8$\times$ 
+& 1.23M & 0.26M & \better{-79\%}
+& 1.77 & 0.43 & \better{-75\%}
+& 20.6 & 9.9 & \better{-52\%}
+& 19.4 & 8.9 & \better{-54\%}
+& 109/126 (87\%) & 114/126 (90\%) 
+& 16/21 (76\%) & 17/21 (80\%) \\
+\textbf{Gemini 3 Pro} 
+& 93\% & 3.9$\times$ 
+& 0.66M & 0.30M & \better{-54\%}
+& 0.59 & 0.30 & \better{-49\%}
+& 10.5 & 11.9 & \worse{+13\%}
+& 2021 & 1193 & \better{-41\%}
+& 108/126 (86\%) & 116/126 (92\%) 
+& 16/21 (76\%) & 17/19 (89\%) \\
+\textbf{Claude 4.5 Sonnet} 
+& 81\% & 3.4$\times$ 
+& 1.36M & 0.40M & \better{-71\%}
+& 1.08 & 0.28 & \better{-74\%}
+& 15.3 & 10.2 & \better{-33\%}
+& 14.3 & 9.2 & \better{-36\%}
+& 119/126 (94\%) & 121/126 (96\%) 
+& 20/21 (95\%) & 20/21 (95\%) \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:main_res}
+\end{table*}

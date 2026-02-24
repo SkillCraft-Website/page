@@ -1,0 +1,31 @@
+% \newcommand{\better}[1]{\textcolor{green!60!black}{#1}}
+% \newcommand{\worse}[1]{\textcolor{red!70!black}{#1}}
+\definecolor{baseblue}{RGB}{230, 240, 250}
+\definecolor{skillgreen}{RGB}{230, 245, 235}
+\definecolor{directexecpurple}{RGB}{240, 230, 250}
+
+\begin{table*}[!h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3.5pt}
+\caption{Three-mode comparison (Base, Skill, Direct Exec) on 48-task subset. \textbf{Base}: No skill library. \textbf{Skill}: With skill library from previous runs. \textbf{Direct Exec}: Skills are directly executed without agent intervention. Efficiency metrics are computed over tasks where both Base and the respective mode succeeded.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|cc|cc|cc|cc|cc|cc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} & \multirow{2}{*}{\textbf{Mode}} & \multicolumn{2}{c|}{\textbf{Success Rate}} & \multicolumn{2}{c|}{\textbf{Skill Stats}} & \multicolumn{2}{c|}{\textbf{Avg Tokens}} & \multicolumn{2}{c|}{\textbf{Avg Cost (\$)}} & \multicolumn{2}{c|}{\textbf{Avg Turns}} & \multicolumn{2}{c}{\textbf{Avg Tool Calls}} \\
+\cmidrule{3-4}\cmidrule{5-6}\cmidrule{7-8}\cmidrule{9-10}\cmidrule{11-12}\cmidrule{13-14}
+ &  & \textbf{Succ} & \textbf{Rate} & \textbf{Exec} & \textbf{Reuse} & \textbf{Val} & \textbf{Diff} & \textbf{Val} & \textbf{Diff} & \textbf{Val} & \textbf{Diff} & \textbf{Val} & \textbf{Diff} \\
+\midrule
+\textbf{Claude-4.5-Sonnet} & \cellcolor{baseblue}Base & 47/48 & 98\% & -- & -- & 1.72M & -- & 1.73 & -- & 15.7 & -- & 14.7 & -- \\
+ & \cellcolor{skillgreen}Skill & 43/48 & 90\% & 99\% & 3.7$\times$ & 0.34M & \better{-80\%} & 0.22 & \better{-87\%} & 10.5 & \better{-33\%} & 9.5 & \better{-36\%} \\
+ & \cellcolor{directexecpurple}Direct Exec & 46/48 & 96\% & 68\% & 3.1$\times$ & 0.16M & \better{-90\%} & 0.17 & \better{-89\%} & 5.8 & \better{-64\%} & 4.8 & \better{-68\%} \\
+\midrule
+\textbf{GPT-5.2} & \cellcolor{baseblue}Base & 45/48 & 94\% & -- & -- & 1.18M & -- & 1.52 & -- & 24.5 & -- & 23.1 & -- \\
+ & \cellcolor{skillgreen}Skill & 43/48 & 90\% & 97\% & 3.5$\times$ & 0.26M & \better{-78\%} & 0.39 & \better{-74\%} & 8.9 & \better{-64\%} & 7.9 & \better{-66\%} \\
+ & \cellcolor{directexecpurple}Direct Exec & 41/48 & 85\% & 68\% & 3.1$\times$ & 0.06M & \better{-95\%} & 0.14 & \better{-91\%} & 4.5 & \better{-78\%} & 3.5 & \better{-81\%} \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:direct_exec}
+\end{table*}

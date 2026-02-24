@@ -1,0 +1,40 @@
+
+\definecolor{urlblue}{RGB}{0, 180, 200}
+\begin{table*}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{5pt}
+
+\caption{Complete list of API sources used in \textsc{SkillCraft}. The benchmark comprises 21 task families across 6 domains (Entertainment, Reference, Education, Developer, Science, Food). \textbf{Tools}: number of distinct API-wrapping functions per task. Each task family includes 6 difficulty-scaled variants (Easy: 3 subtasks, Medium: 5 subtasks, Hard: 7 subtasks), totaling 126 tasks. All APIs except Local DNA Analysis are publicly available REST endpoints.}
+
+\begin{tabular}{llcl}
+\toprule
+\textbf{Task Family} & \textbf{Domain} & \textbf{Tools} & \textbf{Source} \\
+\midrule
+Cat Facts Collector & Reference & 5 & \textcolor{urlblue}{\url{https://catfact.ninja}} \\
+Cocktail Menu Generator & Food & 5 & \textcolor{urlblue}{\url{https://thecocktaildb.com}} \\
+Countries Encyclopedia & Reference & 5 & \textcolor{urlblue}{\url{https://restcountries.com}} \\
+D\&D Campaign Builder & Gaming & 6 & \textcolor{urlblue}{\url{https://dnd5eapi.co}} \\
+D\&D Monster Compendium & Gaming & 6 & \textcolor{urlblue}{\url{https://dnd5eapi.co}} \\
+Dog Breeds Encyclopedia & Reference & 5 & \textcolor{urlblue}{\url{https://dog.ceo/api}} \\
+GitLab Deep Analysis & Developer & 6 & \textcolor{urlblue}{\url{https://gitlab.com/api/v4}} \\
+Jikan Anime Analysis & Entertainment & 5 & \textcolor{urlblue}{\url{https://api.jikan.moe}} \\
+JSONPlaceholder Analyzer & Developer & 7 & \textcolor{urlblue}{\url{https://jsonplaceholder.typicode.com}} \\
+Local DNA Analysis & Science & 5 & Custom Implementation \\
+Name Demographics & Society & 5 & \textcolor{urlblue}{\url{https://genderize.io}} \\
+Open-Meteo Weather & Science & 5 & \textcolor{urlblue}{\url{https://open-meteo.com}} \\
+PokéAPI Pokédex & Gaming & 5 & \textcolor{urlblue}{\url{https://pokeapi.co}} \\
+Random User Database & Society & 5 & \textcolor{urlblue}{\url{https://randomuser.me}} \\
+Recipe Cookbook Builder & Food & 6 & \textcolor{urlblue}{\url{https://themealdb.com}} \\
+Rick \& Morty Explorer & Entertainment & 5 & \textcolor{urlblue}{\url{https://rickandmortyapi.com}} \\
+TVMaze Series Analyzer & Developer & 5 & \textcolor{urlblue}{\url{https://api.tvmaze.com}} \\
+University Directory & Education & 5 & \textcolor{urlblue}{\url{http://universities.hipolabs.com}} \\
+USGS Earthquake Monitor & Science & 6 & \textcolor{urlblue}{\url{https://earthquake.usgs.gov}} \\
+Vocabulary Builder & Reference & 5 & \textcolor{urlblue}{\url{https://dictionaryapi.dev}} \\
+World Bank Snapshot & Education & 5 & \textcolor{urlblue}{\url{https://api.worldbank.org}} \\
+\bottomrule
+\end{tabular}
+
+\label{tab:task_sources}
+\end{table*}

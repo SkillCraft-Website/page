@@ -1,0 +1,462 @@
+% =========================================================================
+% Trajectory Display - Clean Deep Purple Theme
+% =========================================================================
+
+% Preamble (add to your document preamble)
+% \usepackage{tcolorbox}
+% \usepackage{xcolor}
+% \tcbuselibrary{skins,breakable}
+
+% Define colors - Deep Purple Theme Only
+\definecolor{TrajPurple}{HTML}{4A148C}      % Deep purple - main color
+\definecolor{TrajPurpleLight}{HTML}{7B1FA2} % Lighter purple for accents
+\definecolor{TrajPurpleBg}{HTML}{F3E5F5}    % Very light purple background
+\definecolor{TrajGray}{HTML}{424242}        % Dark gray for text
+\definecolor{TrajLightGray}{HTML}{F5F5F5}   % Light gray for backgrounds
+
+% Counter for steps
+\newcounter{trajstep}
+\newcommand{\TrajReset}{\setcounter{trajstep}{0}}
+
+% Main trajectory environment
+\newtcolorbox{trajectory}[1]{
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=TrajPurple,
+  boxrule=1pt,
+  arc=3mm,
+  left=4mm,
+  right=4mm,
+  top=3mm,
+  bottom=3mm,
+  fonttitle=\bfseries\normalsize,
+  coltitle=white,
+  colbacktitle=TrajPurple,
+  title=#1,
+  attach boxed title to top left={yshift=-2mm, xshift=-1mm},
+  boxed title style={boxrule=0pt, arc=2mm, left=3mm, right=3mm, xshift=0mm}
+}
+
+% System/User card - light gray background
+\newtcolorbox{syscard}[1]{
+  enhanced,
+  colback=TrajLightGray,
+  colframe=TrajLightGray,
+  boxrule=0pt,
+  arc=2mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  before skip=2mm,
+  after skip=2mm,
+  fontupper=\small,
+  before upper={\textbf{#1}\par\smallskip}
+}
+
+% Agent step card - purple left border
+\newtcolorbox{stepcard}{
+  enhanced,
+  colback=TrajPurpleBg,
+  colframe=TrajPurpleBg,
+  boxrule=0pt,
+  arc=2mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  before skip=2mm,
+  after skip=2mm,
+  fontupper=\small,
+  borderline west={2pt}{0pt}{TrajPurple}
+}
+
+% Response card - no border, just light background
+\newtcolorbox{respcard}{
+  enhanced,
+  colback=TrajLightGray,
+  colframe=TrajLightGray,
+  boxrule=0pt,
+  arc=2mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  before skip=1mm,
+  after skip=2mm,
+  fontupper=\small
+}
+
+% Statistics box
+\newtcolorbox{statsbox}[1]{
+  enhanced,
+  colback=TrajPurpleBg,
+  colframe=TrajPurple,
+  boxrule=0.8pt,
+  arc=2mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  before skip=3mm,
+  fontupper=\small,
+  title={\small\bfseries #1},
+  coltitle=TrajPurple,
+  colbacktitle=white,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={boxrule=0.8pt, colframe=TrajPurple, arc=1.5mm, left=2mm, right=2mm}
+}
+
+% Inline code style - use italic for parameters
+\newcommand{\tcode}[1]{\textit{#1}}
+
+% Step command
+\newcommand{\stepnum}{\refstepcounter{trajstep}\textbf{Step \#\thetrajstep}}
+
+% Abbreviated steps
+\newcommand{\abbrev}[1]{{\color{TrajGray}\itshape\small\hspace{3mm}#1}}
+
+% =========================================================================
+% CASE 1: Easy Task - Skill Creation Decision
+% =========================================================================
+
+\TrajReset
+\begin{trajectory}{Traj A: Claude-4.5-Sonnet \quad\textit{\small cat-facts-collector/e2}}
+
+\begin{syscard}{System}
+You are an AI assistant with access to tools. Use save\_skill to create reusable workflows and execute\_skill to run them.
+\end{syscard}
+
+\begin{syscard}{User}
+Collect information for 3 cat breeds (Persian, Siamese, Maine Coon) using breed\_profile, breed\_facts, and breed\_encyclopedia APIs. Save results to a JSON file.
+\end{syscard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+I'll process each breed systematically using direct API calls.\par
+\textbf{call} \tcode{catfacts\_breed\_profile} \quad \tcode{Persian}
+\end{stepcard}
+
+\begin{respcard}
+\{"origin": "Persia", "temperament": "Gentle", "life\_span": "12-17"...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{catfacts\_breed\_facts} \quad \tcode{Persian}
+\end{stepcard}
+
+\begin{respcard}
+\{"fact\_1": "Persians are known for their long fur"...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{catfacts\_breed\_encyclopedia} \quad \tcode{Persian}
+\end{stepcard}
+
+\begin{respcard}
+\{"description": "The Persian cat is a long-haired breed..."...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+Persian complete. Continuing with Siamese...
+\end{stepcard}
+
+\abbrev{Steps \#5--7: Same 3 API calls for Siamese and Maine Coon}
+
+\begin{stepcard}
+\textbf{Step \#8}\quad Agent\par\smallskip
+\textbf{call} \tcode{write\_file} \quad \tcode{cat\_breeds\_report.json}
+\end{stepcard}
+
+\begin{respcard}
+File written successfully.
+\end{respcard}
+
+\begin{stepcard}
+\textbf{Step \#9}\quad Agent\par\smallskip
+\textbf{call} \tcode{claim\_done} \quad Task completed successfully.
+\end{stepcard}
+
+\begin{statsbox}{Statistics --- Pass}
+\textbf{Total Steps:} 9 \quad\quad \textbf{Total Tokens:} 762,052\par\smallskip
+\hrule\smallskip
+$\checkmark$ No skill created --- Direct API calls sufficient.
+\end{statsbox}
+
+\end{trajectory}
+
+\vspace{4mm}
+
+% =========================================================================
+% Traj B
+% =========================================================================
+
+\TrajReset
+\begin{trajectory}{Traj B: DeepSeek-V3.2 \quad\textit{\small cat-facts-collector/e2}}
+
+\begin{syscard}{System}
+You are an AI assistant with access to tools. Use save\_skill to create reusable workflows and execute\_skill to run them.
+\end{syscard}
+
+\begin{syscard}{User}
+Collect information for 3 cat breeds (Persian, Siamese, Maine Coon) using breed\_profile, breed\_facts, and breed\_encyclopedia APIs. Save results to a JSON file.
+\end{syscard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{list\_directory} \quad \tcode{workspace}
+\end{stepcard}
+
+\begin{respcard}
+[workspace contents]
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{save\_skill} \quad \tcode{process\_cat\_breed}
+\end{stepcard}
+
+\begin{respcard}
+Skill saved successfully.
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{execute\_skill}\par
+skill\_name: \tcode{process\_cat\_breed} \quad param: \tcode{Persian}
+\end{stepcard}
+
+\begin{respcard}
+Skill executed.\par
+$\triangleright$ Warning: missing breed\_facts, breed\_encyclopedia fields
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{execute\_skill}\par
+skill\_name: \tcode{process\_cat\_breed} \quad param: \tcode{Siamese}
+\end{stepcard}
+
+\begin{respcard}
+Skill executed.\par
+$\triangleright$ Warning: missing breed\_facts, breed\_encyclopedia fields
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{execute\_skill}\par
+skill\_name: \tcode{process\_cat\_breed} \quad param: \tcode{Maine Coon}
+\end{stepcard}
+
+\begin{respcard}
+Skill executed.\par
+$\triangleright$ Warning: missing breed\_facts, breed\_encyclopedia fields
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{write\_file} \quad \tcode{partial\_results.json}
+\end{stepcard}
+
+\begin{respcard}
+File written.
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{file\_write\_json\_chunk} \quad \tcode{persian\_data}
+\end{stepcard}
+
+\begin{respcard}
+Chunk written.
+\end{respcard}
+
+\abbrev{Steps \#8--14: More repair operations (write\_json\_chunk $\times$4, read\_file, file\_append)}
+
+\begin{stepcard}
+\textbf{Step \#15}\quad Agent\par\smallskip
+\textbf{call} \tcode{claim\_done} \quad Task completed.
+\end{stepcard}
+
+\begin{statsbox}{Statistics --- Pass}
+\textbf{Total Steps:} 15 \quad\quad \textbf{Total Tokens:} 1,507,830\par\smallskip
+\hrule\smallskip
+$\times$ Skill created unnecessarily --- 8 extra repair calls needed.
+\end{statsbox}
+
+\end{trajectory}
+
+\vspace{4mm}
+
+% =========================================================================
+% CASE 2: Hard Task - Skill Quality Difference
+% =========================================================================
+
+\TrajReset
+\begin{trajectory}{Traj C: Claude-4.5-Sonnet \quad\textit{\small cocktail-menu-generator/h1}}
+
+\begin{syscard}{System}
+You are an AI assistant with access to tools. Use save\_skill to create reusable workflows and execute\_skill to run them.
+\end{syscard}
+
+\begin{syscard}{User}
+Create a cocktail menu for 5 cocktails (Margarita, Mojito, Old Fashioned, Martini, Negroni) using 5 APIs each. Save to JSON.
+\end{syscard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+25 calls total. I'll create a reusable skill.\par
+\textbf{call} \tcode{save\_skill} \quad \tcode{process\_cocktail\_complete}
+\end{stepcard}
+
+\begin{respcard}
+Skill saved successfully.
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+Now processing all 5 cocktails...\par
+\textbf{call} \tcode{execute\_skill}\par
+skill\_name: \tcode{process\_cocktail\_complete} \quad param: \tcode{Margarita}
+\end{stepcard}
+
+\begin{respcard}
+\{search, details, ingredient, category, glass\} $\rightarrow$ all fields complete
+\end{respcard}
+
+\abbrev{Steps \#3--6: execute\_skill for Mojito, Old Fashioned, Martini, Negroni $\rightarrow$ all success}
+
+\begin{stepcard}
+\textbf{Step \#7}\quad Agent\par\smallskip
+\textbf{call} \tcode{write\_file} \quad \tcode{cocktail\_menu.json}
+\end{stepcard}
+
+\begin{respcard}
+File written successfully.
+\end{respcard}
+
+\begin{stepcard}
+\textbf{Step \#8}\quad Agent\par\smallskip
+\textbf{call} \tcode{claim\_done} \quad Cocktail menu saved. Task completed.
+\end{stepcard}
+
+\begin{statsbox}{Statistics --- Pass}
+\textbf{Total Steps:} 8 \quad\quad \textbf{Total Tokens:} 213,222\par\smallskip
+\hrule\smallskip
+$\checkmark$ 1 save $\rightarrow$ 5 executes --- Skill correct on first try.
+\end{statsbox}
+
+\end{trajectory}
+
+\vspace{4mm}
+
+% =========================================================================
+% Traj D
+% =========================================================================
+
+\TrajReset
+\begin{trajectory}{Traj D: DeepSeek-V3.2 \quad\textit{\small cocktail-menu-generator/h1}}
+
+\begin{syscard}{System}
+You are an AI assistant with access to tools. Use save\_skill to create reusable workflows and execute\_skill to run them.
+\end{syscard}
+
+\begin{syscard}{User}
+Create a cocktail menu for 5 cocktails (Margarita, Mojito, Old Fashioned, Martini, Negroni) using 5 APIs each. Save to JSON.
+\end{syscard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{save\_skill} \quad \tcode{process\_cocktail}
+\end{stepcard}
+
+\begin{respcard}
+Skill save failed.\par
+$\triangleright$ SyntaxError: unexpected token `\}' at line 8
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+Fix syntax error and retry...\par
+\textbf{call} \tcode{save\_skill} \quad \tcode{process\_cocktail\_v2}
+\end{stepcard}
+
+\begin{respcard}
+Skill saved.
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{execute\_skill}\par
+skill\_name: \tcode{process\_cocktail\_v2} \quad param: \tcode{Margarita}
+\end{stepcard}
+
+\begin{respcard}
+Execution failed.\par
+$\triangleright$ SyntaxError: `return' is invalid outside function (line 12)
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+Skill failed. Fallback to direct API...\par
+\textbf{call} \tcode{cocktail\_search} \quad \tcode{Margarita}
+\end{stepcard}
+
+\begin{respcard}
+\{"id": "11007", "name": "Margarita"...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{cocktail\_details} \quad \tcode{11007}
+\end{stepcard}
+
+\begin{respcard}
+\{"ingredients": ["Tequila", "Lime"...]...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{cocktail\_by\_ingredient} \quad \tcode{Tequila}
+\end{stepcard}
+
+\begin{respcard}
+\{"cocktails": [...]...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{cocktail\_by\_ingredient} \quad \tcode{Lime}
+\end{stepcard}
+
+\begin{respcard}
+\{"cocktails": [...]...\}
+\end{respcard}
+
+\begin{stepcard}
+\stepnum\quad Agent\par\smallskip
+\textbf{call} \tcode{save\_skill} \quad \tcode{process\_cocktail\_v3}
+\end{stepcard}
+
+\begin{respcard}
+Skill saved.
+\end{respcard}
+
+\abbrev{Steps \#9--18: More execute\_skill calls + manual cleanup}
+
+\begin{stepcard}
+\textbf{Step \#19}\quad Agent\par\smallskip
+\textbf{call} \tcode{claim\_done} \quad Task completed after multiple retries.
+\end{stepcard}
+
+\begin{statsbox}{Statistics --- Fail}
+\textbf{Total Steps:} 19 \quad\quad \textbf{Total Tokens:} 1,141,166\par\smallskip
+\hrule\smallskip
+$\times$ 3 saves + fallback --- Skill quality poor, task failed.
+\end{statsbox}
+
+\end{trajectory}

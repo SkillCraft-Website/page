@@ -1,0 +1,91 @@
+\section{SkillCraft}
+
+% Current tool-using evaluation paradigm primarily designed to enable models to complete tasks under a fixed set of tools. For instance, answering real-time price queries requires search tools to retrieve current market data, as this information cannot be inferred from the model's training knowledge alone. However, this evaluation paradigm specifies the required tools upfront, which fundamentally limits models' ability to dynamically evolve or compose new tools during user-agent interaction and prevents them from acquiring transferable knowledge or reusable strategies at test time that generalize beyond the predefined tool set. And thus, we introduce \textbf{SkillVerse}, an evaluation suite designed to elicit and assess models' ability to evolve tools during test-time interaction.
+
+\begin{figure*}[t!]
+    \centering
+    % \includegraphics[width=\textwidth]{Figures/ComboCraft1.png}
+    \includegraphics[width=0.9\textwidth]{Figures/ComboCraft_fig2.pdf}
+    \caption{\textbf{Three-stage task construction pipeline for \textsc{SkillCraft}.} 
+    In \textbf{Stage 1}, we explore existing benchmarks through systematic experimentation to identify effective \textbf{task design principles}. 
+    In \textbf{Stage 2}, we construct seed tasks from three sources: (i) selected tasks from Stage 1 with \textbf{unified interfaces}, (ii) newly handcrafted \textbf{web API-based tasks}, and (iii) \textbf{local file and data processing tasks}. 
+    In \textbf{Stage 3}, we systematically scale the seed tasks via \textbf{quantitative scaling} (increasing subtask count) and \textbf{complexity scaling} (increasing tool calls per subtask), producing a task repository with \textbf{graduated difficulty levels}.}
+    \label{fig:wide-figure}
+\end{figure*}
+
+% Current tool-using evaluation paradigms primarily assess whether models can solve tasks with a fixed set of atomic tools. For example, given a search tool, the objective is for the agent to retrieve up-to-date market information and answer a single real-time price query. However, such single-episode evaluations fail to capture realistic, long-horizon, and complex scenarios, in which agents must repeatedly interact with multiple tools, implicitly requiring them to accumulate experience and reuse higher-level skills. To this end, we introduce~\textbf{SkillCraft}, a Skill-centric benchmark that scales task complexity along two orthogonal dimensions---\emph{quantitative scaling} (number of subtasks) and \emph{complexity scaling} (tool calls per subtask)---which implicitly increases the demand for tool usage and thereby encourages agents to discover and reuse compositional tool chains, elevating tool use to a higher level of abstraction.
+
+Current tool-using benchmarks mainly test whether agents can solve single task successfully with a fixed set of atomic tools (e.g., answering one real-time query with a search API). Such single-episode evaluations fail to reflect agents' tool composition ability. We therefore introduce \textbf{SkillCraft}, a long-horizon and compositional benchmark with repetitive structures that better reflects realistic settings and encourages the discovery and reuse of higher-level tool skills.
+
+
+
+% \subsection{What kinds of tasks could evaluate Skill composition ability? }
+
+% We begin by our exploration by asking: How to design tasks that can capture realistic settings with heavy repetition and substantial complexity? In other words, what features the tasks could have to highlight the necessarities of tool composition? That is, if tasks can be easily completed with existing low-level tools, models have no motivation to create new ones. This suggests we need tasks where high-level tools provide clear advantages. 
+
+% Our benchmark design follows two core principles: (1) tasks must be sufficiently complex to necessitate multi-tool compositions, as simple tasks solvable with individual tool calls fail to elicit the compositional reasoning we aim to evaluate; (2) tasks must involve rich entity interactions to enable comprehensive reuse of Skill-level tool abstractions, ensuring that tools discovered in one context can transfer meaningfully to others and allowing us to measure not just composition ability but also the quality and generalizability of the tools models create.
+
+\subsection{What kinds of tasks can evaluate skill composition?}
+
+We begin our exploration by asking: what kinds of tasks are required to faithfully evaluate an agent's ability to compose and reuse skills, rather than merely execute isolated tool calls?
+To evaluate skill composition, tasks must go beyond single-shot, low-branching problems. If a task can be solved efficiently with a few atomic tool calls, agents have little incentive to discover or reuse higher-level skills, and composition ability becomes indistinguishable. We therefore seek tasks that resemble realistic workflows: they are long-horizon, structurally repetitive, and sufficiently challenging that solving them instance-by-instance is inefficient, making reusable tool compositions genuinely beneficial.
+
+Guided by this motivation, our benchmark design follows two principles. First, tasks should require \emph{multi-step, multi-tool} reasoning, such that no single low-level tool call is sufficient and higher-level compositions provide a clear advantage. Second, tasks should exhibit \emph{recurrent structure with rich entity interactions} across instances, so that a skill discovered in one context can be meaningfully reused in others. This allows us to measure not only whether agents can compose atomic tools, but also whether the composed skills are reusable and generalizable. 
+
+Importantly, these principles also mirror real-world tool-using scenarios, which are typically long-horizon and structurally repetitive, where similar sub-skills reoccur across tasks and the abstraction and reuse of higher-level skills are essential for efficient and robust problem solving.
+
+
+\subsection{How to curate such tasks?}
+
+We construct the benchmark through a three-stage pipeline. (1) \textbf{Exploratory Phase.} We first sample a set of complex, multi-step tool-using tasks from multiple existing agent benchmarks such as Toolathlon~\citep{li2025tool}, AgentCompany~\citep{xu2024theagentcompanybenchmarkingllmagents}, WebArena~\citep{zhou2023webarena} and M3ToolEval~\citep{wang2024executable}. 
+Through systematic experimentation, we identify useful APIs\&task types and gain key insights that guide our task design principles. (2) \textbf{Seed Task Creation.} We construct our seed task pool from three sources: (i)a small set of high-quality tasks adapted from Stage 1 whose required APIs are reliable, stable, and free of severe rate limits, and whose difficulty is within the model’s capability, ensuring that large-scale, long-horizon interaction and tool composition are both feasible. (2)~\textbf{Seed Task Creation.} We build the seed task pool from three sources: (i) a small set of high-quality tasks adapted from Stage 1 with reliable, stable, and rate-limit–robust APIs; (ii) a large collection of handcrafted web API tasks; and (iii) local file and data processing tasks based on custom datasets. Stage-1 tasks are converted to a unified MCP interface. For web APIs, we survey, test, and filter stable public endpoints (e.g., GitLab, Open-Meteo, TVMaze), wrap them as standardized local tools, and design tasks accordingly. For local tasks, we prepare datasets, implement standardized processing tools, and construct tasks on top of them.
+(3) \textbf{Systematic Scaling.} We expand seed tasks along two axes: (i) \textbf{quantitative scaling}, increasing the number of entities/subtasks, and (ii) \textbf{complexity scaling}, increasing tool calls per subtask. Combining the two yields multiple difficulty levels (e.g., $3\times3$, $4\times4$, $5\times5$), creating substantial headroom and encouraging discovery and reuse of higher-level compositional skills. Table~\ref{table:task-construction-stats} reports stage-wise statistics, and Fig~\ref{fig:task_distribution} shows coverage across domains and difficulty levels.
+% how to construct the benchmarks. what to reject what to keep.
+
+% Table~\ref{table:task-construction-stats} summarizes the task statistics at each stage. Although we explore over 60 tasks from existing benchmarks in Stage 1, only \textbf{5} are adapted into our final seed pool due to two constraints: (1) incompatible interaction modalities (e.g., WebArena's Playwright-based browser interaction vs. our API-style tool calls), and (2) insufficient task depth for evaluating compositional skill reuse. To address this gap, we handcraft \textbf{16 additional seed tasks} (12 based on curated web APIs and 4 based on local data processing), yielding a total of 21 seed tasks that are subsequently scaled to 126 tasks across 6 difficulty levels. Figure~\ref{fig:task_distribution} illustrates the distribution of our benchmark across application domains and difficulty levels, showing diverse coverage spanning entertainment, education, science, and developer-oriented tasks.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\columnwidth]{Figures/task_distribution_v5.pdf}
+
+% \vspace{0.3em}
+
+% 下方：表格（压缩列宽）
+\small
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Difficulty} & \textbf{Tasks} & \textbf{Entity Num} & \textbf{Complexity} & \textbf{\%} \\
+\midrule
+Easy & 63 & 3 & 3 & 50.0\% \\
+Medium & 42 & 4 & 4 & 33.3\% \\
+Hard & 21 & 5 & 5 & 16.7\% \\
+\midrule
+\textbf{Total} & \textbf{126} & -- & -- & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+
+\caption{Task distribution in SkillCraft. The chart shows 21 task families across 6 application domains. The table summarizes difficulty levels: ~\textbf{Entity Num} = number of target items (subtasks) per task;~\textbf{Complexity} = tool calls required per entity.}
+\label{fig:task_distribution}
+% \vspace{-10pt}
+\end{figure}
+% \vspace{-10pt}
+% We use a three-stage pipeline to create our benchmark: (1) We sample seed complex tool-using tasks from existing benchmarks such as ToolAlphaLlion, TextArena, WebArena or so. (2) We use these as prototypes and reformat the interfaces into unified format and expand both task complexity and the number of entities involved. (3) We handcraft additional tasks based on the expanded task pool from stage 2.
+
+% We show the number of tasks after each stage in Table xx. The seed tasks represent a relatively small fraction of the total tasks in the original benchmarks for two main reasons: (1) Some benchmarks are built on interfaces other than APIs (e.g., WebArena is based on Playwright, so we can only sample tasks that enable interaction via API). (2) Many tasks are too simple and do not require multi-turn tool use and reasoning, making them unsuitable for our purposes. Furthermore, to enhance task complexity, we often combine several seed tasks into a single complex task in stage 2, which explains why stage 2 contains fewer tasks than the initial seed pool despite being more challenging.
+\input{Tables/stats}
+
+% \subsection{How to evaluate tool composition ability? What metrics we should use?}
+% We borrow the insights from cognitive science xxxx. Efficiency...
+
+% However, this immediately raises a deeper question: what is the fundamental difference between high-level and low-level tools? Without understanding this distinction, we cannot design tasks that genuinely require tool evolution, nor can we evaluate whether models have successfully created high-level tools. To answer this, we conducted case studies analyzing how current models behave when using low-level tools in baseline settings.
+
+% Our analysis revealed two recurring inefficiency patterns. First, intermediate results are repeatedly passed between consecutive tool calls---the output of Tool A becomes the input to Tool B, whose output feeds Tool C, with each pass consuming tokens to serialize and describe the data. Second, models use verbose natural language reasoning between each tool call to describe the current state, explain why the next tool is needed, and plan its parameters. These patterns expose the fundamental limitation of low-level tools: they are atomic operations requiring multiple independent calls to complete complex tasks, with each call demanding explicit data passing and natural language reasoning. This insight suggests a clear solution: if we consolidate multiple low-level tool calls into a single executable unit, we eliminate both the redundant data passing and the verbose reasoning overhead. This consolidated unit is precisely what we define as a high-level tool. But what medium should encode this consolidation? Code emerges as the natural choice---it directly encodes data flow through variables and function calls, captures control logic through conditionals and loops, and provides a more compact and precise representation than natural language. Therefore, our evaluation paradigm asks: given tasks requiring multiple low-level tool calls, can models consolidate them into code-based high-level tools (Skills), and how does this affect efficiency and success rate?
+\subsection{How to Evaluate Tool Composition Ability?}
+
+Inspired by cognitive science, which views intelligence as the efficiency of acquiring and reusing skills under limited resources~\citep{anderson1982acquisition,anderson1987skill,chollet2019measure}, we evaluate tool composition not only by task success but also by \emph{efficiency}. In our specific agentic tool-use setting, we also question whether efficiency remains a reliable evaluation metric. As a first step, we analyze the baseline setting to establish a reference point. Our analysis of current models operating with only low-level (atomic) tools reveals two recurring inefficiency patterns: (1) \textbf{Redundant state passing:} Intermediate results are repeatedly serialized between consecutive tool calls, incurring substantial token overhead.  (2) \textbf{Context window saturation:} Long sequences of tool calls and their outputs consume substantial context capacity, potentially causing the model to "forget" earlier information or lose track of the overall goal.
+
+These observations expose a fundamental limitation: complex skills must be decomposed into sequences of atomic operations, each requiring explicit state passing and reasoning. A natural remedy is to \textbf{consolidate frequently co-occurring tool chains into a single executable unit}, which we term \emph{Skills}. Code provides a natural medium for this consolidation, compactly representing data flow, control logic, and iteration.
+
+Accordingly, our evaluation asks: given multi-step, multi-tool tasks, can models abstract recurring tool chains into reusable, code-based Skills? Does this abstraction improve efficiency and success, as measured by \textbf{token usage}, \textbf{tool call count}, and \textbf{interaction steps}? We answer these questions by evaluating models on SkillCraft.

@@ -1,0 +1,114 @@
+\section{What is a good tool composition?}
+To understand what constitutes a \emph{good} tool composition, we study tool composition along two key dimensions: \textbf{composition depth} and \textbf{generalization ability}. Specifically, we examine whether deeper, hierarchical compositions lead to better performance, and whether learned Skills can generalize across tasks, complexity levels, and models.
+\subsection{Is Deeper Composition Always Better?}
+%\subsection{Can the depth be scaled of Skills?}
+We introduce \textbf{Hierarchical Mode}, which enables hierarchical, tree-structured skill composition by allowing skills to invoke other skills during execution. Under the standard \textbf{SkillCraft} protocol (Skill Mode), supporting single-level composition: each skill is defined as a composition of atomic tool calls and cannot invoke other skills. Iteration Mode lifts this restriction by enabling recursive skill invocation, permitting hierarchical composition up to a configurable nesting depth (\textit{max\_skills\_nesting\_depth=10} in our experiments). In theory, hierarchical composition enables reusable abstraction, yields multiplicative efficiency gains through nested skill reuse, and allows the agent to reason at higher levels rather than managing low-level details.
+
+In practice, under \textbf{Hierarchical Mode}, when a skill is executed, the \texttt{call\_tool} interface—responsible for dispatching executable actions during skill execution—can invoke not only atomic tools but also previously saved skills via \texttt{execute\_pattern}. In contrast, under the standard \textbf{SkillCraft} protocol, \texttt{call\_tool} is restricted to atomic tool invocations and cannot trigger other skills. This enables hierarchical/recursive skill invocation and yields a tree-structured execution graph, in which high-level skills orchestrate lower-level ones, as illustrated in Figure~\ref{fig:cases}(a).
+
+\input{Tables/iterate}
+% --- Hex colors (HTML style) ---
+\definecolor{LvlZero}{HTML}{AA7876} % e.g., #FFFF06
+\definecolor{LvlOne}{HTML}{799C74}  % 示例：你可以换成你要的 hex
+\definecolor{LvlTwo}{HTML}{587EB8}  % 示例
+\definecolor{LvlThree}{HTML}{6F6C9C}% 示例
+
+\newcommand{\lvlbox}[2]{%
+  \begingroup
+  \setlength{\fboxsep}{0.8pt}%
+  \colorbox{#1}{\strut\,#2\,}%
+  \endgroup
+}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/cases.pdf}
+    \vspace{-15pt}
+    \caption{
+    % (a): Hierarchical skill composition in Iteration mode. Low-level skills encapsulate atomic tool calls, medium-level skills compose multiple low-level skills with data processing, and high-level skills loop over medium-level skills. Efficiency gains compound at each level. 
+    (a) Hierarchical skill composition in Iteration mode. A task organized as a depth-3 skill hierarchy, where
+\protect\lvlbox{LvlZero}{\textcolor{white}{atomic tools}} are encapsulated by
+\protect\lvlbox{LvlOne}{\textcolor{white}{low-level skills}}, composed into
+\protect\lvlbox{LvlTwo}{\textcolor{white}{medium-level skills}}  with additional processing, and orchestrated by a
+\protect\lvlbox{LvlThree}{\textcolor{white}{high-level skill}}. Efficiency gains compound across levels.
+    (b) Error propagation in hierarchical skills. A null value returned by a low-level skill triggers a \texttt{TypeError} in the medium-level skill, which cascades into complete failure of the high-level skill. The tree structure amplifies the impact of edge-case bugs.}
+    % \label{fig:iteration-success}
+
+    \label{fig:cases}
+\vspace{-10pt}
+\end{figure*}
+
+% \paragraph{Theoretical Promise.} Hierarchical composition offers compelling theoretical benefits: (1) \textit{abstraction}---complex workflows can be decomposed into reusable building blocks; (2) \textit{compounding efficiency}---a high-level skill calling $n$ medium-level skills, each calling $m$ low-level skills, amplifies token savings multiplicatively; and (3) \textit{cognitive offloading}---the agent reasons at higher abstraction levels rather than managing low-level details.
+
+
+\paragraph{Practical Challenges.} However, our experiments reveal that Hierarchical mode exhibits \textit{lower overall success rates} compared to flat Skill mode. The primary reason is \textbf{error propagation through the skill hierarchy}. Figure~\ref{fig:cases} (a) illustrates a typical failure pattern: a low-level skill (\texttt{get\_breed\_profile}) returns data with null fields for edge cases, which propagates upward and causes a \texttt{TypeError} in the medium-level skill (\texttt{analyze\_breed\_complete}), ultimately cascading into complete failure of the high-level skill (\texttt{compile\_breed\_encyclopedia}).
+
+
+To illustrate cascading failures arising from implementation details, we identify three underlying micro-level factors: (1) compounding failures, where a skill at depth $d$ depends on its entire dependency subtree and success rate degrades rapidly with nesting; (2) latent bugs, where early-created skills may harbor edge-case errors that only manifest upon reuse, contaminating all higher-level skills built upon them; and (3) debugging overhead, where diagnosing nested failures requires tracing through dependencies—a cost that often exceeds simply re-executing with flat tool calls.
+% \begin{enumerate}[leftmargin=*]
+%     \item \textbf{Increased instability through nesting.} Each level of skill composition introduces additional points of failure. A skill at depth $d$ depends on the correctness of all skills in its dependency subtree. Even if each individual skill has a high success rate $p$, the compound success rate for a skill calling $k$ sub-skills is approximately $p^k$, which degrades rapidly.
+    
+%     \item \textbf{Latent bugs in foundational skills.} Skills created early in the session may not encounter edge cases during their initial execution, leading to ``latent bugs'' that only manifest when the skill is reused in different contexts. In the tree structure of Iteration mode, \textit{a single buggy low-level skill contaminates all higher-level skills built upon it}.
+    
+%     \item \textbf{Prohibitive debugging overhead.} When a high-level skill fails, the agent must diagnose whether the fault lies in: (a) the high-level skill's logic, (b) a mid-level skill it calls, (c) a low-level skill, or (d) an atomic tool. This debugging process requires the agent to trace through the execution tree, understand each skill's implementation, and potentially rewrite multiple skills---a cost that often exceeds simply re-executing the task with flat tool calls.
+% \end{enumerate}
+
+% \paragraph{Empirical Results.} Table~\ref{tab:three_mode} summarizes our findings. While Iteration mode achieves superior token efficiency on successful runs (due to compounding abstraction benefits), its lower success rate and higher variance make it less reliable than flat Skill mode for practical deployment. The ``break-even point'' where hierarchical composition becomes beneficial requires skills with exceptionally robust error handling---a capability current LLMs struggle to consistently produce.
+
+% These findings suggest that \textit{shallow, well-tested skill libraries} outperform \textit{deep, automatically-generated hierarchies} in the current paradigm. Future work on skill verification, automatic error handling injection, and compositional testing may unlock the full potential of hierarchical skill reuse.
+
+\paragraph{Empirical Results.} Table~\ref{tab:three_mode} compares Base, flat Skill, and hierarchical composition. Overall, deeper composition is \emph{not} a consistently beneficial scaling strategy. For a strong model (GPT-5.2), moving from flat Skill to Hierarchy reduces end-to-end success from 90\% to 79\%, while also weakening token savings (0.26M vs.\ 0.60M). Even when success does not change (e.g., Claude-4.5-Sonnet remains at 96\% in both modes), Hierarchy can still be less efficient (0.40M vs.\ 0.63M). Notably, Hierarchy often achieves high \textit{Exec} rates (e.g., 95--99\%), yet this does not translate into higher task success. Together, these results suggest that \textit{shallow, well-tested skill libraries} are currently more reliable and cost-effective than \textit{deep, automatically generated hierarchies}; realizing the latter likely requires much stronger systematic error handling and compositional verification.
+
+
+\subsection{Cross-task Generalization}
+A key property of a useful composition is its ability to generalize across problem difficulty. If a Skill captures reusable procedural structure rather than instance-specific solutions, it should transfer from simpler to more complex tasks (and vice versa) within the same task family. We therefore evaluate whether Skills learned at one difficulty level can be effectively reused at other difficulty levels.
+
+We implement \textbf{Cross-Task Mode} using a two-phase static transfer approach. In Phase 1 (Skill Creation), an agent solves tasks at the \textit{source} difficulty level in standard Skill mode, creating and caching Skills in its workspace. In Phase 2 (Skill Transfer), the runner: (1) copies the pre-computed Skill cache to the workspace for \textit{target} difficulty tasks, (2) generates a \texttt{cross\_task\_skills\_summary} and injects into the system prompt, providing the agent with a structured description of available Skills including signatures, parameters, and execution history, and (3) executes the agent on target tasks with full access to the inherited Skills.
+
+We evaluate three transfer directions: \textbf{Easy$\rightarrow$Hard} (Skills from e1--e3 tasks transferred to h1 tasks), \textbf{Hard$\rightarrow$Easy} (Skills from hard tasks applied to easy tasks), and \textbf{Hard$\rightarrow$Hard} (Skills from one set of hard tasks applied to different hard tasks within the same family). This static transfer approach isolates the generalization capability of Skills by preventing any modification or accumulation during Phase 2 execution.
+
+\input{Tables/generalization}
+\vspace{-10pt}
+\paragraph{Empirical Results.} Table~\ref{tab:cross_task} studies cross-task transfer across difficulty. For Claude-4.5-Sonnet, Easy$\rightarrow$Hard tasks raise success from 95\% to 100\% and cut tokens from 1.92M to 1.56M, and Hard$\rightarrow$Hard keeps success at 95\% while dropping tokens from 1.96M to 0.47M. For Gemini-3-Pro, transfer also improves both success and efficiency. Easy$\rightarrow$Hard increases success from 76\% to 90\% and reduces tokens from 1.33M to 0.78M. Hard$\rightarrow$Hard increases success from 76\% to 100\% and reduces tokens from 1.30M to 0.75M. Notably, transferred Skills execute with consistently high \textit{Exec} (typically 97--100\%), suggesting that a pre-computed Skill cache learned at one level can be reused across other levels with strong cross-task generalization.
+
+
+\subsection{Cross-Model Skill Generalization}
+\label{sec:cross-model}
+
+To investigate whether skills created by one model can benefit other models, we conduct a cross-model static reuse experiment on 8 hard-difficulty tasks. Four models (Claude, Gemini, GLM, and Minimax) each create skills during their initial task execution, and these skills are then provided to all four models for execution in static-reuse mode, resulting in a total of 16 cross-model combinations (including 4 self-reuse baselines). In static-reuse mode, agents can invoke pre-loaded skills via \texttt{execute\_skill} but cannot create new skills, ensuring that performance differences reflect skill quality and cross-model compatibility rather than on-the-fly adaptation. Figure~\ref{fig:cross-model-heatmap} presents the results as two heatmaps: task success rate and token saving percentage.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/cross_model_4x4_success_rate.pdf}
+        \caption{Success Rate}
+        \label{fig:cross-model-success}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/cross_model_4x4_token_saving.pdf}
+        \caption{Token Saving}
+        \label{fig:cross-model-token}
+    \end{subfigure}
+    \caption{Cross-model skill reuse heatmaps. Each cell $(i,j)$ shows the result when model $j$ executes skills created by model $i$. Bold borders highlight key findings. Token saving uses a diverging colormap: \textcolor{blue!70!black}{blue} = increased cost, \textcolor{red!70!black}{red} = reduced cost.}
+    \label{fig:cross-model-heatmap}
+\end{figure}
+
+\paragraph{Finding 1: High-quality skills achieve universal success.}
+The first row of Figure~\ref{fig:cross-model-success} demonstrates that Claude-created skills achieve 100\% success rate across all four target models, including when executed by Gemini, GLM, and Minimax. This universally high success rate indicates that well-abstracted skills with clear parameter interfaces transfer effectively across different executor models, regardless of their architectural differences.
+
+\paragraph{Finding 2: Skill quality determines efficiency gain or loss.}
+Figure~\ref{fig:cross-model-token} reveals a stark contrast in computational efficiency based on skill creator quality. Claude-created skills (first row) yield consistently high token savings of 54--81\% across all executors, demonstrating that high-quality skills provide universal efficiency benefits. In contrast, Minimax-created skills (bottom row) result in token savings ranging from $-48\%$ to $+18\%$, meaning poorly designed skills often \emph{increase} rather than decrease computational cost. Notably, self-reuse (diagonal) does not always outperform cross-model reuse: Claude achieves 69.2\% saving with Gemini's skills, substantially exceeding Gemini's own 14.8\% self-reuse---indicating that executor capability can compensate for moderate skill quality, but cannot salvage fundamentally flawed skill designs.
+
+\paragraph{Implications.}
+These findings demonstrate that \emph{skill creator quality matters more than executor capability}: investing in high-quality skill creation from capable models yields transferable efficiency benefits across the entire model ecosystem, while poorly designed skills can harm performance regardless of which model executes them. This suggests that multi-agent systems should prioritize skill libraries curated from high-capability models rather than allowing arbitrary skill contributions from all participants.
+
+
+
+
+
+
+
+

@@ -1,0 +1,93 @@
+\begin{figure*}[t!]
+\centering
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{@{}p{0.495\textwidth}@{\hspace{0.01\textwidth}}p{0.495\textwidth}@{}}
+
+% Tool 1
+\begin{toolbox}[equal height group=row1]{Tool 1: save\_macro}\footnotesize\color{black}
+\textbf{Description:} ~\textcolor{red}{Save a reusable workflow} as executable macro.
+
+\vspace{2mm}
+\textbf{Input:}\\[1mm]
+\small
+\texttt{macro\_name} -- Unique identifier\\
+\texttt{script\_code} -- Python script to execute\\
+\texttt{parameters} -- List of variable names\\
+\texttt{description} -- Human-readable summary
+
+\vspace{2mm}
+\textbf{Output:}\\[1mm]
+\small\texttt{"Macro '<name>' saved successfully."}
+
+\vspace{2mm}
+\textbf{When to Use:}\\[1mm]
+\small When identifying ~\textcolor{red}{repetitive workflows}. External tools can be called inside the script.
+\end{toolbox}
+&
+% Tool 2
+\begin{toolbox}[equal height group=row1]{Tool 2: execute\_macro}\footnotesize\color{black}
+\textbf{Description:} Run a saved macro with ~\textcolor{red}{new arguments}.
+
+\vspace{2mm}
+\textbf{Input:}\\[1mm]
+\small
+\texttt{macro\_name} -- Name of saved macro\\
+\texttt{args} -- Dict of arguments
+
+\vspace{2mm}
+\textbf{Output:}\\[1mm]
+\small
+\texttt{\{"status": "success", "result": <data>\}}\\
+\texttt{\{"status": "failed", "result": <error>\}}
+
+\vspace{2mm}
+\textbf{When to Use:}\\[1mm]
+\small ~\textcolor{red}{For batch tasks with repetitive logic.} Replaces sequential calls with macro executions.
+\end{toolbox}
+\\[4mm]
+
+% Tool 3
+\begin{toolbox}[equal height group=row2]{Tool 3: list\_macros}\footnotesize\color{black}
+\textbf{Description:} List ~\textcolor{red}{all macros} saved in current session.
+
+\vspace{2mm}
+\textbf{Input:}\\[1mm]
+\small\textit{(No parameters required)}
+
+\vspace{2mm}
+\textbf{Output:}\\[1mm]
+\small
+\texttt{Macro 1: <name> -- <description>}\\
+\texttt{Macro 2: <name> -- <description>}\\
+\texttt{...}
+
+\vspace{2mm}
+\textbf{When to Use:}\\[1mm]
+\small Check available macros ~\textcolor{red}{before} creating new or reusing existing ones.
+\end{toolbox}
+&
+% Tool 4
+\begin{toolbox}[equal height group=row2]{Tool 4: get\_macro}\footnotesize\color{black}
+\textbf{Description:} ~\textcolor{red}{Retrieve full source code} of a saved macro.
+
+\vspace{2mm}
+\textbf{Input:}\\[1mm]
+\small\texttt{macro\_name} -- Name of target macro
+
+\vspace{2mm}
+\textbf{Output:}\\[1mm]
+\small
+\texttt{\{"script\_code": "...",}\\
+\texttt{~~"parameters": ["path"],}\\
+\texttt{~~"version": 1\}}
+
+\vspace{2mm}
+\textbf{When to Use:}\\[1mm]
+\small ~\textcolor{red}{Inspect or debug a macro} before executing it on new data.
+\end{toolbox}
+\\
+\end{tabular}
+\caption{Pseudo-code for the four primitive tools that enable Skill Mode.}
+\label{fig:macro-tools}
+\end{figure*}
+

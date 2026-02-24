@@ -1,0 +1,65 @@
+\section{SkillCraft Protocol}
+In this section, we introduce the evaluation protocol for SkillCraft. To assess models' composition and skill curation abilities, we employ a pipeline that enables models to compose existing tools into novel higher-level ones and re-use them both inside current task and also cross-tasks. 
+This evaluation protocol enables two core capabilities in a quantifiable process:
+(1) Composition: Models could abstract multi-step tool chains into reusable code-based Skills.
+(2) Reuse: Models retrieve and reuse the discovered Skills at test time, enabling graceful execution and accumulating efficiency gains over repeated interactions.
+
+\subsection{Four Minimal MCP Primitives}
+% To ensure SkillCraft generalizes across tasks and models while keeping the evaluation focused on skill formation rather than system engineering, we need a minimal yet complete interface. 
+% We design the protocol to enable agents to acquire and form skills.
+To support skill reuse with minimal system assumptions, we expose a lightweight MCP interface that allows an agent to store and reuse executable code-based Skills. In practice, we maintain a \emph{Skill Library} (a cache of \emph{verified} Skills and their metadata) and expose four lightweight MCP primitives as the only way to interact with this library.
+% , which can be reused across tasks instead of repeatedly re-deriving the same tool chains.
+% This is achieved in a plug-and-play manner.
+% This interface is designed to cover the full lifecycle of Skills: storage, retrieval, enumeration and execution.
+% The primitives that interact with the Skill Library:
+% \texttt{save\_skill} (persist a workflow), \texttt{get\_skill} (retrieve a skill), \texttt{list\_skills} (enumerate available skills), and \texttt{execute\_skill} (run a skill as a higher-level tool).
+This interface intentionally covers only the operational actions required by SkillMode: \emph{storage}, \emph{retrieval}, \emph{enumeration}, and \emph{execution}.
+Specifically, the Skill Library is accessed through \texttt{save\_skill} (persist a workflow), \texttt{get\_skill} (retrieve code and metadata), \texttt{list\_skills} (discover available skills), and \texttt{execute\_skill} (run a skill as a higher-level tool).
+Together, these primitives define the evaluation boundary: whether a model attempts reuse, whether reuse succeeds, and whether failures are handled can all be directly observed through these API calls. Figure~\ref{fig:macro-tools} illustrates the details about how these primitives fit into the overall protocol.
+
+\subsection{Coding Verifier}
+We introduce a Coding Verifier that applies three-stage validation before any Skill enters the library. The stages are: 
+
+(a) Syntax Validation: Before accepting \texttt{save\_skill}, we parse the Skill code and reject syntactically invalid submissions, returning error line numbers and context snippets to block fundamentally broken code.
+
+(b) Runtime Error Reporting: When \texttt{execute\_skill} fails, we return structured debugging information (e.g. exception messages, tracebacks, and input parameters), which enables models to distinguish syntax issues from tool invocation problems or parameter mismatches.
+
+(c) Post-execution Quality Detection: To filter out useless Skills, we detect silent failures by checking output quality. For example, if over 50\% of output fields contain \emph{Unknown, None, or 0}, we flag the Skill as low-quality and reject it. 
+
+\subsection{SkillCraft Protocol Pipeline}
+To capture how models discover, store, and reuse skills across episodes, the protocol makes explicit, at each step, whether a previously learned skill can replace a sequence of atomic tool calls. The protocol proceeds as follows:
+
+
+% (1) Reuse Attempt:
+% When facing a new task, the agent first calls \texttt{list\_skills} to enumerate available Skills and their descriptions. If a structurally matching Skill exists, the agent invokes it by \texttt{execute\_skill}, parameterizing task-specific variations.
+
+% (2) Exploration:
+% If no suitable Skill exists or execution fails, the agent falls back to atomic tools to complete the task, recording the successful trajectory.
+
+% (3) Composition: After obtaining a successful tool sequence, the agent consolidates it into a candidate Skill, explicitly exposing key parameters. Two implementation constraints directly impact whether Skills deliver efficiency: (i) Intermediate results should flow through code variables, not repeatedly serialized in natural language within the model's context. (ii) Recurring sub-sequences should be abstracted into callable units and parameterized to adapt across instances.
+
+% (4) Verification and Saving:
+% Each candidate Skill is executed as a Python script in a controlled \emph{Coding Env}, which provides a unified bridge API \texttt{call\_tool()} to invoke external tools from code.
+% The candidate skill must execute successfully in the \emph{Coding Env} and pass the \emph{Coding Verifier}. Only upon passing can it be saved via \texttt{save\_skill} into the \emph{Skill Library} as a reusable tool.
+% If verification fails, the agent can use the structured error feedback from the verifier to repair or rewrite the Skill until it passes the \emph{Coding Verifier} or reaching the limit number of exploration attempts.
+
+
+(1) \textbf{Reuse Attempt.} For new task, agent queries existing Skills by \texttt{list\_skills} and attempts to invoke a matching one by \texttt{execute\_skill} with task-specific parameters.
+
+(2) \textbf{Exploration.} If no suitable Skill exists or execution fails, the agent solves the task with atomic tools and records the successful tool sequence.
+
+(3) \textbf{Composition.} The successful sequence is abstracted into a parameterized candidate Skill, consolidating recurring subroutines and passing intermediate results through code variables rather than natural language.
+
+(4) \textbf{Verification and Saving.} The candidate Skill is executed in a controlled \emph{Coding Env} via a unified \texttt{call\_tool()} interface and validated by a \emph{Coding Verifier}. Only skills that pass execution and verification are stored in the \emph{Skill Library} via \texttt{save\_skill} for reliable future reuse.
+% We build a task-driven agent system that improves its tool-use capability \emph{while} solving tasks, rather than treating tool use as a fixed skill. The key idea is to use code as a unified interface to invoke heterogeneous tools and to \emph{compose} multi-step tool workflows into reusable higher-level abstractions (skills). Each time the agent completes a task, it can distill the successful sequence of tool calls into a skill, enabling continual capability evolution and higher efficiency in future tasks (fewer steps, lower latency, and reduced token usage).
+
+% To keep the system lightweight, we avoid heavy frameworks or additional training and instead introduce four minimal MCP primitives for skill storage and reuse: \texttt{save\_skill} (persist a workflow), \texttt{get\_skill} (retrieve a skill), \texttt{list\_skills} (enumerate available skills), and \texttt{execute\_skill} (run a skill as a higher-level tool). Together, these primitives turn tool compositions into first-class reusable tools, supporting both online skill evolution and efficiency gains. We show these tools as follows:
+
+ 
+
+% \begin{figure*}[t!]
+%     \centering
+%     \includegraphics[width=\textwidth]{Figures/ComboCraft.pdf} % Replace with your image file name
+%     \caption{Illustration of the Synthesis pipeline of skill Mode. }
+%     \label{fig:wide-figure}
+% \end{figure*}

@@ -1,0 +1,25 @@
+\definecolor{baseblue}{RGB}{230, 240, 250}
+\definecolor{skillgreen}{RGB}{230, 245, 235}
+
+\begin{table*}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4pt}
+\caption{Cross-model skill generalization results. Skills created by one model (Claude = Claude-4.5-Sonnet, Gemini = Gemini-3-Pro) are transferred to and executed by a different model. \textbf{Base}: Baseline performance of the skill-using model without skill transfer. \textbf{Skill}: Performance with cross-model skill transfer. \textbf{Skill Exec}: Skill execution success rate. Efficiency metrics computed over tasks where both modes succeeded.}
+\begin{tabular}{l|cc|c|ccc|ccc}
+\toprule
+\multirow{2}{*}{\textbf{Cross-Model Generalization}} & \multicolumn{2}{c|}{\textbf{Success Rate}} & \textbf{Skill} & \multicolumn{3}{c|}{\textbf{Avg Tokens}} & \multicolumn{3}{c}{\textbf{Avg Cost (\$)}} \\
+\cmidrule{2-3}\cmidrule{5-7}\cmidrule{8-10}
+& \cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Exec} & \cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} & \cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} \\
+\midrule
+\textbf{Claude} $\rightarrow$ \textbf{Gemini} (Easy→Hard) & 16/21 (76\%) & 16/21 (76\%) & 100\% & 1.20M & 0.72M & \better{-40\%} & 1.10 & 0.48 & \better{-56\%} \\
+\textbf{Claude} $\rightarrow$ \textbf{Gemini} (Hard→Easy) & 55/63 (87\%) & 58/63 (92\%) & 100\% & 0.56M & 0.29M & \better{-48\%} & 0.47 & 0.33 & \better{-29\%} \\
+\textbf{Claude} $\rightarrow$ \textbf{Gemini} (Hard→Hard) & 16/21 (76\%) & 21/21 (100\%) & 98\% & 1.30M & 0.48M & \better{-63\%} & 1.23 & 0.55 & \better{-55\%} \\
+\textbf{Gemini} $\rightarrow$ \textbf{Claude} (Easy→Hard) & 20/21 (95\%) & 20/21 (95\%) & 99\% & 1.96M & 1.64M & \better{-16\%} & 1.45 & 1.17 & \better{-19\%} \\
+\textbf{Gemini} $\rightarrow$ \textbf{Claude} (Hard→Easy) & 60/63 (95\%) & 60/63 (95\%) & 99\% & 1.05M & 0.81M & \better{-23\%} & 0.80 & 0.63 & \better{-21\%} \\
+\textbf{Gemini} $\rightarrow$ \textbf{Claude} (Hard→Hard) & 20/21 (95\%) & 21/21 (100\%) & 99\% & 1.92M & 0.58M & \better{-70\%} & 1.41 & 0.75 & \better{-46\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:cross_model}
+\end{table*}

@@ -1,0 +1,67 @@
+\section{Introduction}
+
+\begin{figure*}[t!]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/main.pdf} % Replace with your image file name
+    \caption{\textbf{SkillCraft Protocol Pipeline Overview.}
+The pipeline consists of three stages: 
+\textbf{(1) Test-Time Tool-Chain Evolution:} The agent solves tasks from the Task Library by exploring and chaining atomic tools, forming executable tool sequences. 
+\textbf{(2) Iterative Skill Composition:} Successful sequences are abstracted into candidate skills, executed and verified in a coding environment; failed executions trigger re-exploration, while validated skills are stored. 
+\textbf{(3) Skill Library and Reuse:} A growing repository of verified, reusable skills that can be retrieved in later tasks to replace low-level tool exploration, enabling test-time skill accumulation and efficient composition.}
+
+    \label{fig:wide-figure}
+    % \vspace{-10pt}
+\end{figure*}
+
+
+% Recent language agents are increasingly deployed in complex and realistic scenarios. They operate productivity applications such as Notion, arXiv, and Google Sheets through tool protocols like OpenAI-style plugins, MCP and agent platforms like OpenAgents, AutoGen LangGraph~\citep{wu2024autogen,xie2024openagents,langgraph}. Current agent systems usually \emph{fix} both the toolkit and the model weights at deployment. The paradigm is often~\textit{Can the agent solve this task
+% with the given tools?}. Nonetheless, the external environments and user preferences exhibit stochasticity and variability over time. This mismatch creates a gap between a static system and the evolving goals in the environment. This motivates a fundamental question: \emph{Can agents autonomously evolve their tools during test time?}, which enables agent shifts from static tool use to dynamic tool evolution.
+
+\begin{quote}
+\textit{``The intelligence of a system is a measure of its skill-acquisition efficiency over a scope of tasks, with respect to priors, experience, and generalization difficulty.''} \\
+\hfill -- Fran\c{c}ois Chollet, \textit{On the Measure of Intelligence}
+\end{quote}
+
+Real-world tool-using language agents increasingly operate in long-horizon workflows with recurring substructures, such as repeated search–analyze–summarize patterns across documents, repositories, or web services.~\citep{boisvert2024workarenacompositionalplanningreasoningbased,jimenez2024swebench,zhang2025swebenchgoeslive} In cognitive science, such repetition is precisely what gives rise to \emph{skill abstraction}: intelligence is characterized not by executing isolated actions, but by efficiently acquiring, reusing, and recomposing higher-level procedures from experience. In this view, effective behavior requires the ability to form \emph{compositional skills}, which are reusable tool compositions that capture shared structure across tasks rather than repeatedly solving each instance from scratch with flat, atomic tool calls. This raises a fundamental question: \emph{can an agent acquire and reuse such compositional tool skills that generalize across structurally similar tasks?}
+% \congl{generalize + increase efficiency}
+% Real-world tool-using language agents~\citep{wu2024autogen,xie2024openagents,langgraph} increasingly operate in long-horizon workflows with recurring substructures, such as repeated search–analyze–summarize patterns across documents, repositories, or web services. In such settings, effective behavior requires more than solving each instance with flat, atomic tool calls; it calls for the ability to discover, abstract, and reuse higher-level procedures formed by composing tools. This raises a fundamental question: \emph{can an agent acquire reusable compositional tool skills that generalize across structurally similar tasks, rather than re-solving each problem from scratch?}
+
+Existing tool-using benchmarks~\citep{zhou2023webarena, xu2024theagentcompanybenchmarkingllmagents, li2025tool} typically \emph{fix} both the toolset and the model at deployment and adopt the paradigm: \textit{Can the agent solve this task with the given tools?} As a result, they provide limited signal on whether agents can accumulate, abstract, and reuse compositional skills across tasks. To isolate and measure this missing capability, we introduce \textbf{SkillCraft}, a benchmark with standardized protocols specifically designed to elicit and evaluate reusable tool compositions (Skills) within and across tasks. 
+% Different from existing benchmarks, we construct \textbf{SkillCraft} to involve reusable tool compositions in the same task.
+Unlike existing benchmarks, \textbf{SkillCraft} embeds repeated substructures within a single task, requiring agents to identify and reuse tool compositions multiple times within a fixed budget.
+% \congl{this sentence is not clear}
+
+
+We construct \textbf{SkillCraft} in a three-stage manner. 
+First, we explore existing tool-using tasks such as Toolathlon~\citep{li2025tool}, AgentCompany~\citep{xu2024theagentcompanybenchmarkingllmagents}, and WebArena~\citep{zhou2023webarena} to identify task design principles. 
+Second, we construct seed tasks by both selecting and adapting high-quality tasks from existing benchmarks and carefully designing long-horizon tasks from scratch. 
+Third, we scale task difficulty along two orthogonal dimensions to encourage tool composition and Skill abstraction.
+\textbf{Quantitative scaling} increases the number of entities involved in a task. For example, a task is extended from ``analyze the commit history of repository A" to ``analyze five repositories", encouraging the reuse of learned Skills.
+\textbf{Complexity scaling} links multiple subtasks into longer chains, increasing structural difficulty and enabling higher-level skill formation (e.g., fetching commits, identifying contributors, and correlating them).
+These settings reflect realistic long-horizon tool use, where reusable high-level compositions are essential for efficient and robust problem solving.
+
+% \congl{prefer to start paragraphs with next,... finally,... in addition,... rather than besides}
+% \congl{there are two parts here: the benchmark and the test-time evolution algorithm, are you calling everything together skillcraft, is this called something else?}
+In addition, we introduce a protocol to evaluate agents’ tool composition ability. We equip agents with a plug-and-play composition mechanism, termed~\textbf{Skill Mode}, which enables them to (i) automatically discover and cache successful sequences of tool calls as reusable skills, and (ii) invoke these cached skills on new inputs when similar patterns arise. In practice, we achieve this by modifying the system prompt and registering a set of tools that allow agents to save and execute Skills in a plug-and-play manner. This creates test-time tool evolution: agents expand their action space through discovery and reuse \emph{during the test time}, accumulating capabilities during solving tasks. 
+% \congl{more details here! how much efficiency gain do we get after seeing how many tasks? do we get accumulating complexity in the skills? does this process plateau?}
+
+% To better understand how models compose and evolve tools, we require a suitable testbed with tasks that actively elicit such compositional behavior. This naturally raises a key question: if the tasks are too simple, higher-level Skills are unnecessary and never emerge, implying that sufficient task complexity is essential to drive and evaluate Skill composition. In contrast, most existing benchmarks for tool-using agents implicitly assume the opposite. Benchmarks such as WebArena~\citep{zhou2023webarena}, AgentCompany~\citep{xu2024theagentcompanybenchmarkingllmagents}, and Toolathlon~\citep{li2025tool} evaluate each episode as an independent and static problem: the agent is assessed solely on whether it can solve a single instance with a fixed set of tools, and the task typically involves only one goal, leaving little room for the emergence of reusable, higher-level Skills. It motivates us to create~\textbf{SkillCraft}.
+
+ 
+
+
+% We construct \textbf{SkillCraft} in a three-stage manner. First, we sample seed tool-using tasks from existing benchmarks such as Toolathlon~\citep{li2025tool}, AgentCompany~\citep{xu2024theagentcompanybenchmarkingllmagents}, and WebArena~\citep{zhou2023webarena}. Second, we unify the interface between agents and tools via MCP, providing a standardized tool abstraction layer. Third, we scale task difficulty along two orthogonal dimensions to encourage tool composition and Skill abstraction.
+% \textbf{Quantitative scaling} increases the number of entities involved in a task. For example, a task is extended from “analyze the commit history of repository A” to “analyze five repositories,” encouraging the reuse of learned Skills.
+% \textbf{Complexity scaling} composes multiple subtasks into longer chains, thereby increasing structural difficulty and creating headroom for higher-level Skill formation. For instance, instead of merely retrieving data, an agent must (i) fetch commit logs, (ii) identify active contributors, and (iii) correlate the results to uncover architectural patterns. 
+
+% These settings mirror realistic, long-horizon tool-using workloads—similar in spirit to complex skill benchmarks.
+
+
+% By introducing a complex and challenging benchmark, we could make the benefit of using Skills rather than atomic tools more clear: It would increase the efficiency by directly reusing high-level Skills and invoiding the atomic tool calling and the long chain of thoughts. 
+
+
+Using \textbf{SkillCraft}, we evaluate state-of-the-art models (e.g., Gemini-2.5-Pro, Claude-Sonnet-4.5, GPT-5.1) and find that \emph{Skill Mode} substantially improves efficiency, reducing token usage by up to 80\%. Moreover, efficiency gains from tool composition strongly correlate with task success, indicating that stronger models are better at discovering, reusing, and exploiting recurring tool-use patterns under the same composition mechanism.
+These results suggest that stronger models tend to benefit more from reusable tool compositions, and are better able to identify, reuse, and exploit recurring tool-use patterns under the same composition mechanism.
+% \congl{what does this mean? that it knows what to compose? that the tool helps with efficiency?}
+
+We further conduct a fine-grained analysis of composition quality along two complementary dimensions: \emph{depth} and \emph{generalization}. We find that deeper, automatically generated hierarchies are often not a reliable scaling strategy—despite high per-skill execution rates, nesting amplifies error propagation and debugging overhead—whereas well-tested, shallow skill libraries remain more robust and cost-effective. In contrast, truly high-quality compositions exhibit strong transferability: skills learned at one difficulty level can be statically reused at other levels (and even across models) with consistently high execution success, improving both success and efficiency.

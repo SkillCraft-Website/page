@@ -1,0 +1,114 @@
+% Task Prompt Examples for Scaled Tasks
+% Requires: \input{task_prompt_template.tex} in preamble
+
+% =========================================================================
+% Task 1: Easy Difficulty - Cat Facts Collector (E1)
+% =========================================================================
+
+\begin{TaskPromptBox}{cat-facts-collector/e1 ~~{\small[Easy]}}
+
+\TPLabel{Prompt:}
+Create encyclopedia entries for \textbf{3 cat breeds} (Persian, Siamese, Maine Coon) using 3 API endpoints per breed. For each breed, collect: (1) \textit{Breed Profile} --- basic info and characteristics; (2) \textit{Country Relatives} --- breeds from same country; (3) \textit{Coat Family} --- breeds with similar coat. Compile a summary with statistics across all breeds and save results to cat\_encyclopedia.json.
+
+\TPDivider
+
+\TPLabel{Available tools:}
+\begin{itemize}
+  \setlength{\itemsep}{4pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item breed\_profile(breed\_name)\\
+        {\small Get breed info and characteristics}
+  \item breed\_relatives(country)\\
+        {\small List breeds from same country}
+  \item breed\_coat\_family(coat\_type)\\
+        {\small List breeds with similar coat}
+  \item write\_file(path, content)\\
+        {\small Save JSON output}
+  \item claim\_done(status)\\
+        {\small Signal task completion}
+\end{itemize}
+
+\TPDivider
+
+{\small\color{gray} \textbf{Scale:} 3 subtasks $\times$ 3 API calls = 9 total calls}
+
+\end{TaskPromptBox}
+
+\vspace{4mm}
+
+% =========================================================================
+% Task 2: Medium Difficulty - Cocktail Menu Generator (M1)
+% =========================================================================
+
+\begin{TaskPromptBox}{cocktail-menu-generator/m1 ~~{\small[Medium]}}
+
+\TPLabel{Prompt:}
+Create a cocktail menu for \textbf{4 classic cocktails} (Margarita, Mojito, Old Fashioned, Martini) using 4 API endpoints per cocktail. For each cocktail, collect: (1) \textit{Search} --- find cocktail by name; (2) \textit{Details} --- full recipe and instructions; (3) \textit{By Ingredient} --- list cocktails using main ingredient; (4) \textit{By Category} --- list cocktails in same category. Calculate complexity rating (Easy/Medium/Complex based on ingredient count) and estimated prep time. Save results to cocktail\_menu.json.
+
+\TPDivider
+
+\TPLabel{Available tools:}
+\begin{itemize}
+  \setlength{\itemsep}{4pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item search(name)\\
+        {\small Search cocktail by name}
+  \item details(id)\\
+        {\small Get full recipe and instructions}
+  \item by\_ingredient(ingredient)\\
+        {\small List cocktails with ingredient}
+  \item by\_category(category)\\
+        {\small List cocktails in category}
+  \item write\_file(path, content)\\
+        {\small Save JSON output}
+  \item claim\_done(status)\\
+        {\small Signal task completion}
+\end{itemize}
+
+\TPDivider
+
+{\small\color{gray} \textbf{Scale:} 4 subtasks $\times$ 4 API calls = 16 total calls}
+
+\end{TaskPromptBox}
+
+\vspace{4mm}
+
+% =========================================================================
+% Task 3: Hard Difficulty - GitLab Deep Analysis (H1)
+% =========================================================================
+
+\begin{TaskPromptBox}{gitlab-deep-analysis/h1 ~~{\small[Hard]}}
+
+\TPLabel{Prompt:}
+Perform a comprehensive analysis of \textbf{5 GitLab repositories} (gitlab-runner, gitaly, gitlab-pages, gitlab-shell, cli). For each project, collect: (1) \textit{Project Info} --- stars, forks, description; (2) \textit{Contributors} --- top 5 by commit count; (3) \textit{Recent Commits} --- last 20 commits with authors; (4) \textit{Branches} --- all branches with protection status; (5) \textit{Issues} --- open count and recent titles. Calculate activity score (0--100) based on commits (40\%), contributors (30\%), issues (20\%), branches (10\%). Determine health status: \textit{healthy} ($\geq$70), \textit{moderate} (40--70), \textit{inactive} ($<$40). Save results to gitlab\_analysis\_results.json.
+
+\TPDivider
+
+\TPLabel{Available tools:}
+\begin{itemize}
+  \setlength{\itemsep}{4pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item get\_project\_info(project\_path)\\
+        {\small Get project details (stars, forks, description)}
+  \item get\_contributors(project\_path)\\
+        {\small Get contributor list}
+  \item get\_commits(project\_path, limit)\\
+        {\small Get commit history}
+  \item get\_branches(project\_path)\\
+        {\small Get branch information}
+  \item get\_issues(project\_path)\\
+        {\small Get issue list}
+  \item write\_file(path, content)\\
+        {\small Save JSON output}
+  \item claim\_done(status)\\
+        {\small Signal task completion}
+\end{itemize}
+
+\TPDivider
+
+{\small\color{gray} \textbf{Scale:} 5 subtasks $\times$ 5 API calls = 25 total calls}
+
+\end{TaskPromptBox}

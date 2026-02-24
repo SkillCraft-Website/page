@@ -1,0 +1,48 @@
+% Requires: \usepackage{booktabs,multirow,graphicx}
+% For colors: \usepackage[table]{xcolor}
+
+\definecolor{baseblue}{RGB}{230, 240, 250}
+\definecolor{skillgreen}{RGB}{230, 245, 235}
+
+\begin{table}[t]
+\centering
+\Large
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{4pt}
+
+\caption{Cross-task skill generalization results. \textbf{E$\rightarrow$H}: Skills learned from easy tasks (e1--e3) transferred to hard tasks (h1). \textbf{H$\rightarrow$E}: Skills from hard tasks applied to easy tasks. \textbf{H$\rightarrow$H}: Skills from hard tasks reapplied to the same hard tasks. \textbf{Base}: Baseline without skill transfer. \textbf{Skill}: With cross-task skill transfer. \textbf{Skill Exec}: Skill execution success rate. Efficiency metrics computed over tasks where both modes succeeded.~\textbf{Claude} is Claude-4.5-Sonnet and~\textbf{Gemini} is Gemini-3-Pro. Avg Tokens are in millions.
+}
+
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ll|cc|c|ccc|ccc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} &
+\multirow{2}{*}{\textbf{Setting}} &
+\multicolumn{2}{c|}{\textbf{Success Rate}} &
+\textbf{Skill} &
+\multicolumn{3}{c|}{\textbf{Avg Tokens}} &
+\multicolumn{3}{c}{\textbf{Avg Cost (\$)}} \\
+\cmidrule{3-4}\cmidrule{6-8}\cmidrule{9-11}
+& &
+\cellcolor{baseblue}\textbf{Base} &
+\cellcolor{skillgreen}\textbf{Skill} &
+\textbf{Exec} &
+\cellcolor{baseblue}\textbf{Base} &
+\cellcolor{skillgreen}\textbf{Skill} &
+\textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} &
+\cellcolor{skillgreen}\textbf{Skill} &
+\textbf{Diff} \\
+\midrule
+\textbf{Claude} & E$\rightarrow$H & 20/21 (95\%) & 21/21 (100\%) & 100\% & 1.92 & 1.56 & \better{-19\%} & 1.41 & 1.07 & \better{-24\%} \\
+ & H$\rightarrow$E & 60/63 (95\%) & 60/63 (95\%) & 97\% & 1.06 & 0.69 & \better{-35\%} & 0.81 & 0.44 & \better{-45\%} \\
+ & H$\rightarrow$H & 20/21 (95\%) & 20/21 (95\%) & 98\% & 1.96 & 0.47 & \better{-76\%} & 1.46 & 0.43 & \better{-71\%} \\
+\midrule
+\textbf{Gemini} & E$\rightarrow$H & 16/21 (76\%) & 19/21 (90\%) & 99\% & 1.33 & 0.78 & \better{-41\%} & 1.26 & 0.76 & \better{-39\%} \\
+ & H$\rightarrow$E & 55/63 (87\%) & 60/63 (95\%) & 100\% & 0.55 & 0.36 & \better{-35\%} & 0.46 & 0.30 & \better{-35\%} \\
+ & H$\rightarrow$H & 16/21 (76\%) & 21/21 (100\%) & 99\% & 1.30 & 0.75 & \better{-42\%} & 1.23 & 0.67 & \better{-46\%} \\
+\bottomrule
+\end{tabular}%
+} % end resizebox
+\label{tab:cross_task}
+\end{table}

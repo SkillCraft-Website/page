@@ -1,0 +1,60 @@
+\begin{SystemPromptBox}{System Prompt: Skill Reuse Mode}
+
+\SPLabel{Skill Tools:}
+You have access to skill cache tools to save and execute reusable scripts:
+\begin{itemize}
+  \setlength{\itemsep}{2pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item \texttt{save\_skill} --- Save an executable script as a reusable skill
+  \item \texttt{execute\_skill} --- Execute a saved skill with different arguments
+\end{itemize}
+
+\SPDivider
+
+\SPLabel{When to Use:}
+For repetitive operations (processing multiple items, files, etc.), create a skill to encapsulate the workflow, then execute it for all items. You can create skills based on tool schemas without calling the tool first---especially efficient when tools return large data.
+
+\SPDivider
+
+\SPLabel{Script Rules:}
+\begin{enumerate}
+  \setlength{\itemsep}{2pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item Use \texttt{call\_tool()} for ALL tool calls: \texttt{call\_tool('tool\_name', arg1=val1, ...)}
+  \item \texttt{call\_tool()} returns DIRECT result---use it directly without \texttt{.get("result")} wrapper
+  \item MUST set \texttt{result} variable---this is what gets returned from \texttt{execute\_skill}
+  \item Modules available: \texttt{re}, \texttt{json}, \texttt{os} are pre-imported
+  \item No recursion: Cannot call skill tools within skills
+\end{enumerate}
+
+\SPDivider
+
+\SPLabel{Example:}
+{\small
+\begin{verbatim}
+save_skill({
+  "skill_name": "analyze_project",
+  "script_code": ...
+})
+
+execute_skill({
+    "skill_name": "analyze_project"
+    "args": {"path": "org/repo1"}}
+\end{verbatim}
+}
+
+\SPDivider
+
+\SPLabel{Best Practices:}
+\begin{itemize}
+  \setlength{\itemsep}{2pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item \textbf{Token Efficiency:} Extract only fields needed for final output
+  \item \textbf{Maximize ROI:} Create skill early, execute for ALL items (beneficial when $N \geq 3$)
+  \item \textbf{Fallback:} If skill fails 2--3 times, process items directly
+\end{itemize}
+
+\end{SystemPromptBox}

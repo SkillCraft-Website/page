@@ -1,0 +1,35 @@
+\begin{table*}[!h]
+    \centering
+    \setlength{\tabcolsep}{8pt}
+    
+    \caption{\textbf{Task statistics across the three-stage construction pipeline.} 
+    In \textbf{Stage 1}, we explore \textbf{60+ tasks} from existing benchmarks to identify effective task design principles. 
+    In \textbf{Stage 2}, we construct \textbf{21 seed tasks} from three sources: adapted benchmark tasks, handcrafted web API-based tasks, and local processing tasks. 
+    In \textbf{Stage 3}, we systematically scale seed tasks by increasing \textbf{entity number} and \textbf{subtask complexity}, producing \textbf{126 tasks} across 6 difficulty levels.}
+    
+    \begin{tabular}{@{}p{4cm}p{6.5cm}p{3.5cm}c@{}}
+        \toprule
+        \textbf{Stage} & \textbf{Description} & \textbf{Source} & \textbf{\#Tasks} \\
+        \midrule
+        Stage 1: Exploratory Phase 
+        & Explore existing benchmarks to identify task design principles 
+        & Existing benchmarks like Toolathlon, WebArena, TextArena, M3Eval, etc.
+        & 60+ \\
+        \midrule
+        Stage 2: Seed Task Creation & (i) Select \& adapt quality tasks from Stage 1 & Existing benchmarks & 5 \\
+        % \cmidrule(l){2-4}
+         & (ii) Handcraft web API-based tasks & GitLab, OpenMeteo, etc. & 12 \\
+        % \cmidrule(l){2-4}
+        & (iii) Handcraft local processing tasks & Custom datasets \& files & 4 \\
+        
+        \cmidrule(l){2-4}
+        & \textbf{Total Seed Tasks} & & \textbf{21} \\
+        \midrule
+        Stage 3: Systematic Scaling & Scale entity number (N: 3→4→5) & From Seed tasks & \textbf{126} \\
+        % \cmidrule(l){2-3}
+         & Scale subtask complexity (M: 3→4→5) & Seed tasks × 6 levels & \\
+        \bottomrule
+    \end{tabular}
+
+    \label{table:task-construction-stats}
+\end{table*}

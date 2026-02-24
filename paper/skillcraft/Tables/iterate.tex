@@ -1,0 +1,62 @@
+% Requires: \usepackage{booktabs,multirow,graphicx}
+% For colors: \usepackage[table]{xcolor}
+
+\definecolor{baseblue}{RGB}{230, 240, 250}
+\definecolor{skillgreen}{RGB}{230, 245, 235}
+\definecolor{iteratepurple}{RGB}{240, 230, 250}
+
+\begin{table}[!h]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{1.5pt}
+
+\caption{Three-mode comparison across models. \textbf{Base}: No skill library. \textbf{Skill}: With skill library. \textbf{Hier}: Hierarchical mode with skill nesting. \textbf{N}: Number of successful tasks out of 126 total. \textbf{Ex}: Execution success rate (\%). \textbf{Re}: Reuse factor ($\times$). \textbf{$\Delta$}: Relative change vs.\ Base (\%).}
+
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l|l|cc|cc|cc|cc|cc|cc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} &
+\multirow{2}{*}{\textbf{Mode}} &
+\multicolumn{2}{c|}{\textbf{Success}} &
+\multicolumn{2}{c|}{\textbf{Skill}} &
+\multicolumn{2}{c|}{\textbf{Tokens}} &
+\multicolumn{2}{c|}{\textbf{Cost (\$)}} &
+\multicolumn{2}{c|}{\textbf{Turns}} &
+\multicolumn{2}{c}{\textbf{Tools}} \\
+\cmidrule{3-4}\cmidrule{5-6}\cmidrule{7-8}\cmidrule{9-10}\cmidrule{11-12}\cmidrule{13-14}
+& & \textbf{N} & \textbf{\%} & \textbf{Ex} & \textbf{Re} & \textbf{Val} & \textbf{$\Delta$} & \textbf{Val} & \textbf{$\Delta$} & \textbf{Val} & \textbf{$\Delta$} & \textbf{Val} & \textbf{$\Delta$} \\
+\midrule
+
+\multirow{3}{*}{\textbf{DeepSeek-V3.2}}
+& \cellcolor{baseblue}Base
+& 76 & 60 & -- & -- & 1.04M & -- & 0.21 & -- & 18.8 & -- & 19.2 & -- \\
+& \cellcolor{skillgreen}Skill
+& 87 & 69 & 71 & 4.8 & 0.53M & \better{-49} & 0.10 & \better{-51} & 15.4 & \better{-18} & 14.9 & \better{-23} \\
+& \cellcolor{iteratepurple}Hier
+& 92 & 73 & 75 & 3.0 & 0.68M & \better{-36} & 0.10 & \better{-66} & 16.5 & \better{-13} & 15.4 & \better{-20} \\
+\midrule
+
+\multirow{3}{*}{\textbf{Claude-4.5}}
+& \cellcolor{baseblue}Base
+& 119 & 94 & -- & -- & 1.36M & -- & 1.08 & -- & 15.3 & -- & 14.3 & -- \\
+& \cellcolor{skillgreen}Skill
+& 121 & 96 & 81 & 3.4 & 0.40M & \better{-71} & 0.28 & \better{-74} & 10.2 & \better{-33} & 9.2 & \better{-36} \\
+& \cellcolor{iteratepurple}Hier
+& 121 & 96 & 99 & 3.8 & 0.63M & \better{-54} & 0.44 & \better{-61} & 11.5 & \better{-26} & 10.5 & \better{-27} \\
+\midrule
+
+\multirow{3}{*}{\textbf{GPT-5.2}}
+& \cellcolor{baseblue}Base
+& 109 & 87 & -- & -- & 1.23M & -- & 1.77 & -- & 20.6 & -- & 19.4 & -- \\
+& \cellcolor{skillgreen}Skill
+& 114 & 90 & 84 & 3.8 & 0.26M & \better{-79} & 0.43 & \better{-75} & 9.9 & \better{-52} & 8.9 & \better{-54} \\
+& \cellcolor{iteratepurple}Hier
+& 100 & 79 & 95 & 3.6 & 0.60M & \better{-51} & 0.81 & \better{-48} & 11.8 & \better{-42} & 10.8 & \better{-44} \\
+\bottomrule
+\end{tabular}%
+} % end resizebox
+
+
+\label{tab:three_mode}
+\end{table}

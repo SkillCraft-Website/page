@@ -1,0 +1,70 @@
+\begin{table*}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\caption{
+Results breakdown by difficulty level (Easy: e1--e3, Medium: m1--m2, Hard: h1).
+\textbf{Success Rate}: task completion rate (score $\geq$ 90) for \colorbox{baseblue}{Baseline} and \colorbox{skillgreen}{Skill} modes.
+\textbf{Skill Stats}: Exec = skill execution success rate; Reuse = average times each skill is invoked.
+\textbf{Efficiency metrics}: per-task averages computed over tasks where \emph{both} modes succeeded.
+\textbf{Diff}: percentage change; \better{negative} = improvement, \worse{positive} = degradation.
+}
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|cc|cc|ccc|ccc|ccc|ccc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} &
+\multirow{2}{*}{\textbf{Diff.}} &
+\multicolumn{2}{c|}{\textbf{Success Rate}} &
+\multicolumn{2}{c|}{\textbf{Skill Stats}} &
+\multicolumn{3}{c|}{\textbf{Avg Tokens}} &
+\multicolumn{3}{c|}{\textbf{Avg Cost (\$)}} &
+\multicolumn{3}{c|}{\textbf{Avg Turns}} &
+\multicolumn{3}{c}{\textbf{Avg Tool Calls}} \\
+\cmidrule{3-4}\cmidrule{5-6}\cmidrule{7-9}\cmidrule{10-12}\cmidrule{13-15}\cmidrule{16-18}
+& &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} &
+\textbf{Exec} & \textbf{Reuse} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} &
+\cellcolor{baseblue}\textbf{Base} & \cellcolor{skillgreen}\textbf{Skill} & \textbf{Diff} \\
+\midrule
+\multirow{3}{*}{\textbf{Kimi-K2-Thinking}} & Easy & 30/63 (48\%) & 32/63 (51\%) & 81\% & 2.6$\times$ & 427K & 293K & \better{-31\%} & 0.17 & 0.12 & \better{-29\%} & 9.0 & 13.7 & \worse{+53\%} & 12.2 & 10.6 & \better{-13\%} \\
+ & Medium & 17/42 (40\%) & 17/42 (40\%) & 76\% & 2.9$\times$ & 576K & 335K & \better{-42\%} & 0.23 & 0.14 & \better{-39\%} & 8.1 & 15.1 & \worse{+87\%} & 19.5 & 12.5 & \better{-36\%} \\
+ & Hard & 8/21 (38\%) & 7/21 (33\%) & 66\% & 4.8$\times$ & 622K & 285K & \better{-54\%} & 0.25 & 0.13 & \better{-50\%} & 10.4 & 16.4 & \worse{+58\%} & 27.8 & 18.4 & \better{-34\%} \\
+\midrule
+\multirow{3}{*}{\textbf{DeepSeek-V3.2-EXP}} & Easy & 42/63 (66\%) & 47/63 (74\%) & 94\% & 2.5$\times$ & 943K & 512K & \better{-46\%} & 0.27 & 0.22 & \better{-18\%} & 28.2 & 25.7 & \better{-9\%} & 15.4 & 13.2 & \better{-14\%} \\
+ & Medium & 25/42 (59\%) & 25/42 (59\%) & 89\% & 3.2$\times$ & 1.34M & 556K & \better{-59\%} & 0.22 & 0.08 & \better{-63\%} & 36.2 & 30.4 & \better{-16\%} & 23.4 & 17.2 & \better{-26\%} \\
+ & Hard & 9/21 (42\%) & 15/21 (71\%) & 88\% & 4.4$\times$ & 844K & 547K & \better{-35\%} & 0.22 & 0.07 & \better{-69\%} & 21.4 & 33.1 & \worse{+55\%} & 28.7 & 17.6 & \better{-39\%} \\
+\midrule
+\multirow{3}{*}{\textbf{DeepSeek-R1}} & Easy & 50/63 (79\%) & 55/63 (87\%) & 68\% & 2.9$\times$ & 498K & 470K & \better{-6\%} & 0.21 & 0.20 & \better{-3\%} & 14.0 & 16.8 & \worse{+20\%} & 11.1 & 11.0 & \better{-1\%} \\
+ & Medium & 28/42 (66\%) & 31/42 (74\%) & 77\% & 3.5$\times$ & 631K & 241K & \better{-62\%} & 0.26 & 0.13 & \better{-50\%} & 13.6 & 14.9 & \worse{+10\%} & 15.8 & 10.7 & \better{-32\%} \\
+ & Hard & 11/21 (52\%) & 15/21 (71\%) & 68\% & 4.2$\times$ & 855K & 421K & \better{-51\%} & 0.34 & 0.17 & \better{-49\%} & 17.1 & 16.9 & \better{-1\%} & 16.7 & 16.8 & \worse{+1\%} \\
+\midrule
+\multirow{3}{*}{\textbf{GLM-4.7}} & Easy & 52/63 (82\%) & 57/63 (90\%) & 90\% & 2.9$\times$ & 661K & 428K & \better{-35\%} & 0.18 & 0.12 & \better{-33\%} & 12.2 & 11.4 & \better{-6\%} & 13.6 & 11.8 & \better{-13\%} \\
+ & Medium & 27/42 (64\%) & 36/42 (85\%) & 89\% & 4.0$\times$ & 874K & 514K & \better{-41\%} & 0.22 & 0.10 & \better{-54\%} & 13.7 & 15.3 & \worse{+11\%} & 19.0 & 15.1 & \better{-21\%} \\
+ & Hard & 12/21 (57\%) & 15/21 (71\%) & 94\% & 4.9$\times$ & 1.17M & 648K & \better{-45\%} & 0.28 & 0.16 & \better{-43\%} & 19.6 & 15.1 & \better{-23\%} & 28.2 & 16.5 & \better{-41\%} \\
+\midrule
+\multirow{3}{*}{\textbf{Gemini 3 Pro}} & Easy & 55/63 (87\%) & 59/63 (93\%) & 95\% & 2.3$\times$ & 534K & 300K & \better{-44\%} & 0.46 & 0.30 & \better{-35\%} & 15.4 & 19.6 & \worse{+27\%} & 12.8 & 9.2 & \better{-29\%} \\
+ & Medium & 37/42 (88\%) & 40/42 (95\%) & 92\% & 2.7$\times$ & 730K & 323K & \better{-56\%} & 0.68 & 0.31 & \better{-55\%} & 16.6 & 18.4 & \worse{+11\%} & 19.5 & 10.6 & \better{-46\%} \\
+ & Hard & 16/21 (76\%) & 17/19 (89\%) & 96\% & 3.3$\times$ & 970K & 227K & \better{-77\%} & 0.90 & 0.27 & \better{-70\%} & 22.2 & 20.3 & \better{-8\%} & 28.9 & 8.7 & \better{-70\%} \\
+\midrule
+\multirow{3}{*}{\textbf{Minimax-M2.1}} & Easy & 59/63 (94\%) & 58/63 (96\%) & 100\% & 3.0$\times$ & 379K & 363K & \better{-4\%} & 0.04 & 0.03 & \better{-13\%} & 7.7 & 7.4 & \better{-4\%} & 12.1 & 11.4 & \better{-5\%} \\
+ & Medium & 40/42 (95\%) & 41/42 (98\%) & 84\% & 3.6$\times$ & 468K & 380K & \better{-19\%} & 0.05 & 0.05 & \better{-8\%} & 7.9 & 7.1 & \better{-11\%} & 18.6 & 16.8 & \better{-10\%} \\
+ & Hard & 18/21 (86\%) & 20/21 (95\%) & 100\% & 3.0$\times$ & 479K & 409K & \better{-15\%} & 0.06 & 0.05 & \better{-4\%} & 8.2 & 7.2 & \better{-12\%} & 26.8 & 24.8 & \better{-8\%} \\
+\midrule
+\multirow{3}{*}{\textbf{Claude 4.5 Sonnet}} & Easy & 60/63 (95\%) & 60/63 (95\%) & 99\% & 3.0$\times$ & 1.06M & 399K & \better{-62\%} & 0.81 & 0.25 & \better{-69\%} & 19.2 & 17.4 & \better{-9\%} & 11.4 & 9.0 & \better{-21\%} \\
+ & Medium & 39/42 (92\%) & 41/42 (98\%) & 100\% & 3.7$\times$ & 1.54M & 369K & \better{-76\%} & 1.32 & 0.27 & \better{-80\%} & 22.0 & 17.7 & \better{-19\%} & 15.7 & 9.0 & \better{-43\%} \\
+ & Hard & 20/21 (95\%) & 20/21 (95\%) & 98\% & 4.7$\times$ & 1.96M & 440K & \better{-77\%} & 1.46 & 0.40 & \better{-72\%} & 25.5 & 19.9 & \better{-22\%} & 20.3 & 10.2 & \better{-50\%} \\
+\midrule
+\multirow{3}{*}{\textbf{GPT-5.2}} & Easy & 59/63 (94\%) & 60/63 (95\%) & 91\% & 3.0$\times$ & 939K & 196K & \better{-79\%} & 1.38 & 0.30 & \better{-78\%} & 22.3 & 15.1 & \better{-32\%} & 12.5 & 7.7 & \better{-38\%} \\
+ & Medium & 34/42 (81\%) & 37/42 (88\%) & 95\% & 4.2$\times$ & 1.44M & 314K & \better{-78\%} & 2.10 & 0.48 & \better{-77\%} & 26.9 & 17.0 & \better{-37\%} & 21.0 & 8.9 & \better{-58\%} \\
+ & Hard & 16/21 (76\%) & 17/21 (80\%) & 90\% & 4.3$\times$ & 1.86M & 405K & \better{-78\%} & 2.72 & 0.61 & \better{-77\%} & 31.4 & 20.5 & \better{-35\%} & 41.3 & 13.4 & \better{-68\%} \\
+\bottomrule
+\end{tabular}
+}
+
+\label{tab:difficulty_breakdown}
+\end{table*}

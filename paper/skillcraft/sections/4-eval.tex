@@ -1,0 +1,42 @@
+\section{Evaluation}
+
+
+
+% \textbf{Model}
+% Our motivation is to evaluate whether current language agents have the ability to do the tool evolving and generalization. We evaluate several SOTA models like Gemini, GPT-5, and DeepSeekV3.2. We report both the success rate, reuse rate, and the efficiency saving metrics for both baseline mode and skill-reuse mode on skillVerse. 
+
+% \textbf{Metrics}
+% We measure success rate using accuracy. For each task, we follow Toolathlon to define a human-expert, handcrafted evaluation rule for matching and scoring the outputs. We also report the reuse rate of generated tools and the efficiency in both modes. For efficiency, we report multiple metrics, including the number of input tokens, output tokens, and interaction turns. In assumption, better intelligent models would have better tool composition ability, which would demonstrate a higher token efficiency difference between the skillMode and the baseline mode.
+
+% \subsection{Evaluation Setup}
+We evaluate agents on SkillCraft in a consistent and unified setting under the same task prompts, tool endpoints, and environment constraints. Here we introduce our settings.
+
+% We enforce uniform runtime limits (e.g., maximum interaction steps and timeouts) to prevent extremely long runs and to ensure comparable resource measurements across models.
+
+\paragraph{Models} We benchmark a representative set of state-of-the-art models, including~\text{Kimi-K2-Thinking}~\citep{team2025kimi}, \text{DeepSeek-V3.2-EXP}~\citep{liu2025deepseek}, \text{DeepSeek-R1}~\citep{guo2025deepseek}, \text{Gemini-3-Pro}~\citep{googledeepmind2025gemini3pro_modelcard}, \text{Minimax-M2.1}\citep{minimax2025_m21}, \text{Claude-4.5-Sonnet}~\citep{anthropic2025_claude_sonnet_4_5_system_card} and \text{GPT-5.2}~\citep{openai2025_gpt52_system_card}.
+
+\paragraph{Metrics}
+We measure \textbf{Success Rate} using accuracy. For each task, we follow Toolathlon to define a human-expert, handcrafted evaluation rule for matching and scoring the outputs, counting a task as successful if its final score $\ge 90\%$. To measure Skill behavior beyond task completion, we report \textbf{Exec Rate}, the fraction of successful Skill executions among all Skill execution attempts, and \textbf{Reusing Rate}, the average number of times each saved Skill is invoked.
+
+For efficiency metrics, we have \textbf{InTok/OutTok} (total input/output tokens) and \textbf{Turn Num} (LLM interaction rounds), and \textbf{Tool\_Call Num} when applicable. For each consumption metric $m$, we compute \textbf{Diff} as $(m_{\text{skill}}-m_{\text{base}})/m_{\text{base}}$ (negative indicates savings). To ensure fair comparisons, efficiency metrics are averaged over the subset of tasks where both compared modes succeed.
+
+\input{Tables/res}
+
+% \paragraph{Results} We report the main results at Table~\ref{tab:main_res}. \textbf{Overall, enabling skill reuse yields consistent and substantial efficiency gains across models.} Specifically, for every reported model, Avg Tokens and Avg Cost drop sharply (often by ~40–80\%), and Avg Tool Calls also decreases. This indicates that once a reusable Skill is formed, repeated long-horizon tool-chain planning and intermediate-state narration are amortized away, leading to markedly lower per-task resource usage.
+
+% The gains are not uniform and appear to depend on model capability. Models with higher baseline success tend to realize larger token savings under skill mode, suggesting skill reuse acts as a capability amplifier: \textbf{stronger agents are better at synthesizing correct, reusable Skills and executing them reliably}, so the one-time skill-construction overhead is amortized more effectively over many tasks. At the same time, skill mode can introduce additional coordination overhead for some models, visible as increased turns (e.g., \textbf{Kimi-K2-Thinking}).  This suggests a trade-off where weaker or less stable Skill synthesis leads to more repair interactions, partially offsetting the benefits of reuse.
+
+\paragraph{Results} Table~\ref{tab:main_res} shows our main results. Overall,~\textbf{Skill Mode yields consistent and substantial gains in both success and efficiency across models}. For every model, Skill Mode sharply reduces average token usage and cost, and typically decreases the number of tool calls as well. However, the average number of conversation turns (highlighted in red in Table~\ref{tab:main_res} Avg Turns) can increase for some models, as Skill Mode adds extra decision and verification steps when selecting and executing cached skills. But these additional turns are typically lightweight, so overall tokens and cost still drop. For example, GPT-5.2 improves success from 109/126 (87\%) to 114/126 (90\%), and also cutting average tokens from 1.23M to 0.26M (-79\%) and average cost from \$1.77 to \$0.43 (-75\%). It suggests that once skills are discovered and cached, long-horizon tool-chain planning can be solved both more effectively and more efficiently through repeated reuse.
+
+Moreover, ~\textbf{the magnitude of efficiency gains correlates positively with model capability}. Cross-metric correlation analysis shown in Figure~\ref{fig:heatmap}reveals two key patterns: (1)~\textbf{skill execution rate correlates with task success} (r=0.65), indicating that skill composition ability is tightly coupled with coding ability (skill execution success rate measures how reliably generated skills can be executed, with higher rates indicating better coding quality).; (2) \textbf{Efficiency savings correlate with baseline success} (e.g., $r=0.53$ for \emph{Turns Saved} and \emph{success rate}), confirming that stronger models benefit more from skill reuse. Concretely, \emph{closed-source} models such as Claude Sonnet 4.5 and GPT-5.2---which start from high baseline success (94\% and 87\%)---achieve the largest token reductions (-71\% and -79\%). In contrast, \emph{open-weight} models either suffer from lower success rates (\textless 90\% overall and \textless 60\% on the hard set; see Table~\ref{tab:difficulty_breakdown}), as observed for Kimi, DeepSeek, and GLM models, or exhibit limited tool-composition gains. For example, MiniMax-M2.1 shows only modest savings (-11\%), likely because it already solves many tasks efficiently without invoking skills. These findings suggest Skill Mode acts as a capability amplifier, benefiting models that can both synthesize correct skills and execute them reliably.
+
+Moreover, our case studies reveal clear differences in tool composition behavior across models. Stronger models compose tools flexibly, invoking and reusing skills only when beneficial, whereas weaker models tend to follow prompts more rigidly and over-apply composition even when it is unnecessary. This supports the view that tool composition ability is a core metric of intelligence. Detailed examples are provided in the Appendix~\ref{app:traj}.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=\columnwidth]{Figures/correlation_heatmap (2).pdf} % Replace with your image file name
+    \caption{Cross-metric correlation heatmap. Metrics are grouped into four categories: Success, Skill, Eff\_Base, and Eff\_Save. Key findings: (1) Skill execution rate correlates with task success (r=0.65); (2) Stronger models achieve greater efficiency gains from skills (r=0.53).}
+\vspace{-10pt}
+    \label{fig:heatmap}
+\end{figure}
+

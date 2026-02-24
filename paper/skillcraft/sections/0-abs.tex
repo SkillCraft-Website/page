@@ -1,0 +1,21 @@
+% Real-world tool-using language agents are deployed in complex, long-horizon settings with diverse user demands. In such environments, we would like agents not only to invoke a fixed set of tools, but also to self-evolve at test time by discovering, composing, and reusing tools as higher-level Skills. However, existing agentflow and evaluation paradigm only focus on static tools and tasks. We investigate \textit{to what extent agents can compose and evolve tools} by introducing \textbf{SkillCraft}, a benchmark designed to stress-test agents' tool composition abilities. SkillCraft features complex, highly compositional, and realistic usage scenarios across diverse tools, with difficulty scaling along both quantitative and complexity dimensions, explicitly constructed to elicit and evaluate agents' abstraction behavior.
+% To instantiate this evaluation, we further introduce an accompanying evaluation protocol that enables agents to automatically compose atomic tools into higher-level Skills using programming as a unifying abstraction. This protocol allows agents to improve efficiency through Skill reuse, while accumulating a reusable ``Skill box'' that facilitates generalization across tasks.
+% We evaluate state-of-the-art tool-using language models on~\textbf{SkillCraft} and observe a strong correlation between a model’s overall capability and its ability to discover and reuse effective Skills at test time.
+
+
+Real-world tool-using agents operate over long-horizon workflows with recurring structure and diverse demands, where effective behavior requires not only invoking atomic tools but also abstracting, and reusing higher-level tool compositions. However, existing benchmarks mainly measure instance-level success under static tool sets, offering limited insight into agents’ ability to acquire such reusable skills.
+We address this gap by introducing \textbf{SkillCraft}, a benchmark explicitly stress-test agent ability to form and reuse higher-level tool compositions, where we call \emph{Skills}. SkillCraft features realistic, highly compositional tool-use scenarios with difficulty scaled along both quantitative and structural dimensions, designed to elicit skill abstraction and cross-task reuse. We further propose a lightweight evaluation protocol that enables agents to auto-compose atomic tools into executable Skills, cache and reuse them inside and across tasks, thereby improving efficiency while accumulating a persistent library of reusable skills.
+% \congl{example of what a skill is could be good here, or a picture on the first page}
+Evaluating state-of-the-art agents on SkillCraft, we observe substantial efficiency gains, with token usage reduced by up to 80\% by skill saving and reuse. Moreover, success rate strongly correlates with tool composition ability at test time, underscoring compositional skill acquisition as a core capability.
+% \congl{what should we take away from this - is this saying that skill acquisition helps only when it helps, e.g., some tasks are not suitable for this?}
+% \congl{what is the quantitative result? e.g., we end up X more efficient}
+% \congl{did we answer the question in the title, can LLMs do this and do it well?}
+
+
+\begin{figure}[t!]
+    \centering \includegraphics[width=\columnwidth]{Figures/teaser.pdf} % Replace with your image file name
+    \caption{Skill Mode demo. Demonstrating how skills are automatically discovered, cached locally, and subsequently reused.}
+    \label{fig:wide-figure}
+    % \vspace{-20pt}
+\end{figure}
+% \vspace{-10pt}

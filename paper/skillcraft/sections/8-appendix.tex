@@ -1,0 +1,152 @@
+\appendix
+
+% (Optional) If you want appendix sections to be lettered:
+% \renewcommand{\thesection}{\Alph{section}}
+
+\input{sections/6-relwork}
+
+% =========================================================
+\section{Skill Mode: System Details}
+\label{app:system}
+
+\subsection{Four primitive tools enabling Skill Mode}
+\label{app:primitive_tools}
+We illustrate the detailed design and functionality of the four primitive tools that together enable the proposed Skill Mode in Figure~\ref{fig:macro-tools}.
+\input{Figures/tool}
+
+\subsection{Why Skill Mode improves efficiency}
+\label{app:why_efficiency}
+Figure~\ref{fig:why-figure} illustrates why Skill Mode improves efficiency through two complementary mechanisms. In normal tool use, raw tool outputs (e.g., full webpages or verbose API responses) are repeatedly injected into the context, bloating the prompt with extraneous information and incurring repeated argument-passing costs as the output of one tool becomes the input of the next via the agent. Skill Mode instead extracts and caches only the minimal, task-relevant fields, enabling direct tool-to-tool chaining and allowing intermediate results to be passed once rather than re-serialized at every step. Moreover, by reusing previously discovered tool sequences as atomic skills, the agent amortizes planning and reasoning cost over repeated executions, avoiding the need to reconstruct the same multi-step workflow from scratch.
+
+\begin{figure*}[t!]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Fig5.pdf}
+    \caption{Skill Mode improves efficiency through two mechanisms. First, it reduces argument passing overhead by enabling direct tool chaining (Tool A $\rightarrow$ Tool B $\rightarrow$ Tool C) rather than shuttling intermediate outputs through the agent (Tool A $\rightarrow$ Agent $\rightarrow$ Tool B $\rightarrow$ Agent $\rightarrow$ Tool C). Second, it amortizes planning cost by allowing agents to reuse previously discovered tool sequences, eliminating the need to reason about recurring multi-step patterns from scratch.}
+    \label{fig:why-figure}
+\end{figure*}
+
+\subsection{Implementation details}
+\label{app:implementation_details}
+This section provides additional implementation details that complement the methodology described in the main text.
+
+\paragraph{Execution Configuration.}
+To ensure reproducibility and prevent resource exhaustion, we impose several execution limits on each task. Each task is allocated a maximum of 150 conversation turns (or 300 steps in single-turn mode) and a 60-minute timeout. We enforce cumulative token limits of 1M input tokens and 150K output tokens per task, with individual requests capped at 150K input tokens. Tasks exceeding these limits are terminated and evaluated based on partial completion. For generation, all models use temperature$=$0.0 and top\_p$=$1.0 to ensure deterministic outputs. We set \texttt{tool\_choice="auto"} to allow models to decide when to invoke tools autonomously.
+
+\paragraph{Skill Storage and Execution.}
+Skills are persisted as JSON entries in a \texttt{skill\_cache.json} file within each task's workspace. Each skill entry contains: (1) \texttt{script\_code}---executable Python code that invokes tools via a \texttt{call\_tool(name, **kwargs)} interface, (2) \texttt{parameters}---a list of input parameter names, (3) \texttt{description}---natural language documentation, and (4) \texttt{execution\_stats}---runtime statistics tracking successful and failed executions.
+
+\paragraph{Evaluation Protocol.}
+We employ a partial-credit scoring system where each task defines multiple weighted evaluation criteria. Typical criteria include: output file existence (10 points), JSON validity (10 points), data completeness (30 points), and field-level accuracy (50 points). A task is considered \emph{successful} if it achieves $\geq$90\% of the maximum score. Efficiency metrics (tokens, cost, turns, tool calls) are computed only over tasks where \emph{both} baseline and skill modes succeed, ensuring fair comparison. All API costs are tracked via the OpenRouter billing API.
+
+
+% =========================================================
+\section{SkillCraft: Benchmark Construction Details}
+\label{app:benchmark}
+
+\subsection{Task API Sources}
+\label{app:task_sources}
+\input{Tables/task_source}
+We present the complete list of API sources used in \textsc{SkillCraft} benchmark in Table~\ref{tab:task_sources}. 
+Our 21 task families span six application domains—from entertainment and gaming to science and development—covering a diverse range of real-world API interaction patterns.
+All APIs are publicly available REST endpoints that require structured multi-step interactions, making them ideal candidates for evaluating skill composition and reuse.
+For each task family, we implement 5--7 tool functions wrapping distinct API endpoints; difficulty levels (Easy/Medium/Hard) control the number of subtasks (3/4/5) and thus total API calls required per task.
+Most of these APIs are sourced from existing community-maintained projects, while the Local DNA Analysis task uses a custom implementation for bioinformatics operations.
+
+
+% =========================================================
+\section{Additional Analyses}
+\label{app:analysis}
+
+
+
+\subsection{Results by task difficulty}
+\label{app:difficulty_analysis}
+\input{Tables/res_by_level}
+
+% Keep your existing text exactly as-is below:
+Table~\ref{tab:difficulty_breakdown} presents a detailed breakdown of our experimental results across three difficulty levels: Easy (tasks e1--e3), Medium (tasks m1--m2), and Hard (task h1). We identify several noteworthy patterns that provide deeper insights into the behavior and benefits of skill reuse.
+
+\paragraph{Skill Reuse Frequency Increases with Task Complexity.}
+Across all models, the average skill reuse count shows a consistent upward trend with task difficulty. For Easy tasks, skills are invoked 2.3--3.0$\times$ on average, while Hard tasks see 3.0--4.9$\times$ reuse. This pattern reflects the compositional nature of our benchmark: harder tasks require more repeated API compositions, which naturally leads to more opportunities for skill reuse. Notably, GLM-4.7 achieves the highest reuse rate (4.9$\times$) on Hard tasks, demonstrating effective skill generalization across complex scenarios.
+
+\paragraph{Efficiency Gains are More Pronounced on Harder Tasks.}
+Token savings exhibit a clear correlation with task difficulty. For frontier models like Claude 4.5 Sonnet and GPT-5.2, token reduction on Hard tasks reaches 77--78\%, compared to 62--79\% on Easy tasks. Similarly, tool call reduction is most dramatic on Hard tasks: Gemini 3 Pro achieves a 70\% reduction on Hard versus 29\% on Easy, while GPT-5.2 shows 68\% versus 38\%. This suggests that skill reuse provides greater benefits when tasks involve more complex, multi-step API orchestrations---precisely the scenarios where manual tool composition becomes most costly.
+
+\paragraph{Success Rate Improvements Favor Challenging Tasks.}
+For models with moderate baseline performance, skill reuse disproportionately improves success rates on Hard tasks. DeepSeek-V3.2-EXP shows a remarkable +29 percentage point improvement on Hard tasks (from 42\% to 71\%) compared to only +8 points on Easy tasks. Similarly, DeepSeek-R1 improves by +19 points on Hard versus +7 points on Easy. This indicates that skills learned from easier variants effectively transfer to help models overcome challenges they would otherwise fail, validating the cross-difficulty generalization capability of our skill framework.
+
+\paragraph{High-Capacity Models Benefit from Efficiency, Not Accuracy.}
+Frontier models (Claude, GPT-5.2) already achieve $>$95\% success rates on Easy tasks in baseline mode, leaving little room for accuracy improvement. However, they show the largest efficiency gains: Claude achieves 72\% average token reduction, and GPT-5.2 achieves 78\%. In contrast, Minimax-M2.1, which exhibits highly efficient baseline behavior (only 379K--479K tokens per task), shows modest 4--19\% token savings. This suggests that skill reuse is most valuable for models whose baseline execution involves verbose, sequential API interactions.
+
+\paragraph{Skill Execution Remains Robust Across Difficulties.}
+Skill execution success rates remain consistently high (66--100\%) across all difficulty levels for most models, indicating that skills created during easier tasks transfer reliably to harder contexts. The lowest execution rates appear in Kimi-K2-Thinking (66\% on Hard) and DeepSeek-R1 (68\% on Easy/Hard), both of which employ extended reasoning that may occasionally conflict with deterministic skill execution patterns.
+
+\subsection{Direct execution mode}
+\label{app:direct_exec}
+% Move the table close to where you discuss it:
+\input{Tables/direct_exec}
+
+We further investigate the efficiency impact of script parameterization by implementing \textbf{Direct Exec Mode}, an alternative approach that trades generalization capability for execution efficiency.
+
+In our Skill mode, agents create parameterized skills through a two-step process: first \texttt{save\_skill} to store a reusable script with parameter placeholders, then \texttt{execute\_skill} to invoke it with specific arguments. This design enables skill reuse across similar tasks but introduces overhead from parameter abstraction and the save-then-execute workflow.
+
+Direct Exec Mode takes a fundamentally different approach. Instead of creating generalizable skills, agents write \textbf{single-use scripts} with all values \textbf{hardcoded directly} into the code. The agent uses \texttt{exec\_script} to execute these scripts immediately, after which they are discarded. This eliminates both the abstraction overhead of designing reusable interfaces and the two-step save-execute workflow.
+
+Table~\ref{tab:direct_exec} compares Base, Skill, and Direct Exec on a 48-task subset. For Claude-4.5-Sonnet, Direct Exec largely preserves success at 96\% while cutting tokens from 1.72M to 0.16M, and it reduces turns from 15.7 to 5.8 with tool calls from 14.7 to 4.8. Skill mode is less aggressive at 0.34M tokens and it drops success to 90\%. For GPT-5.2, Direct Exec achieves the largest savings from 1.18M to 0.06M tokens and reduces turns from 24.5 to 4.5, but success falls from 94\% to 85\%, while Skill keeps 90\% at 0.26M tokens. Direct Exec also has lower Exec at 68\% versus 97\% to 99\% in Skill mode, matching the fact that removing the agent loop removes recovery and adaptation. These results show Direct Exec as the efficiency upper bound when Skills transfer cleanly as standalone programs.
+This advantage stems from two factors: (1) \textbf{reduced cognitive load}---the agent need not design generalizable parameter interfaces or anticipate future reuse scenarios; and (2) \textbf{simplified execution}---hardcoded values eliminate potential parameter binding errors that can occur in parameterized skill execution.
+
+These results suggest that the generalization capability of Skills incurs a non-trivial overhead. When tasks are isolated and patterns are unlikely to be reused, Direct Exec Mode provides a more efficient alternative.
+
+
+\subsection{Trajectory analysis}
+\label{app:traj}
+\input{Figures/trajectory_comparison}
+
+% Trajectory Analysis Section
+% To be included in the paper with: \input{Figures/trajectory_analysis}
+
+We present representative trajectories from our experiments to illustrate the qualitative differences in how models approach skill creation and reuse. The above shows four trajectories: two from an easy task (\texttt{cat-facts-collector/e2}) and two from a hard task (\texttt{cocktail-menu-generator/h1}), comparing Claude-4.5-Sonnet and DeepSeek-V3.2.
+
+\paragraph{Behavioral Divergence.}
+A fundamental distinction emerges in how models decide \emph{whether} to create skills. Claude exhibits efficiency-maximizing behavior: it autonomously evaluates whether the abstraction overhead is justified before committing to skill creation. In Trajectory A, Claude identifies that the easy task (9 API calls for 3 cat breeds) does not warrant skill abstraction and proceeds with direct calls, completing in 34 steps. In Trajectory C, facing a harder task (15 API calls for 5 cocktails), Claude creates a single skill that executes correctly 5 times with zero errors. In contrast, DeepSeek follows the system prompt more literally, attempting skill creation regardless of task complexity. In Trajectory B, it creates \texttt{process\_cat\_breed} for the same easy task despite minimal reuse benefit, and in Trajectory D, it persists through three failed skill creation attempts before abandoning the approach entirely.
+
+\paragraph{Skill Creation Failures.}
+DeepSeek's skill creation attempts reveal systematic issues. In Trajectory B, the created skill \texttt{process\_cat\_breed} is incomplete---its output schema omits \texttt{breed\_facts} and \texttt{breed\_encyclopedia} fields, requiring 8 additional repair operations. In Trajectory D, DeepSeek attempts skill creation three times (\texttt{process\_cocktail}, \texttt{process\_cocktail\_v2}, \texttt{process\_cocktail\_v3}), each failing with syntax errors such as ``unexpected token'' and ``return is invalid outside function.'' These errors indicate that DeepSeek treats skill creation as template expansion rather than program synthesis.
+
+\paragraph{Skill Execution Failures.}
+Even when skills are successfully saved, execution failures reveal deeper issues. In Trajectory B, all three \texttt{execute\_skill} calls produce incomplete results with warnings about missing fields. The skill's internal logic failed to properly chain the three required API calls. In Trajectory D, the \texttt{execute\_skill} call fails immediately with a runtime error, forcing the agent to fall back to manual API calls and ultimately failing the task.
+
+\paragraph{Implications.}
+These findings suggest that effective tool composition requires not just the \emph{ability} to create and execute skills, but the \emph{judgment} to know when abstraction is beneficial. The 5.3$\times$ token savings achieved by Claude in the hard task (213K vs. 1.14M tokens) compared to DeepSeek demonstrates that understanding-driven skill use leads to both higher success rates and greater efficiency.
+
+
+\section{Prompt Templates}
+\label{app:prompts}
+
+This section presents the prompt templates used in our experiments, including the system prompt for skill-enabled modes and representative task prompts across different difficulty levels.
+
+\subsection{System Prompt for Skill Reuse}
+\label{app:system_prompt}
+
+In skill mode, agents receive an augmented system prompt that introduces the skill abstraction mechanism. The prompt provides: (1) available skill tools (\texttt{save\_skill} and \texttt{execute\_skill}); (2) guidelines for when to create skills; (3) script authoring rules; and (4) a concrete example demonstrating the skill creation and execution workflow.
+
+The key design principle is \emph{minimal intervention}: rather than prescribing when agents should use skills, we provide the capability and let agents autonomously decide based on task structure. This enables fair comparison between skill-enabled and baseline modes, as the core task instructions remain identical.
+
+\input{Figures/system_prompt}
+
+\subsection{Task Prompt Examples}
+\label{app:task_prompts}
+
+Task prompts describe the objective, required outputs, and available domain-specific tools. We present three representative examples from our scaled task suite, spanning easy (E), medium (M), and hard (H) difficulty levels. The scaling follows a systematic pattern: easy tasks involve $3 \times 3 = 9$ API calls, medium tasks involve $4 \times 4 = 16$ calls, and hard tasks involve $5 \times 5 = 25$ calls.
+
+Each prompt specifies:
+\begin{itemize}
+    \item \textbf{Objective}: The data collection or analysis goal
+    \item \textbf{Output format}: JSON schema for structured results
+    \item \textbf{Available tools}: Domain-specific APIs (prefixes removed for clarity)
+    \item \textbf{Scale}: Number of subtasks and API calls per subtask
+\end{itemize}
+
+Note that skill-related tools (\texttt{save\_skill}, \texttt{execute\_skill}) are \emph{not} mentioned in task prompts---they are injected via the system prompt only in skill-enabled modes. This ensures that baseline (Normal) mode and skill-enabled modes receive identical task instructions.
+
+\input{Figures/task_prompt}
