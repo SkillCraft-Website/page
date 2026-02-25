@@ -1723,18 +1723,6 @@
             </div>
         </div>
 
-        <!-- Figure: Efficiency Explanation -->
-        <div class="home-figure-section">
-            <div class="home-figure">
-                <img src="./assets/figure-efficiency.png" alt="Why Skill Mode improves efficiency" style="max-width: 820px;">
-                <div class="home-figure-caption">
-                    <strong>Why can Skill Mode improve efficiency?</strong>
-                    In normal mode, token-heavy tool outputs make agent thinking dense — and the same verbose output becomes the next input, compounding cost.
-                    In Skill Mode, the agent composes a reusable skill (code-as-think) that processes outputs concisely, so each piece of information only needs to pass through once.
-                </div>
-            </div>
-        </div>
-
         <!-- Key Stats Strip -->
         <div class="home-stats-section">
             <div class="home-stats-strip">
@@ -1757,6 +1745,35 @@
                 <div class="home-stat-card">
                     <div class="home-stat-number">79%</div>
                     <div class="home-stat-label">Max Token Savings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure: Task Construction Pipeline -->
+        <div class="home-figure-section">
+            <div class="home-section">
+                <div class="home-section-title">Benchmark Design</div>
+                <div class="home-section-sub">How SkillCraft tasks are constructed and organized</div>
+            </div>
+            <div class="home-figure">
+                <img src="./assets/figure-task-construction.png" alt="Three-stage task construction pipeline" style="max-width: 780px;">
+                <div class="home-figure-caption">
+                    <strong>Three-stage task construction pipeline.</strong>
+                    <em>Stage 1 (Exploratory Phase):</em> Survey existing benchmarks to derive task design principles.
+                    <em>Stage 2 (Seed Task Construction):</em> Build seed tasks from Web APIs and local tools.
+                    <em>Stage 3 (Systematic Scaling):</em> Scale along entity count and subtask complexity to create 126 benchmark tasks.
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Distribution Figure -->
+        <div class="home-figure-section" style="padding-top: 0;">
+            <div class="home-figure">
+                <img src="./assets/figure-task-distribution.png" alt="Task Distribution in SkillCraft" style="max-width: 440px;">
+                <div class="home-figure-caption">
+                    <strong>Task distribution in SkillCraft.</strong>
+                    21 task families across 6 application domains (Food &amp; Lifestyle, Science &amp; Environment, Developer &amp; Web, Education &amp; Society, Reference, Entertainment &amp; Gaming).
+                    Tasks span 3 difficulty levels: Easy (63), Medium (42), and Hard (21), with systematic complexity scaling through entity count and subtask multiplicity.
                 </div>
             </div>
         </div>
@@ -1904,29 +1921,14 @@
                     <span class="finding-metric">3.2–4.8&times; reuse factor</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Figure: Task Construction Pipeline -->
-        <div class="home-figure-section" style="padding-top: 0;">
-            <div class="home-figure">
-                <img src="./assets/figure-task-construction.png" alt="Three-stage task construction pipeline" style="max-width: 780px;">
+            <!-- Efficiency Figure within Key Findings -->
+            <div class="home-figure" style="margin-top: 36px;">
+                <img src="./assets/figure-efficiency.png" alt="Why Skill Mode improves efficiency" style="max-width: 820px;">
                 <div class="home-figure-caption">
-                    <strong>Three-stage task construction pipeline.</strong>
-                    <em>Stage 1 (Exploratory Phase):</em> Survey existing benchmarks to derive task design principles.
-                    <em>Stage 2 (Seed Task Construction):</em> Build seed tasks from Web APIs and local tools.
-                    <em>Stage 3 (Systematic Scaling):</em> Scale along entity count and subtask complexity to create 126 benchmark tasks.
-                </div>
-            </div>
-        </div>
-
-        <!-- Task Distribution Figure -->
-        <div class="home-figure-section" style="padding-top: 0;">
-            <div class="home-figure">
-                <img src="./assets/figure-task-distribution.png" alt="Task Distribution in SkillCraft" style="max-width: 440px;">
-                <div class="home-figure-caption">
-                    <strong>Task distribution in SkillCraft.</strong>
-                    21 task families across 6 application domains (Food & Lifestyle, Science & Environment, Developer & Web, Education & Society, Reference, Entertainment & Gaming).
-                    Tasks span 3 difficulty levels: Easy (63), Medium (42), and Hard (21), with systematic complexity scaling through entity count and subtask multiplicity.
+                    <strong>Why can Skill Mode improve efficiency?</strong>
+                    In normal mode, token-heavy tool outputs bloat the context with extraneous data — and the same verbose output becomes the next input, compounding cost.
+                    In Skill Mode, the agent composes a reusable skill that extracts only what's needed, so each piece of information only needs to pass through once.
                 </div>
             </div>
         </div>
